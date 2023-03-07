@@ -3,24 +3,22 @@ import getTags from "../../services/getTags";
 import { useEffect, useState } from "react";
 import TagInputStyle from "../../assets/css/TagInput.css"
 
-
-
-function TagInput({tags, onChange}) {
+function TagInput({hiddenInputHandler}) {
     const [recommendTags, setRecommendTags] = useState([]);
     const [currentFocus, setCurrentFocus] = useState(-1);
     const [tagList, setTagList] = useState([]);
-    const [selectedTags, setSelectedTag] = useState(tags);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const tagsFieldName = "tagsInput";
 
     useEffect(() => {
-
         getTags()
             .then(setTagList)
             .catch(console.error);
+    }, []);
 
-        setSelectedTag(tags)
-    }, [tags]);
-
-
+    useEffect(() => {
+        hiddenInputHandler(tagsFieldName, selectedTags);
+    }, [selectedTags]);
 
     const tagsInputHandler = (e) => {
         const value = e.target.value;
@@ -59,7 +57,7 @@ function TagInput({tags, onChange}) {
         } else if (e.keyCode === 13) {
             e.preventDefault();
             if (currentFocus > -1) {
-                tags.push(recommendTags[currentFocus])
+                setSelectedTags([].concat(selectedTags, recommendTags[currentFocus]))
                 closeRecommendTagList()
             }
         } else if (e.keyCode === 27) {
@@ -69,7 +67,7 @@ function TagInput({tags, onChange}) {
     }
 
     const recommendTagsOnClick = (e, item) => {
-        tags.push(item)
+        setSelectedTags([].concat(selectedTags, item))
         closeRecommendTagList()
     };
 
@@ -85,7 +83,6 @@ function TagInput({tags, onChange}) {
         return "";
     }
 
-
     const tagElementList = recommendTags.map((item, index) =>
         (
 
@@ -99,14 +96,14 @@ function TagInput({tags, onChange}) {
     )
 
     const closeTag = (event, index) => {
-        event.target.parentElement.remove();
+        event.target.parentElement.style.display = 'none';
         let newTags = [];
-        tags.forEach((item, loopIndex) => {
+        selectedTags.forEach((item, loopIndex) => {
             if(loopIndex !== index) {
                 newTags.push(item);
             }
         });
-        tags = newTags;
+        setSelectedTags(newTags);
     }
 
     return (
@@ -128,7 +125,7 @@ function TagInput({tags, onChange}) {
             </FormFieldset>
 
             <ul className="tags-input">
-            {tags.map((item, index) =>
+            {selectedTags.map((item, index) =>
                     (<li key={item} >{item}<span className="close" onClick={event => closeTag(event, index)}>x</span></li>)
                 )}
             </ul>
@@ -136,10 +133,9 @@ function TagInput({tags, onChange}) {
             <FormFieldset
                 normal
                 placeholder="Enter tags"
-                name="tagsInput"
-                value={tags}
+                name={tagsFieldName}
+                value={selectedTags}
                 type="hidden"
-                handler={onChange}
             >
 
 

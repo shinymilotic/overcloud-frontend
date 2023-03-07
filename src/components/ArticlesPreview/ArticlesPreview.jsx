@@ -28,7 +28,7 @@ function ArticlesPreview({ articles, loading, updateArticles }) {
             />
           </ArticleMeta>
           <Link
-            to={`/article/${article.slug}`}
+            to={`/articles/${article.slug}`}
             state={article}
             className="preview-link"
           >

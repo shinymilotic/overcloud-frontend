@@ -5,6 +5,7 @@ import getArticle from "../../services/getArticle";
 import setArticle from "../../services/setArticle";
 import FormFieldset from "../FormFieldset";
 import TagInput from "../TagInput";
+import ArticleUtils from "../../helpers/string/Article"
 
 const emptyForm = { title: "", description: "", body: "", tagList: [] };
 
@@ -46,9 +47,15 @@ function ArticleEditorForm() {
     setForm((form) => ({ ...form, [type]: value }));
   };
 
+  const hiddenInputHandler = (type, value) => {
+
+    setForm((form) => ({ ...form, [type]: value }));
+  };
+
   const formSubmit = (e) => {
     e.preventDefault();
 
+    slug = ArticleUtils.convertToSlug(title)
     setArticle({ headers, slug, body, description, tagList, title })
       .then((slug) => navigate(`/articles/${slug}`))
       .catch(setErrorMessage);
@@ -88,8 +95,7 @@ function ArticleEditorForm() {
         </fieldset>
 
         <TagInput
-         tags={tagList}
-         onChange={inputHandler}></TagInput>
+            hiddenInputHandler={hiddenInputHandler}></TagInput>
 
         <button className="btn btn-lg pull-xs-right btn-primary" type="submit">
           {slug ? "Update Article" : "Publish Article"}
