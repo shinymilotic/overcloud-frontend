@@ -5,7 +5,7 @@ async function getArticle({ headers, slug }) {
   try {
     const { data } = await axios({ headers, url: `api/articles/${slug}` });
 
-    return data.article;
+      return data.articles[0];
   } catch (error) {
     errorHandler(error);
   }
