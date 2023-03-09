@@ -14,7 +14,7 @@ function Article() {
   const { id, title, body, tagList, createdAt, author } = article || {};
   const { headers, isAuth } = useAuth();
   const navigate = useNavigate();
-  const { slug } = useParams();
+  const { slug  } = useParams();
 
   useEffect(() => {
     if (state) return;

@@ -3,3 +3,5 @@ function convertToSlug(Text) {
         .replace(/ /g, '-')
         .replace(/[^\w-]+/g, '');
 }
+
+export {convertToSlug};

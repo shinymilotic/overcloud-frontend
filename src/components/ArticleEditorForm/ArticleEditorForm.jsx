@@ -5,7 +5,7 @@ import getArticle from "../../services/getArticle";
 import setArticle from "../../services/setArticle";
 import FormFieldset from "../FormFieldset";
 import TagInput from "../TagInput";
-import ArticleUtils from "../../helpers/string/Article"
+import {convertToSlug} from "../../helpers/string/ArticleUtils"
 
 const emptyForm = { title: "", description: "", body: "", tagList: [] };
 
@@ -36,7 +36,6 @@ function ArticleEditorForm() {
       .catch(console.error);
 
 
-
     return () => setForm(emptyForm);
   }, [headers, isAuth, loggedUser.username, navigate, slug, state]);
 
@@ -55,9 +54,10 @@ function ArticleEditorForm() {
   const formSubmit = (e) => {
     e.preventDefault();
 
-    slug = ArticleUtils.convertToSlug(title)
     setArticle({ headers, slug, body, description, tagList, title })
-      .then((slug) => navigate(`/articles/${slug}`))
+      .then((slug) => {
+        slug ? navigate(`/articles/${slug}`) : navigate(`/articles/${convertToSlug(title)}`)
+      })
       .catch(setErrorMessage);
   };
 
