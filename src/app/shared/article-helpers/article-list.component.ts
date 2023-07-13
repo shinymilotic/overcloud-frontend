@@ -19,7 +19,6 @@ export class ArticleListComponent implements OnDestroy {
   query!: ArticleListConfig;
   results: Article[] = [];
   currentPage = 1;
-  totalPages: Array<number> = [];
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
@@ -64,10 +63,6 @@ export class ArticleListComponent implements OnDestroy {
         this.results = data.articles;
 
         // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
-        this.totalPages = Array.from(
-          new Array(Math.ceil(data.articlesCount / this.limit)),
-          (val, index) => index + 1
-        );
       });
   }
 }
