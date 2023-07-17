@@ -26,6 +26,7 @@ export class ShowAuthedDirective implements OnInit {
         (isAuthenticated && this.condition) ||
         (!isAuthenticated && !this.condition)
       ) {
+        this.viewContainer.clear();
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();
