@@ -1,3 +1,4 @@
+import { RxLet } from "@rx-angular/template/let";
 import { Component, inject, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { TagsService } from "../../core/services/tags.service";
@@ -7,7 +8,6 @@ import { ArticleListComponent } from "../../shared/article-helpers/article-list.
 import { takeUntil, tap } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
-import { LetDirective } from "@rx-angular/template/let";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { TagsSliderComponent } from "../../tags-slider/tags-slider.component";
 @Component({
@@ -18,7 +18,7 @@ import { TagsSliderComponent } from "../../tags-slider/tags-slider.component";
     NgClass,
     ArticleListComponent,
     AsyncPipe,
-    LetDirective,
+    RxLet,
     NgForOf,
     ShowAuthedDirective,
     TagsSliderComponent,
