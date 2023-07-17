@@ -15,26 +15,26 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "15.2.3",
-    "@angular/common": "15.2.3",
-    "@angular/compiler": "15.2.3",
-    "@angular/core": "15.2.3",
-    "@angular/forms": "15.2.3",
-    "@angular/platform-browser": "15.2.3",
-    "@angular/platform-browser-dynamic": "15.2.3",
-    "@angular/router": "15.2.3",
-    "@angular/service-worker": "15.2.3",
+    "@angular/animations": "16.1.5",
+    "@angular/common": "16.1.5",
+    "@angular/compiler": "16.1.5",
+    "@angular/core": "16.1.5",
+    "@angular/forms": "16.1.5",
+    "@angular/platform-browser": "16.1.5",
+    "@angular/platform-browser-dynamic": "16.1.5",
+    "@angular/router": "16.1.5",
+    "@angular/service-worker": "16.1.5",
     "@rx-angular/cdk": "latest",
     "@rx-angular/template": "^15.1.0",
     "marked": "^4.2.12",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.13.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.4",
-    "@angular/cli": "^15.2.4",
-    "@angular/compiler-cli": "15.2.3",
+    "@angular-devkit/build-angular": "^16.1.4",
+    "@angular/cli": "^16.1.4",
+    "@angular/compiler-cli": "16.1.5",
     "@types/jasmine": "~4.3.0",
     "@types/marked": "^4.0.8",
     "husky": "^8.0.3",
@@ -46,7 +46,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
-    "typescript": "~4.8.2"
+    "typescript": "~5.1.6"
   },
   "lint-staged": {
     "*.{ts,html,css,json,md}": "prettier --write"
