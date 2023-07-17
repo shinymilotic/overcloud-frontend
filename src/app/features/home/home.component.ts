@@ -9,7 +9,7 @@ import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
 import { LetDirective } from "@rx-angular/template/let";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
-
+import { TagsSliderComponent } from "../../tags-slider/tags-slider.component";
 @Component({
   selector: "app-home-page",
   templateUrl: "./home.component.html",
@@ -21,13 +21,13 @@ import { ShowAuthedDirective } from "../../shared/show-authed.directive";
     LetDirective,
     NgForOf,
     ShowAuthedDirective,
+    TagsSliderComponent,
   ],
   standalone: true,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   listConfig: ArticleListConfig = {
-    type: "all",
     filters: {},
   };
   tags$ = inject(TagsService)
@@ -46,9 +46,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(
         tap((isAuthenticated) => {
           if (isAuthenticated) {
-            this.setListTo("feed");
-          } else {
-            this.setListTo("all");
+            this.setListTo();
+            // } else {
+            //   this.setListTo("all");
           }
         }),
         takeUntil(this.destroy$)
@@ -63,14 +63,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  setListTo(type: string = "", filters: Object = {}): void {
+  setListTo(filters: Object = {}): void {
     // If feed is requested but user is not authenticated, redirect to login
-    if (type === "feed" && !this.isAuthenticated) {
+    if (!this.isAuthenticated) {
       void this.router.navigate(["/login"]);
       return;
     }
 
     // Otherwise, set the list object
-    this.listConfig = { type: type, filters: filters };
+    this.listConfig = { filters: filters };
   }
 }

@@ -31,7 +31,6 @@ export class ProfileArticlesComponent implements OnInit, OnDestroy {
         next: (profile: Profile) => {
           this.profile = profile;
           this.articlesConfig = {
-            type: "all",
             filters: {
               author: this.profile.username,
             },

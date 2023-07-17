@@ -11,14 +11,13 @@ import { UserService } from "../../core/services/user.service";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { Errors } from "../../core/models/errors.model";
 import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 
 interface SettingsForm {
   image: FormControl<string>;
   username: FormControl<string>;
   bio: FormControl<string>;
   email: FormControl<string>;
-  password: FormControl<string>;
 }
 
 @Component({
@@ -34,10 +33,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     username: new FormControl("", { nonNullable: true }),
     bio: new FormControl("", { nonNullable: true }),
     email: new FormControl("", { nonNullable: true }),
-    password: new FormControl("", {
-      validators: [Validators.required],
-      nonNullable: true,
-    }),
   });
   errors: Errors | null = null;
   isSubmitting = false;
@@ -49,9 +44,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.settingsForm.patchValue(
-      this.userService.getCurrentUser() as Partial<User>
-    );
+    this.userService.getCurrentUser().subscribe((data) => {
+      this.settingsForm.patchValue(data.user);
+    });
+    // this.settingsForm.patchValue(
+    //   this.userService.getCurrentUser() as Partial<User>
+    // );
   }
 
   ngOnDestroy(): void {

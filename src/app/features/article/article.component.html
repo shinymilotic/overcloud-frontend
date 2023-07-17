@@ -9,15 +9,15 @@
             class="btn btn-sm btn-outline-secondary"
             [routerLink]="['/editor', article.slug]"
           >
-            <i class="ion-edit"></i> Edit Article
+            <i class="ion-edit"></i> Sửa
           </a>
-
+          <span>&nbsp;&nbsp;</span>
           <button
             class="btn btn-sm btn-outline-danger"
             [ngClass]="{ disabled: isDeleting }"
             (click)="deleteArticle()"
           >
-            <i class="ion-trash-a"></i> Delete Article
+            <i class="ion-trash-a"></i> Xóa
           </button>
         </span>
 
@@ -65,15 +65,15 @@
             class="btn btn-sm btn-outline-secondary"
             [routerLink]="['/editor', article.slug]"
           >
-            <i class="ion-edit"></i> Edit Article
+            <i class="ion-edit"></i> Sửa
           </a>
-
+          <span>&nbsp;&nbsp;</span>
           <button
             class="btn btn-sm btn-outline-danger"
             [ngClass]="{ disabled: isDeleting }"
             (click)="deleteArticle()"
           >
-            <i class="ion-trash-a"></i> Delete Article
+            <i class="ion-trash-a"></i> Xóa
           </button>
         </span>
 
@@ -104,7 +104,7 @@
               <div class="card-block">
                 <textarea
                   class="form-control"
-                  placeholder="Write a comment..."
+                  placeholder="Hãy bình luận..."
                   rows="3"
                   [formControl]="commentControl"
                 ></textarea>
@@ -115,7 +115,7 @@
                   class="comment-author-img"
                 />
                 <button class="btn btn-sm btn-primary" type="submit">
-                  Post Comment
+                  Bình luận
                 </button>
               </div>
             </fieldset>
@@ -123,9 +123,9 @@
         </div>
 
         <div *appShowAuthed="false">
-          <a [routerLink]="['/login']">Sign in</a> or
-          <a [routerLink]="['/register']">sign up</a> to add comments on this
-          article.
+          <a [routerLink]="['/login']">Đăng nhập</a> or
+          <a [routerLink]="['/register']">Đăng ký</a> để bình luận vào các bài
+          đăng.
         </div>
 
         <app-article-comment

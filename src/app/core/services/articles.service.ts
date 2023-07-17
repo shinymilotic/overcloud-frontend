@@ -21,7 +21,7 @@ export class ArticlesService {
     });
 
     return this.http.get<{ articles: Article[]; articlesCount: number }>(
-      "/articles" + (config.type === "feed" ? "/feed" : ""),
+      "/articles",
       { params }
     );
   }

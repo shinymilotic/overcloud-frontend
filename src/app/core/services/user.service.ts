@@ -47,7 +47,7 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<{ user: User }> {
-    return this.http.get<{ user: User }>("/user").pipe(
+    return this.http.get<{ user: User }>("/users").pipe(
       tap({
         next: ({ user }) => this.setAuth(user),
         error: () => this.purgeAuth(),
@@ -57,7 +57,7 @@ export class UserService {
   }
 
   update(user: Partial<User>): Observable<{ user: User }> {
-    return this.http.put<{ user: User }>("/user", { user }).pipe(
+    return this.http.put<{ user: User }>("/users", { user }).pipe(
       tap(({ user }) => {
         this.currentUserSubject.next(user);
       })

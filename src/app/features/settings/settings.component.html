@@ -2,7 +2,7 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Your Settings</h1>
+        <h1 class="text-xs-center">Cài đặt</h1>
 
         <app-list-errors [errors]="errors"></app-list-errors>
 
@@ -45,17 +45,8 @@
               />
             </fieldset>
 
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="password"
-                placeholder="New Password"
-                formControlName="password"
-              />
-            </fieldset>
-
             <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
-              Update Settings
+              Thay đổi
             </button>
           </fieldset>
         </form>
@@ -64,7 +55,7 @@
         <hr />
 
         <button class="btn btn-outline-danger" (click)="logout()">
-          Or click here to logout.
+          Đăng xuất
         </button>
       </div>
     </div>

@@ -31,7 +31,6 @@ export class ProfileFavoritesComponent implements OnInit, OnDestroy {
         next: (profile: Profile) => {
           this.profile = profile;
           this.favoritesConfig = {
-            type: "all",
             filters: {
               favorited: this.profile.username,
             },
