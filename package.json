@@ -29,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@rx-angular/cdk": "16.0.0",
     "@rx-angular/template": "^16.0.2",
+    "component": "^1.1.0",
     "marked": "^4.2.12",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.0",

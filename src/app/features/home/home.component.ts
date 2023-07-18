@@ -9,7 +9,6 @@ import { takeUntil, tap } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
-import { TagsSliderComponent } from "../../tags-slider/tags-slider.component";
 @Component({
   selector: "app-home-page",
   templateUrl: "./home.component.html",
@@ -21,7 +20,6 @@ import { TagsSliderComponent } from "../../tags-slider/tags-slider.component";
     RxLet,
     NgForOf,
     ShowAuthedDirective,
-    TagsSliderComponent,
   ],
   standalone: true,
 })

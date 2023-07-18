@@ -11,7 +11,7 @@
                 class="form-control form-control-lg"
                 formControlName="title"
                 type="text"
-                placeholder="Article Title"
+                placeholder="Tiêu đề"
               />
             </fieldset>
 
@@ -20,7 +20,7 @@
                 class="form-control"
                 formControlName="description"
                 type="text"
-                placeholder="What's this article about?"
+                placeholder="Tóm tắt"
               />
             </fieldset>
 
@@ -29,7 +29,7 @@
                 class="form-control"
                 formControlName="body"
                 rows="8"
-                placeholder="Write your article (in markdown)"
+                placeholder="Nội dung"
               >
               </textarea>
             </fieldset>
@@ -38,7 +38,7 @@
               <input
                 class="form-control"
                 type="text"
-                placeholder="Enter tags"
+                placeholder="Danh sách thẻ"
                 [formControl]="tagField"
                 (keyup.enter)="addTag()"
               />
