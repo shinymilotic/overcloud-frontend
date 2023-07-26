@@ -25,37 +25,69 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <textarea
+              <!-- <textarea
                 class="form-control"
                 formControlName="body"
                 rows="8"
                 placeholder="Nội dung"
+                id="editor"
               >
-              </textarea>
+              </textarea> -->
+              <div #editorjs></div>
             </fieldset>
+            <app-react-owc-renderer></app-react-owc-renderer>
 
             <fieldset class="form-group">
-              <input
+              <!-- <input
                 class="form-control"
                 type="text"
                 placeholder="Danh sách thẻ"
                 [formControl]="tagField"
                 (keyup.enter)="addTag()"
-              />
-              <div class="tag-list">
-                <span *ngFor="let tag of tagList" class="tag-default tag-pill">
-                  <i class="ion-close-round" (click)="removeTag(tag)"></i>
-                  {{ tag }}
-                </span>
-              </div>
+              /> -->
+              <mat-form-field class="example-chip-list">
+                <mat-label>Thẻ</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Thêm thẻ">
+                  <mat-chip-row
+                    *ngFor="let tag of inTags"
+                    (removed)="remove(tag)"
+                  >
+                    {{ tag }}
+                    <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </mat-chip-grid>
+                <input
+                  placeholder="Thêm thẻ..."
+                  #tagInput
+                  [formControl]="tagField"
+                  [matChipInputFor]="chipGrid"
+                  [matAutocomplete]="auto"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)"
+                />
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  (optionSelected)="selected($event)"
+                >
+                  <mat-option
+                    *ngFor="let tag of filteredTags | async"
+                    [value]="tag"
+                  >
+                    {{ tag }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
             </fieldset>
 
             <button
-              class="btn btn-lg pull-xs-right btn-primary"
+              id="submitBtn"
+              class="btn btn-lg btn-primary"
               type="button"
               (click)="submitForm()"
             >
-              Publish Article
+              Đăng bài
             </button>
           </fieldset>
         </form>

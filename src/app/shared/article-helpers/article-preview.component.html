@@ -1,4 +1,19 @@
 <div class="article-preview">
+  <div>
+    <a [routerLink]="['/articles', article.slug]" class="preview-link">
+      <h1>{{ article.title }}</h1>
+      <p>{{ article.description }}</p>
+      <ul class="tag-list">
+        <li
+          class="tag-default tag-pill tag-outline"
+          *ngFor="let tag of article.tagList"
+        >
+          {{ tag }}
+        </li>
+      </ul>
+    </a>
+  </div>
+
   <app-article-meta [article]="article">
     <app-favorite-button
       [article]="article"
@@ -8,17 +23,4 @@
       {{ article.favoritesCount }}
     </app-favorite-button>
   </app-article-meta>
-
-  <a [routerLink]="['/articles', article.slug]" class="preview-link">
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.description }}</p>
-    <ul class="tag-list">
-      <li
-        class="tag-default tag-pill tag-outline"
-        *ngFor="let tag of article.tagList"
-      >
-        {{ tag }}
-      </li>
-    </ul>
-  </a>
 </div>

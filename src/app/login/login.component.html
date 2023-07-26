@@ -6,6 +6,8 @@
         <p class="text-xs-center">
           <a [routerLink]="['/register']">Bạn cần có tài khoản?</a>
         </p>
+        <br />
+        <br />
         <app-list-errors [errors]="errors"></app-list-errors>
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
@@ -20,7 +22,7 @@
             <fieldset class="form-group">
               <input
                 formControlName="password"
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 class="form-control form-control-lg"
                 type="password"
               />

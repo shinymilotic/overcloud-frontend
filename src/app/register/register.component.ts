@@ -26,7 +26,7 @@ interface RegisterFrom {
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   title = "";
-  errors: Errors = { errors: {} };
+  errors!: Errors[];
   isSubmitting = false;
   authForm: FormGroup<RegisterFrom>;
   destroy$ = new Subject<void>();
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     this.isSubmitting = true;
-    this.errors = { errors: {} };
+    // this.errors = { errors: {} };
 
     let observable = this.userService.register(
       this.authForm.value as {
@@ -79,8 +79,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => void this.router.navigate(["/"]),
-      error: (err) => {
-        this.errors = err;
+      error: ({ errors }) => {
+        this.errors = errors;
         this.isSubmitting = false;
       },
     });

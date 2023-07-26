@@ -10,8 +10,8 @@ import { NgIf } from "@angular/common";
 import { ListErrorsComponent } from "../shared/list-errors.component";
 import { Errors } from "../core/models/errors.model";
 import { UserService } from "../core/services/user.service";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import { catchError, takeUntil } from "rxjs/operators";
+import { Subject, throwError } from "rxjs";
 
 interface LoginForm {
   email: FormControl<string>;
@@ -26,7 +26,7 @@ interface LoginForm {
 })
 export class LoginComponent implements OnInit, OnDestroy {
   title = "";
-  errors: Errors = { errors: {} };
+  errors!: Errors[];
   isSubmitting = false;
   authForm: FormGroup<LoginForm>;
   destroy$ = new Subject<void>();
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     this.isSubmitting = true;
-    this.errors = { errors: {} };
+    // this.errors = { errors: {} };
 
     let observable = this.userService.login(
       this.authForm.value as { email: string; password: string }
@@ -68,8 +68,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => void this.router.navigate(["/"]),
-      error: (err) => {
-        this.errors = err;
+      error: ({ errors }) => {
+        this.errors = errors;
         this.isSubmitting = false;
       },
     });

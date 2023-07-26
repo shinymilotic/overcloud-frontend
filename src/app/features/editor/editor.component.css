@@ -1,0 +1,46 @@
+.ce-block__content,
+.ce-toolbar__content {
+  margin: 0 !important;
+}
+.codex-editor :global(.codex-editor) {
+  width: 100% !important;
+  height: 100% !important;
+}
+input {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+#submitBtn {
+  display: block;
+  margin: 0 auto;
+}
+
+mat-form-field,
+app-list-errors {
+  display: block;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.ltr {
+  text-align: left;
+}
+
+.rtl {
+  text-align: right;
+}
+
+.editor-placeholder {
+  color: #999;
+  overflow: hidden;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.editor-paragraph {
+  margin: 0 0 15px 0;
+  position: relative;
+}

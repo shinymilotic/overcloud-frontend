@@ -13,6 +13,7 @@ import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ErrorInterceptor } from "./core/interceptors/error.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 export function initAuth(jwtService: JwtService, userService: UserService) {
   return () => (jwtService.getToken() ? userService.getCurrentUser() : EMPTY);
@@ -32,6 +33,7 @@ export function initAuth(jwtService: JwtService, userService: UserService) {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: "registerWhenStable:30000",
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

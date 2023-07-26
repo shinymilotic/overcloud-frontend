@@ -9,13 +9,9 @@ import { NgForOf, NgIf } from "@angular/common";
   standalone: true,
 })
 export class ListErrorsComponent {
-  errorList: string[] = [];
+  errorList: Errors[] = [];
 
-  @Input() set errors(errorList: Errors | null) {
-    this.errorList = errorList
-      ? Object.keys(errorList.errors || {}).map(
-          (key) => `${key} ${errorList.errors[key]}`
-        )
-      : [];
+  @Input() set errors(errorList: Errors[]) {
+    this.errorList = errorList;
   }
 }

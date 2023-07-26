@@ -1,6 +1,6 @@
-input {
+form {
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   border-radius: 4px;
   outline: none;
   font-size: 16px;
@@ -9,4 +9,12 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+form input {
+  border: 1px solid #ccc;
+}
+
+form button {
+  border: 1px solid #ccc;
 }

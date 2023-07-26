@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/">Overcloud</a>
 
-    <input type="text" placeholder="Tìm kiếm..." name="search" />
+    <app-search-bar></app-search-bar>
 
     <!-- Show this for logged out users -->
     <ul *appShowAuthed="false" class="nav navbar-nav pull-xs-right">
@@ -38,7 +38,7 @@
 
       <li class="nav-item">
         <a class="nav-link" routerLink="/editor" routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;Viết bài
+          <i class="ion-compose"></i>&nbsp;Viết
         </a>
       </li>
 

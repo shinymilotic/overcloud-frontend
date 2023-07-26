@@ -4,7 +4,7 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Cài đặt</h1>
 
-        <app-list-errors [errors]="errors"></app-list-errors>
+        <app-list-errors></app-list-errors>
 
         <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
@@ -12,7 +12,7 @@
               <input
                 class="form-control"
                 type="text"
-                placeholder="URL of profile picture"
+                placeholder="Đường dẫn tới hình ảnh đại diện của bạn"
                 formControlName="image"
               />
             </fieldset>
@@ -21,7 +21,7 @@
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Username"
+                placeholder="Tên đăng nhập"
                 formControlName="username"
               />
             </fieldset>
@@ -30,7 +30,7 @@
               <textarea
                 class="form-control form-control-lg"
                 rows="8"
-                placeholder="Short bio about you"
+                placeholder="Mô tả về bản thân"
                 formControlName="bio"
               >
               </textarea>

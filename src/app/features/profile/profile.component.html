@@ -34,9 +34,9 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="['/profiles', profile.username]"
+                [routerLink]="['/profile', profile.username]"
               >
-                Bài viết của tôi
+                Bài viết đã tạo
               </a>
             </li>
             <li class="nav-item">
@@ -44,7 +44,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="['/profiles', profile.username, 'favorites']"
+                [routerLink]="['/profile', profile.username, 'favorites']"
               >
                 Bài viết yêu thích
               </a>

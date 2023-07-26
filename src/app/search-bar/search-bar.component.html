@@ -1,1 +1,9 @@
-<input type="text" placeholder="Tìm kiếm..." name="search" />
+<form (submit)="onSearch()">
+  <input
+    type="text"
+    placeholder="  Tìm kiếm..."
+    name="q"
+    [value]="this.searchInput"
+  />
+  <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+</form>

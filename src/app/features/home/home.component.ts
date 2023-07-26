@@ -1,6 +1,12 @@
 import { RxLet } from "@rx-angular/template/let";
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { TagsService } from "../../core/services/tags.service";
 import { ArticleListConfig } from "../../core/models/article-list-config.model";
 import { AsyncPipe, NgClass, NgForOf } from "@angular/common";
@@ -33,11 +39,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     .pipe(tap(() => (this.tagsLoaded = true)));
   tagsLoaded = false;
   destroy$ = new Subject<void>();
-
+  mySubscription;
   constructor(
     private readonly router: Router,
-    private readonly userService: UserService
-  ) {}
+    private readonly userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.userService.isAuthenticated
@@ -45,8 +59,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         tap((isAuthenticated) => {
           if (isAuthenticated) {
             this.setListTo();
-            // } else {
-            //   this.setListTo("all");
           }
         }),
         takeUntil(this.destroy$)
