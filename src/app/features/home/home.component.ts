@@ -39,14 +39,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     .pipe(tap(() => (this.tagsLoaded = true)));
   tagsLoaded = false;
   destroy$ = new Subject<void>();
-  mySubscription;
+
   constructor(
     private readonly router: Router,
-    private readonly userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private readonly userService: UserService
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.mySubscription = this.router.events.subscribe((event) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.router.navigated = false;
       }

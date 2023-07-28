@@ -19,7 +19,6 @@ import { Comment } from "../../core/models/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { Errors } from "../../core/models/errors.model";
 import { Profile } from "../../core/models/profile.model";
-import parser from "editorjs-html";
 
 @Component({
   selector: "app-article-page",
@@ -50,7 +49,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   commentControl = new FormControl<string>("", { nonNullable: true });
   commentFormErrors: Errors | null = null;
-  bodyAsHtml: string = "";
+  bodyAsHtml!: string;
   isSubmitting = false;
   isDeleting = false;
   destroy$ = new Subject<void>();
@@ -77,24 +76,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(([article, comments, currentUser]) => {
-        this.bodyAsHtml = this.convertBodyToHtml(article.body);
         this.article = article;
         this.comments = comments;
         this.currentUser = currentUser;
         this.canModify = currentUser?.username === article.author.username;
       });
-  }
-
-  convertBodyToHtml(body: string): string {
-    let result: string = "";
-    try {
-      const jsonBody = JSON.parse(body);
-      const bodyBlocks: Array<string> = parser().parse(jsonBody);
-      result = bodyBlocks.join("");
-    } catch (error) {
-      result = body;
-    }
-    return result;
   }
 
   ngOnDestroy(): void {

@@ -33,9 +33,12 @@
                 id="editor"
               >
               </textarea> -->
-              <div #editorjs></div>
+              <lexical-editor
+                id="lexical-editor"
+                [setCurrentValue]="this.body.value"
+                (changeValueEvent)="this.updateBodyChange($event)"
+              ></lexical-editor>
             </fieldset>
-            <app-react-owc-renderer></app-react-owc-renderer>
 
             <fieldset class="form-group">
               <!-- <input
@@ -46,7 +49,7 @@
                 (keyup.enter)="addTag()"
               /> -->
               <mat-form-field class="example-chip-list">
-                <mat-label>Thẻ</mat-label>
+                <mat-label>Danh sách thẻ:</mat-label>
                 <mat-chip-grid #chipGrid aria-label="Thêm thẻ">
                   <mat-chip-row
                     *ngFor="let tag of inTags"

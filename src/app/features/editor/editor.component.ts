@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -22,23 +21,6 @@ import { combineLatest, Observable, Subject, throwError } from "rxjs";
 import { catchError, map, startWith, takeUntil, tap } from "rxjs/operators";
 import { UserService } from "../../core/services/user.service";
 import { Errors } from "../../core/models/errors.model";
-import EditorJS, { OutputData } from "@editorjs/editorjs";
-// @ts-ignore
-import Header from "@editorjs/header";
-// @ts-ignore
-import List from "@editorjs/list";
-// @ts-ignore
-import LinkTool from "@editorjs/link";
-// @ts-ignore
-import RawTool from "@editorjs/raw";
-// @ts-ignore
-import SimpleImage from "@editorjs/simple-image";
-// @ts-ignore
-import Checklist from "@editorjs/checklist";
-// @ts-ignore
-import Embed from "@editorjs/embed";
-// @ts-ignore
-import Quote from "@editorjs/quote";
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteModule,
@@ -49,8 +31,16 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { TagsService } from "src/app/core/services/tags.service";
-import { createEditor } from "lexical";
-import { ReactBidirectionalRendererComponent } from "src/app/react-bidirectional-renderer.component";
+import { LexicalEditorBinding } from "src/app/lexical-editor.component";
+import {
+  $createParagraphNode,
+  $createTextNode,
+  $getRoot,
+  $getSelection,
+  EditorState,
+  LexicalEditor,
+} from "lexical";
+import { $generateHtmlFromNodes } from "@lexical/html";
 
 interface ArticleForm {
   title: FormControl<string>;
@@ -74,26 +64,21 @@ interface ArticleForm {
     FormsModule,
     MatChipsModule,
     MatIconModule,
-    ReactBidirectionalRendererComponent,
+    LexicalEditorBinding,
   ],
   styleUrls: ["./editor.component.css"],
   standalone: true,
 })
-export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditorComponent implements OnInit, OnDestroy {
   articleForm: UntypedFormGroup = new FormGroup<ArticleForm>({
     title: new FormControl("", { nonNullable: true }),
     description: new FormControl("", { nonNullable: true }),
     slug: new FormControl("", { nonNullable: true }),
   });
   tagField = new FormControl<string>("", { nonNullable: true });
-
   errors!: Errors[];
   isSubmitting = false;
   destroy$ = new Subject<void>();
-  @ViewChild("editorjs", { read: ElementRef })
-  editorElement!: ElementRef;
-  private editor!: EditorJS;
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filteredTags: Observable<string[]> = inject(TagsService)
     .getAll()
@@ -105,6 +90,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   announcer = inject(LiveAnnouncer);
   body = new FormControl("", { nonNullable: true });
   isUpdate: boolean = false;
+  editor!: LexicalEditor;
 
   constructor(
     private readonly articleService: ArticlesService,
@@ -113,66 +99,24 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     private readonly userService: UserService
   ) {}
 
-  ngAfterViewInit() {
-    console.log("AfterViewInit");
-    this.initializeEditor();
-  }
-
-  private initializeEditor() {
-    this.editor = new EditorJS({
-      onReady: () => {
-        if (this.body.value != "") {
-          this.editor.render(this.convertStringToJson(this.body.value));
-        }
-      },
-      minHeight: 50,
-      holder: this.editorElement.nativeElement,
-      placeholder: "Nội dung...",
-      tools: {
-        header: Header,
-        list: List,
-        image: SimpleImage,
-        embed: {
-          class: Embed,
-          config: {
-            services: {
-              youtube: true,
-            },
-          },
-        },
-        quote: {
-          class: Quote,
-          inlineToolbar: true,
-          shortcut: "CMD+SHIFT+O",
-          config: {
-            quotePlaceholder: "Viết trích dẫn",
-            captionPlaceholder: "Tác giả của trích dẫn",
-          },
-        },
-      },
-    });
-  }
-
   add(event: MatChipInputEvent): void {
     const value = (event.value || "").trim();
 
-    // Add our fruit
     if (value) {
       this.inTags.push(value);
     }
 
-    // Clear the input value
     event.chipInput!.clear();
 
     this.tagField.setValue("");
   }
 
-  remove(fruit: string): void {
-    const index = this.inTags.indexOf(fruit);
+  remove(tag: string): void {
+    const index = this.inTags.indexOf(tag);
 
     if (index >= 0) {
       this.inTags.splice(index, 1);
-      this.announcer.announce(`Removed ${fruit}`);
+      this.announcer.announce(`Removed ${tag}`);
     }
   }
 
@@ -191,8 +135,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log("OnInit");
-
     const slug = this.route.snapshot.params["slug"];
     if (slug != undefined) {
       combineLatest([
@@ -219,23 +161,18 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  convertStringToJson(body: string): OutputData {
-    return JSON.parse(body);
-  }
-
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   addTag() {
-    // retrieve tag control
     const tag = this.tagField.value;
-    // only add tag if it does not exist yet
+
     if (tag != null && tag.trim() !== "" && this.inTags.indexOf(tag) < 0) {
       this.inTags.push(tag);
     }
-    // clear the input
+
     this.tagField.reset("");
   }
 
@@ -245,58 +182,58 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   submitForm(): void {
     this.isSubmitting = true;
-    // update any single tag
     this.addTag();
+    let htmlString = "";
+    this.editor.update(() => {
+      htmlString = $generateHtmlFromNodes(this.editor, null);
+    });
+    this.body.setValue(htmlString);
+    if (this.isUpdate === true) {
+      this.updateArticle();
+    } else {
+      this.createArticle();
+    }
+  }
 
-    this.editor
-      .save()
-      .then((outputData) => {
-        const body = JSON.stringify(outputData);
-        if (this.isUpdate === true) {
-          // put the changes
-          // post the changes
-          this.articleService
-            .update({
-              ...this.articleForm.value,
-              body: body,
-              tagList: this.inTags,
-            })
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-              next: (article) => {
-                this.router.navigate(["/articles/", article.slug]);
-              },
-              error: (err) => {
-                this.errors = err;
-                this.isSubmitting = false;
-              },
-            });
-        } else {
-          // post the changes
-          this.articleService
-            .create({
-              ...this.articleForm.value,
-              body: body,
-              tagList: this.inTags,
-            })
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-              next: (article) => {
-                this.router.navigate(["/articles/", article.slug]);
-              },
-              error: ({ errors }) => {
-                this.errors = errors;
-                this.isSubmitting = false;
-              },
-            });
-        }
+  updateBodyChange(editor: LexicalEditor) {
+    this.editor = editor;
+  }
+
+  updateArticle() {
+    this.articleService
+      .update({
+        ...this.articleForm.value,
+        body: this.body.value,
+        tagList: this.inTags,
       })
-      .catch((error) => {
-        console.log("Saving failed: ", error);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (article) => {
+          this.router.navigate(["/articles/", article.slug]);
+        },
+        error: (err) => {
+          this.errors = err;
+          this.isSubmitting = false;
+        },
       });
   }
 
-  createArticle() {}
-
-  updateArticle() {}
+  createArticle() {
+    this.articleService
+      .create({
+        ...this.articleForm.value,
+        body: this.body.value,
+        tagList: this.inTags,
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (article) => {
+          this.router.navigate(["/articles/", article.slug]);
+        },
+        error: (errors) => {
+          this.errors = errors;
+          this.isSubmitting = false;
+        },
+      });
+  }
 }

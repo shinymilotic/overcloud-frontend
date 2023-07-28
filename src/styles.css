@@ -4988,7 +4988,8 @@ a.tag:hover {
 }
 
 .tag-default {
-  background-color: #818a91;
+  background-color: #f2f2f2;
+  color: black;
 }
 
 .tag-default[href]:focus,
@@ -7304,10 +7305,8 @@ a.text-danger:hover {
 }
 
 .tag-default {
-  color: #fff !important;
   font-size: 0.8rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+  padding: 8px 16px;
   white-space: nowrap;
   margin-right: 3px;
   margin-bottom: 0.2rem;
@@ -7320,8 +7319,8 @@ a.text-danger:hover {
 
 .tag-default.tag-outline {
   border: 1px solid #ddd;
-  color: #aaa !important;
-  background: 0 0 !important;
+  color: black;
+  background: #f2f2f2;
 }
 
 ul.tag-list {
@@ -7529,12 +7528,6 @@ footer .attribution {
   margin-bottom: -1px;
 }
 
-.home-page .sidebar {
-  padding: 5px 10px 10px;
-  background: #f3f3f3;
-  border-radius: 4px;
-}
-
 .home-page .sidebar p {
   margin-bottom: 0.2rem;
 }
@@ -7546,6 +7539,7 @@ footer .attribution {
 .article-page .banner h1 {
   font-size: 2.8rem;
   font-weight: 600;
+  color: #ffebb5;
 }
 
 .article-page .banner .btn {
@@ -7735,9 +7729,7 @@ h1 {
 }
 
 .editor-container {
-  margin: 20px auto 20px auto;
   border-radius: 2px;
-  max-width: 600px;
   color: #000;
   position: relative;
   line-height: 20px;
