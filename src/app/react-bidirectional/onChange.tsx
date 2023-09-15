@@ -7,6 +7,5 @@ export default function onChange(editorState: EditorState, editor: LexicalEditor
     // Read the contents of the EditorState here.
     const root = $getRoot();
     const selection = $getSelection();
-    console.log(JSON.stringify(editorState));
   });
 }

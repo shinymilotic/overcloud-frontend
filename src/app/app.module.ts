@@ -7,16 +7,20 @@ import { FooterComponent } from "./core/layout/footer.component";
 import { HeaderComponent } from "./core/layout/header.component";
 import { JwtService } from "./core/services/jwt.service";
 import { UserService } from "./core/services/user.service";
-import { EMPTY } from "rxjs";
+import { EMPTY, shareReplay, tap } from "rxjs";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ErrorInterceptor } from "./core/interceptors/error.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { Auth } from "./core/models/auth.model";
 
 export function initAuth(jwtService: JwtService, userService: UserService) {
-  return () => (jwtService.getToken() ? userService.getCurrentUser() : EMPTY);
+  let accessToken = jwtService.getToken();
+  let refreshToken = jwtService.getRefreshToken();
+  return () =>
+    accessToken ? userService.auth(accessToken, refreshToken) : EMPTY;
 }
 
 @NgModule({
@@ -44,7 +48,7 @@ export function initAuth(jwtService: JwtService, userService: UserService) {
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import {
+  Component,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { ArticlesService } from "../../core/services/articles.service";
 import { ArticleListConfig } from "../../core/models/article-list-config.model";
 import { Article } from "../../core/models/article.model";
@@ -32,7 +38,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     if (config) {
       this.query = config;
       this.currentPage = 1;
-      this.runQuery();
+      this.runQuery(this.currentPage);
     }
   }
 
@@ -50,18 +56,13 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   }
 
   setPageTo(pageNumber: number) {
-    this.currentPage = pageNumber;
-    this.runQuery();
-  }
-
-  runQuery() {
+    // this.runQuery(pageNumber);
     this.loading = LoadingState.LOADING;
-    this.results = [];
-
+    // this.results = [];
     // Create limit and offset filter (if necessary)
     if (this.limit) {
       this.query.filters.size = this.limit;
-      this.query.filters.page = this.currentPage;
+      this.query.filters.page = pageNumber;
     }
 
     this.route.queryParamMap.subscribe((params: any) => {
@@ -72,7 +73,55 @@ export class ArticleListComponent implements OnDestroy, OnInit {
       const param: SearchParam = {
         q: this.q,
         size: this.limit,
-        page: this.currentPage,
+        page: pageNumber,
+      };
+
+      this.searchService
+        .search(param)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data) => {
+          this.loading = LoadingState.LOADED;
+          if (data.articles.length != 0) {
+            data.articles.forEach((element) => {
+              this.results.push(element);
+            });
+            this.currentPage = pageNumber;
+          }
+        });
+    } else {
+      this.articlesService
+        .query(this.query)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data) => {
+          this.loading = LoadingState.LOADED;
+          if (data.articles.length != 0) {
+            data.articles.forEach((element) => {
+              this.results.push(element);
+            });
+            this.currentPage = pageNumber;
+          }
+        });
+    }
+  }
+
+  runQuery(pageNumber: number) {
+    this.loading = LoadingState.LOADING;
+    // this.results = [];
+    // Create limit and offset filter (if necessary)
+    if (this.limit) {
+      this.query.filters.size = this.limit;
+      this.query.filters.page = pageNumber;
+    }
+
+    this.route.queryParamMap.subscribe((params: any) => {
+      this.q = params["params"].q;
+    });
+
+    if (this.q != undefined && this.q != "" && this.q != null) {
+      const param: SearchParam = {
+        q: this.q,
+        size: this.limit,
+        page: pageNumber,
       };
 
       this.searchService
@@ -90,6 +139,13 @@ export class ArticleListComponent implements OnDestroy, OnInit {
           this.loading = LoadingState.LOADED;
           this.results = data.articles;
         });
+    }
+  }
+
+  @HostListener("window:scroll", ["$event"])
+  onScroll(event: any) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
+      this.setPageTo(this.currentPage + 1);
     }
   }
 }

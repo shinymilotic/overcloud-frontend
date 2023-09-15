@@ -46,8 +46,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   currentUser!: User | null;
   comments: Comment[] = [];
   canModify: boolean = false;
-
-  commentControl = new FormControl<string>("", { nonNullable: true });
+  commentControl: FormControl<string>;
   commentFormErrors: Errors | null = null;
   bodyAsHtml!: string;
   isSubmitting = false;
@@ -60,7 +59,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private readonly commentsService: CommentsService,
     private readonly router: Router,
     private readonly userService: UserService
-  ) {}
+  ) {
+    this.commentControl = new FormControl<string>("", { nonNullable: true });
+  }
 
   ngOnInit(): void {
     const slug = this.route.snapshot.params["slug"];

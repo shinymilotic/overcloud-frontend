@@ -12,11 +12,7 @@ import { Errors } from "../core/models/errors.model";
 import { UserService } from "../core/services/user.service";
 import { catchError, takeUntil } from "rxjs/operators";
 import { Subject, throwError } from "rxjs";
-
-interface LoginForm {
-  email: FormControl<string>;
-  password: FormControl<string>;
-}
+import { LoginForm } from "./LoginForm";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",

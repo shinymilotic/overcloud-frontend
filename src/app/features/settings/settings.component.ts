@@ -12,13 +12,7 @@ import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { Errors } from "../../core/models/errors.model";
 import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
-
-interface SettingsForm {
-  image: FormControl<string>;
-  username: FormControl<string>;
-  bio: FormControl<string>;
-  email: FormControl<string>;
-}
+import { SettingsForm } from "./SettingsForm";
 
 @Component({
   selector: "app-settings-page",
@@ -28,24 +22,26 @@ interface SettingsForm {
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   user!: User;
-  settingsForm = new FormGroup<SettingsForm>({
-    image: new FormControl("", { nonNullable: true }),
-    username: new FormControl("", { nonNullable: true }),
-    bio: new FormControl("", { nonNullable: true }),
-    email: new FormControl("", { nonNullable: true }),
-  });
-  errors: Errors | null = null;
+  settingsForm: FormGroup<SettingsForm>;
+  errors!: Errors[];
   isSubmitting = false;
   destroy$ = new Subject<void>();
 
   constructor(
     private readonly router: Router,
     private readonly userService: UserService
-  ) {}
+  ) {
+    this.settingsForm = new FormGroup<SettingsForm>({
+      image: new FormControl("", { nonNullable: true }),
+      username: new FormControl("", { nonNullable: true }),
+      bio: new FormControl("", { nonNullable: true }),
+      email: new FormControl("", { nonNullable: true }),
+    });
+  }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe((data) => {
-      this.settingsForm.patchValue(data.user);
+      this.settingsForm.patchValue(data);
     });
     // this.settingsForm.patchValue(
     //   this.userService.getCurrentUser() as Partial<User>
@@ -68,10 +64,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .update(this.settingsForm.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: ({ user }) =>
-          void this.router.navigate(["/profile/", user.username]),
+        next: (user) => void this.router.navigate(["/profile/", user.username]),
         error: (err) => {
-          this.errors = err;
+          this.errors = err.errors;
           this.isSubmitting = false;
         },
       });

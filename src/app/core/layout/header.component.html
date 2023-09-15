@@ -2,14 +2,10 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/">Overcloud</a>
 
-    <app-search-bar></app-search-bar>
+    <app-search-bar class="nav navbar-nav"></app-search-bar>
 
     <!-- Show this for logged out users -->
     <ul *appShowAuthed="false" class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/"> Trang chủ </a>
-      </li>
-
       <li class="nav-item">
         <a class="nav-link" routerLink="/login" routerLinkActive="active">
           Đăng nhập
@@ -25,17 +21,6 @@
 
     <!-- Show this for logged in users -->
     <ul *appShowAuthed="true" class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          Trang chủ
-        </a>
-      </li>
-
       <li class="nav-item">
         <a class="nav-link" routerLink="/editor" routerLinkActive="active">
           <i class="ion-compose"></i>&nbsp;Viết

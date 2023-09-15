@@ -35,7 +35,7 @@
               </textarea> -->
               <lexical-editor
                 id="lexical-editor"
-                [setCurrentValue]="this.body.value"
+                [setCurrentValue]="this.articleForm.controls.body.value"
                 (changeValueEvent)="this.updateBodyChange($event)"
               ></lexical-editor>
             </fieldset>

@@ -46,7 +46,7 @@ interface ArticleForm {
   title: FormControl<string>;
   description: FormControl<string>;
   slug: FormControl<string>;
-  // body: FormControl<string>;
+  body: FormControl<string>;
 }
 
 @Component({
@@ -70,25 +70,18 @@ interface ArticleForm {
   standalone: true,
 })
 export class EditorComponent implements OnInit, OnDestroy {
-  articleForm: UntypedFormGroup = new FormGroup<ArticleForm>({
-    title: new FormControl("", { nonNullable: true }),
-    description: new FormControl("", { nonNullable: true }),
-    slug: new FormControl("", { nonNullable: true }),
-  });
-  tagField = new FormControl<string>("", { nonNullable: true });
+  articleForm: FormGroup<ArticleForm>;
+  tagField: FormControl<string>;
   errors!: Errors[];
   isSubmitting = false;
   destroy$ = new Subject<void>();
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  filteredTags: Observable<string[]> = inject(TagsService)
-    .getAll()
-    .pipe(tap(() => (this.tagsLoaded = true)));
+  separatorKeysCodes: number[];
+  filteredTags: Observable<string[]>;
   inTags: string[] = [];
   allTags!: string[];
   tagsLoaded = false;
   @ViewChild("tagInput") tagInput!: ElementRef<HTMLInputElement>;
   announcer = inject(LiveAnnouncer);
-  body = new FormControl("", { nonNullable: true });
   isUpdate: boolean = false;
   editor!: LexicalEditor;
 
@@ -97,7 +90,19 @@ export class EditorComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly userService: UserService
-  ) {}
+  ) {
+    this.articleForm = new FormGroup<ArticleForm>({
+      title: new FormControl("", { nonNullable: true }),
+      description: new FormControl("", { nonNullable: true }),
+      slug: new FormControl("", { nonNullable: true }),
+      body: new FormControl("", { nonNullable: true }),
+    });
+    this.tagField = new FormControl<string>("", { nonNullable: true });
+    this.filteredTags = inject(TagsService)
+      .getAll()
+      .pipe(tap(() => (this.tagsLoaded = true)));
+    this.separatorKeysCodes = [ENTER, COMMA];
+  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || "").trim();
@@ -148,9 +153,8 @@ export class EditorComponent implements OnInit, OnDestroy {
           }),
           takeUntil(this.destroy$)
         )
-        .subscribe(([article, { user }]) => {
+        .subscribe(([article, user]) => {
           if (user.username === article.author.username) {
-            this.body.setValue(article.body);
             this.inTags = article.tagList;
             this.articleForm.patchValue(article);
             this.isUpdate = true;
@@ -187,7 +191,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor.update(() => {
       htmlString = $generateHtmlFromNodes(this.editor, null);
     });
-    this.body.setValue(htmlString);
+    this.articleForm.controls.body.setValue(htmlString);
     if (this.isUpdate === true) {
       this.updateArticle();
     } else {
@@ -203,7 +207,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.articleService
       .update({
         ...this.articleForm.value,
-        body: this.body.value,
         tagList: this.inTags,
       })
       .pipe(takeUntil(this.destroy$))
@@ -222,7 +225,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.articleService
       .create({
         ...this.articleForm.value,
-        body: this.body.value,
         tagList: this.inTags,
       })
       .pipe(takeUntil(this.destroy$))
@@ -231,7 +233,7 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.router.navigate(["/articles/", article.slug]);
         },
         error: (errors) => {
-          this.errors = errors;
+          this.errors = errors.errors;
           this.isSubmitting = false;
         },
       });
