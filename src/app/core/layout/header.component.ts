@@ -10,6 +10,7 @@ import { MatBadgeModule } from "@angular/material/badge";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatButtonModule } from "@angular/material/button";
 import { Subject, takeUntil } from "rxjs";
+import { SideBarComponent } from "src/app/side-bar/side-bar.component";
 @Component({
   selector: "app-layout-header",
   templateUrl: "./header.component.html",
@@ -26,6 +27,7 @@ import { Subject, takeUntil } from "rxjs";
     MatBadgeModule,
     MatMenuModule,
     MatButtonModule,
+    SideBarComponent,
   ],
 })
 export class HeaderComponent {

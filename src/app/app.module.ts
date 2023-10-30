@@ -7,14 +7,13 @@ import { FooterComponent } from "./core/layout/footer.component";
 import { HeaderComponent } from "./core/layout/header.component";
 import { JwtService } from "./core/services/jwt.service";
 import { UserService } from "./core/services/user.service";
-import { EMPTY, shareReplay, tap } from "rxjs";
+import { EMPTY } from "rxjs";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./core/interceptors/token.interceptor";
-import { ErrorInterceptor } from "./core/interceptors/error.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { Auth } from "./core/models/auth.model";
+import { SideBarComponent } from "./side-bar/side-bar.component";
 
 export function initAuth(jwtService: JwtService, userService: UserService) {
   let accessToken = jwtService.getToken();

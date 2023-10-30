@@ -15,6 +15,8 @@ import { takeUntil, tap } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+
 @Component({
   selector: "app-home-page",
   templateUrl: "./home.component.html",
@@ -26,6 +28,8 @@ import { ShowAuthedDirective } from "../../shared/show-authed.directive";
     RxLet,
     NgForOf,
     ShowAuthedDirective,
+    RouterLink,
+    RouterLinkActive,
   ],
   standalone: true,
 })
