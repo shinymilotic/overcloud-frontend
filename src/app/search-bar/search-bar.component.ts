@@ -7,12 +7,14 @@ import { Router } from "@angular/router";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ActivatedRoute } from "@angular/router";
+import { NgIf } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-search-bar",
   templateUrl: "./search-bar.component.html",
   styleUrls: ["./search-bar.component.css"],
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, FormsModule, NgIf],
   standalone: true,
 })
 export class SearchBarComponent implements OnDestroy {

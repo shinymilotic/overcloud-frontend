@@ -28,6 +28,7 @@ export function initAuth(jwtService: JwtService, userService: UserService) {
     BrowserModule,
     FooterComponent,
     HeaderComponent,
+    SideBarComponent,
     AppRoutingModule,
     HttpClientModule,
     ServiceWorkerModule.register("ngsw-worker.js", {

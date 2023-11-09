@@ -1,8 +1,10 @@
 import {
   Component,
   ElementRef,
+  HostBinding,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewChild,
   inject,
 } from "@angular/core";
@@ -21,15 +23,7 @@ import { combineLatest, Observable, Subject, throwError } from "rxjs";
 import { catchError, map, startWith, takeUntil, tap } from "rxjs/operators";
 import { UserService } from "../../core/services/user.service";
 import { Errors } from "../../core/models/errors.model";
-import {
-  MatAutocompleteSelectedEvent,
-  MatAutocompleteModule,
-} from "@angular/material/autocomplete";
-import { MatChipInputEvent, MatChipsModule } from "@angular/material/chips";
-import { MatIconModule } from "@angular/material/icon";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { TagsService } from "src/app/core/services/tags.service";
 import { LexicalEditorBinding } from "src/app/lexical-editor.component";
 import {
@@ -56,40 +50,42 @@ interface ArticleForm {
     ListErrorsComponent,
     ReactiveFormsModule,
     NgForOf,
-    MatFormFieldModule,
-    MatAutocompleteModule,
     ReactiveFormsModule,
     NgFor,
     AsyncPipe,
     FormsModule,
-    MatChipsModule,
-    MatIconModule,
     LexicalEditorBinding,
   ],
   styleUrls: ["./editor.component.css"],
   standalone: true,
 })
 export class EditorComponent implements OnInit, OnDestroy {
+  @HostBinding("class") classes = "app-editor-page";
   articleForm: FormGroup<ArticleForm>;
   tagField: FormControl<string>;
   errors!: Errors[];
   isSubmitting = false;
   destroy$ = new Subject<void>();
-  separatorKeysCodes: number[];
   filteredTags: Observable<string[]>;
   inTags: string[] = [];
   allTags!: string[];
   tagsLoaded = false;
   @ViewChild("tagInput") tagInput!: ElementRef<HTMLInputElement>;
+  @ViewChild("tagInputTextElement")
+  tagInputTextElement!: ElementRef<HTMLInputElement>;
   announcer = inject(LiveAnnouncer);
   isUpdate: boolean = false;
   editor!: LexicalEditor;
+  isInputTag: boolean = true;
+  selectedTagIndex: number;
+  activeElement: Element | null = null;
 
   constructor(
     private readonly articleService: ArticlesService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private renderer: Renderer2
   ) {
     this.articleForm = new FormGroup<ArticleForm>({
       title: new FormControl("", { nonNullable: true }),
@@ -101,20 +97,20 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.filteredTags = inject(TagsService)
       .getAll()
       .pipe(tap(() => (this.tagsLoaded = true)));
-    this.separatorKeysCodes = [ENTER, COMMA];
+    this.selectedTagIndex = -1;
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || "").trim();
+  // add(event: MatChipInputEvent): void {
+  //   const value = (event.value || "").trim();
 
-    if (value) {
-      this.inTags.push(value);
-    }
+  //   if (value) {
+  //     this.inTags.push(value);
+  //   }
 
-    event.chipInput!.clear();
+  //   event.chipInput!.clear();
 
-    this.tagField.setValue("");
-  }
+  //   this.tagField.setValue("");
+  // }
 
   remove(tag: string): void {
     const index = this.inTags.indexOf(tag);
@@ -125,11 +121,11 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.inTags.push(event.option.viewValue);
-    this.tagInput.nativeElement.value = "";
-    this.tagField.setValue("");
-  }
+  // selected(event: MatAutocompleteSelectedEvent): void {
+  //   this.inTags.push(event.option.viewValue);
+  //   this.tagInput.nativeElement.value = "";
+  //   this.tagField.setValue("");
+  // }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -172,7 +168,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   addTag() {
     const tag = this.tagField.value;
-
     if (tag != null && tag.trim() !== "" && this.inTags.indexOf(tag) < 0) {
       this.inTags.push(tag);
     }
@@ -237,5 +232,88 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.isSubmitting = false;
         },
       });
+  }
+
+  focusInputTag() {
+    this.isInputTag = false;
+  }
+
+  loseFocusInputTag() {
+    this.isInputTag = true;
+  }
+
+  changeInputTag() {}
+
+  selectTag($event: KeyboardEvent) {
+    if ($event.key === "ArrowDown") {
+      this.handleArrowDown();
+    } else if ($event.key === "ArrowUp") {
+      this.handleArrowUp();
+    } else if ($event.key === "Enter") {
+      this.handleEnter();
+    }
+  }
+
+  handleEnter() {
+    let element: Element | null = this.activeElement;
+
+    if (element != null && element.innerHTML != null) {
+      let tag: string = element.innerHTML;
+      if (tag != null && tag.trim() !== "" && this.inTags.indexOf(tag) < 0) {
+        this.inTags.push(tag);
+      }
+    }
+  }
+
+  handleArrowDown() {
+    if (this.activeElement == null) {
+      this.activeElement = this.tagInput.nativeElement.firstElementChild;
+      this.renderer.addClass(this.activeElement, "selectedTag");
+    } else if (
+      this.activeElement == this.tagInput.nativeElement.lastElementChild
+    ) {
+      this.renderer.removeClass(this.activeElement, "selectedTag");
+      this.activeElement = null;
+    } else {
+      this.renderer.removeClass(this.activeElement, "selectedTag");
+      this.activeElement = this.activeElement.nextElementSibling;
+      this.renderer.addClass(this.activeElement, "selectedTag");
+    }
+  }
+
+  handleArrowUp() {
+    if (this.activeElement == null) {
+      this.activeElement = this.tagInput.nativeElement.lastElementChild;
+      this.renderer.addClass(this.activeElement, "selectedTag");
+    } else if (
+      this.activeElement == this.tagInput.nativeElement.firstElementChild
+    ) {
+      this.renderer.removeClass(this.activeElement, "selectedTag");
+      this.activeElement = null;
+    } else {
+      this.renderer.removeClass(this.activeElement, "selectedTag");
+      this.activeElement = this.activeElement.previousElementSibling;
+      this.renderer.addClass(this.activeElement, "selectedTag");
+    }
+  }
+
+  mouseEnterTag($event: any) {
+    let target: Element = $event.target;
+    if (this.activeElement != null) {
+      this.renderer.removeClass(this.activeElement, "selectedTag");
+    }
+    this.activeElement = target;
+    this.renderer.addClass(this.activeElement, "selectedTag");
+  }
+
+  clickTag() {
+    let element: Element | null = this.activeElement;
+    console.log(element);
+    if (element != null && element.innerHTML != null) {
+      let tag: string = element.innerHTML;
+      if (tag != null && tag.trim() !== "" && this.inTags.indexOf(tag) < 0) {
+        this.inTags.push(tag);
+      }
+    }
   }
 }

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #submitBtn {
   display: block;
   float: right;
@@ -7,4 +11,49 @@ mat-form-field,
 app-list-errors {
   display: block;
   max-width: 400px;
+}
+
+fieldset.form-group {
+  margin-bottom: 20px;
+  padding: 5px;
+  border: solid 1px;
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 20px;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+button:hover {
+  background-color: #def1ff !important;
+}
+
+button:focus {
+  background-color: #3ea6ff !important;
+}
+
+.inTag div {
+  background-color: #f2f2f2;
+  padding: 8px 16px;
+  width: fit-content;
+  flex-direction: row;
+  margin-right: 8px;
+  border-radius: 100px;
+}
+
+.inTag {
+  display: flex;
+}
+
+.selectedTag {
+  background-color: #def1ff !important;
+}
+
+.cancel-tag {
+  position: absolute;
+  font-size: 18px;
+  top: 0;
+  right: -10px;
 }

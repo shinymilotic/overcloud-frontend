@@ -1,4 +1,4 @@
-input {
+/* input {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -9,4 +9,52 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 15px;
+  padding: 7px;
+  border-radius: 15px;
+}
+
+.logo {
+  background-image: url(logo.svg), none;
+}
+
+.nav-item:hover {
+  background-color: #def1ff !important;
+}
+
+.nav-item:focus {
+  background-color: #3ea6ff !important;
+}
+
+.navbar-brand {
+  float: left;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
+.navbar-brand > img {
+  display: block;
 }

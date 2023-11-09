@@ -1,100 +1,82 @@
-<div class="editor-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-10 offset-md-1 col-xs-12">
-        <app-list-errors [errors]="errors"></app-list-errors>
+<div class="editor-page p-12 flex justify-between">
+  <app-list-errors [errors]="errors"></app-list-errors>
 
-        <form [formGroup]="articleForm">
-          <fieldset [disabled]="isSubmitting">
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                formControlName="title"
-                type="text"
-                placeholder="Tiêu đề"
-              />
-            </fieldset>
+  <form [formGroup]="articleForm">
+    <fieldset [disabled]="isSubmitting">
+      <fieldset class="form-group">
+        <input
+          class="form-control form-control-lg w-full outline-none"
+          formControlName="title"
+          type="text"
+          placeholder="Tiêu đề"
+        />
+      </fieldset>
 
-            <fieldset class="form-group">
-              <input
-                class="form-control"
-                formControlName="description"
-                type="text"
-                placeholder="Tóm tắt"
-              />
-            </fieldset>
+      <fieldset class="form-group">
+        <input
+          class="form-control w-full outline-none"
+          formControlName="description"
+          type="text"
+          placeholder="Tóm tắt"
+        />
+      </fieldset>
 
-            <fieldset class="form-group">
-              <!-- <textarea
-                class="form-control"
-                formControlName="body"
-                rows="8"
-                placeholder="Nội dung"
-                id="editor"
-              >
-              </textarea> -->
-              <lexical-editor
-                id="lexical-editor"
-                [setCurrentValue]="this.articleForm.controls.body.value"
-                (changeValueEvent)="this.updateBodyChange($event)"
-              ></lexical-editor>
-            </fieldset>
+      <fieldset class="form-group">
+        <!-- <textarea
+          class="form-control"
+          formControlName="body"
+          rows="8"
+          placeholder="Nội dung"
+          id="editor"
+        >
+        </textarea> -->
+        <lexical-editor
+          id="lexical-editor"
+          [setCurrentValue]="this.articleForm.controls.body.value"
+          (changeValueEvent)="this.updateBodyChange($event)"
+        ></lexical-editor>
+      </fieldset>
 
-            <fieldset class="form-group">
-              <!-- <input
-                class="form-control"
-                type="text"
-                placeholder="Danh sách thẻ"
-                [formControl]="tagField"
-                (keyup.enter)="addTag()"
-              /> -->
-              <mat-form-field class="example-chip-list">
-                <mat-label>Danh sách thẻ:</mat-label>
-                <mat-chip-grid #chipGrid aria-label="Thêm thẻ">
-                  <mat-chip-row
-                    *ngFor="let tag of inTags"
-                    (removed)="remove(tag)"
-                  >
-                    {{ tag }}
-                    <button matChipRemove [attr.aria-label]="'remove ' + tag">
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </mat-chip-row>
-                </mat-chip-grid>
-                <input
-                  placeholder="Thêm thẻ..."
-                  #tagInput
-                  [formControl]="tagField"
-                  [matChipInputFor]="chipGrid"
-                  [matAutocomplete]="auto"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event)"
-                />
-                <mat-autocomplete
-                  #auto="matAutocomplete"
-                  (optionSelected)="selected($event)"
-                >
-                  <mat-option
-                    *ngFor="let tag of filteredTags | async"
-                    [value]="tag"
-                  >
-                    {{ tag }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </fieldset>
+      <fieldset class="form-group">
+        <input
+          #tagInputTextElement
+          class="form-control w-full outline-none"
+          type="text"
+          placeholder="Danh sách thẻ"
+          [formControl]="tagField"
+          (focus)="focusInputTag()"
+          (blur)="loseFocusInputTag()"
+          (input)="changeInputTag()"
+          (keydown)="selectTag($event)"
+        />
+        <!-- (keydown.enter)="this.addTag()" -->
 
-            <button
-              id="submitBtn"
-              class="btn btn-lg btn-primary"
-              type="button"
-              (click)="submitForm()"
-            >
-              Đăng bài
-            </button>
-          </fieldset>
-        </form>
+        <div #tagInput [hidden]="isInputTag">
+          <div
+            class="cursor-pointer"
+            name="inputTag"
+            *ngFor="let tag of filteredTags | async"
+            (mouseenter)="mouseEnterTag($event)"
+            (mousedown)="clickTag()"
+          >
+            {{ tag }}
+          </div>
+        </div>
+      </fieldset>
+      <div class="inTag">
+        <div class="cursor-pointer relative" *ngFor="let tag of inTags">
+          {{ tag }}
+          <span class="material-symbols-outlined cancel-tag"> cancel </span>
+        </div>
       </div>
-    </div>
-  </div>
+      <button
+        id="submitBtn"
+        class="btn btn-lg btn-primary"
+        type="button"
+        (click)="submitForm()"
+      >
+        Đăng bài
+      </button>
+    </fieldset>
+  </form>
 </div>

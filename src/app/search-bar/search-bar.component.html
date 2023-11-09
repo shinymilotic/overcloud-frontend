@@ -1,10 +1,15 @@
 <form (submit)="onSearch()">
-  <input
-    matInput
-    type="text"
-    placeholder="  Tìm kiếm..."
-    name="q"
-    [value]="this.searchInput"
-  />
-  <!-- <button type="submit"><fa-icon [icon]="faSearch"></fa-icon></button> -->
+  <div class="flex">
+    <input
+      matInput
+      type="text"
+      placeholder="  Tìm kiếm..."
+      name="q"
+      [value]="this.searchInput"
+      class="outline-none pl-6"
+    />
+    <button type="submit" class="w-12 h-8">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+  </div>
 </form>

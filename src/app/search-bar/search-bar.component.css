@@ -1,20 +1,19 @@
-form {
-  padding: 5px;
-  border: 0px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  font-size: 16px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  /* background: var(--yt-spec-base-background, #282828); */
 }
 
-form input {
-  border: 1px solid #ccc;
-}
-
-form button {
-  border: 1px solid #ccc;
+div.flex {
+  border-radius: 28px;
+  /* background: var(--yt-spec-base-background, #282828); */
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border: solid 1px;
 }
