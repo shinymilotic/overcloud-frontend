@@ -1,11 +1,12 @@
 <button
-  class="btn btn-sm"
+  class="btn-favorite"
   [ngClass]="{
     disabled: isSubmitting,
     'btn-outline-primary': !article.favorited,
     'btn-primary': article.favorited
   }"
-  (click)="toggleFavorite()"
+  (click)="toggleFavorite($event)"
 >
-  <i class="ion-heart"></i> <ng-content></ng-content>
+  <i class="material-symbols-outlined"> favorite </i>
+  <span><ng-content></ng-content></span>
 </button>

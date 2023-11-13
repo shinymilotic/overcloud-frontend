@@ -7,12 +7,6 @@
   float: right;
 }
 
-mat-form-field,
-app-list-errors {
-  display: block;
-  max-width: 400px;
-}
-
 fieldset.form-group {
   margin-bottom: 20px;
   padding: 5px;

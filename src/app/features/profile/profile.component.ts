@@ -17,6 +17,7 @@ import { AsyncPipe, NgIf } from "@angular/common";
 @Component({
   selector: "app-profile-page",
   templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.css"],
   imports: [
     FollowButtonComponent,
     NgIf,

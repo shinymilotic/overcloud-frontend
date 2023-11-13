@@ -1,4 +1,4 @@
-<div class="editor-page p-12 flex justify-between">
+<div class="editor-page p-12 flex justify-between flex-col">
   <app-list-errors [errors]="errors"></app-list-errors>
 
   <form [formGroup]="articleForm">
@@ -32,7 +32,6 @@
         </textarea> -->
         <lexical-editor
           id="lexical-editor"
-          [setCurrentValue]="this.articleForm.controls.body.value"
           (changeValueEvent)="this.updateBodyChange($event)"
         ></lexical-editor>
       </fieldset>
@@ -64,9 +63,18 @@
         </div>
       </fieldset>
       <div class="inTag">
-        <div class="cursor-pointer relative" *ngFor="let tag of inTags">
+        <div
+          class="cursor-pointer relative"
+          *ngFor="let tag of inTags"
+          id="{{ tag }}"
+        >
           {{ tag }}
-          <span class="material-symbols-outlined cancel-tag"> cancel </span>
+          <span
+            class="material-symbols-outlined cancel-tag"
+            (click)="deleteTag(tag)"
+          >
+            cancel
+          </span>
         </div>
       </div>
       <button

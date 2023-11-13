@@ -308,12 +308,16 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   clickTag() {
     let element: Element | null = this.activeElement;
-    console.log(element);
     if (element != null && element.innerHTML != null) {
       let tag: string = element.innerHTML;
+
       if (tag != null && tag.trim() !== "" && this.inTags.indexOf(tag) < 0) {
         this.inTags.push(tag);
       }
     }
+  }
+
+  deleteTag(tag: string) {
+    this.inTags = this.inTags.filter((item) => item !== tag);
   }
 }

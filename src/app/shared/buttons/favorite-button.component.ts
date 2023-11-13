@@ -16,6 +16,7 @@ import { Article } from "../../core/models/article.model";
 @Component({
   selector: "app-favorite-button",
   templateUrl: "./favorite-button.component.html",
+  styleUrls: ["./favorite-button.component.css"],
   imports: [NgClass],
   standalone: true,
 })
@@ -37,7 +38,8 @@ export class FavoriteButtonComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  toggleFavorite(): void {
+  toggleFavorite($event: Event): void {
+    $event.stopPropagation();
     this.isSubmitting = true;
 
     this.userService.isAuthenticated

@@ -31,22 +31,22 @@ export class LexicalEditorBinding implements OnInit {
     this.reactApp.value;
   }
 
-  @Input() set setCurrentValue(value: string) {
-    if (value != "") {
-      this.reactApp.value.update(() => {
-        // In the browser you can use the native DOMParser API to parse the HTML string.
-        const parser = new DOMParser();
-        const dom = parser.parseFromString(value, "text/html");
+  // @Input() set setCurrentValue(value: string) {
+  //   if (value != "") {
+  //     this.reactApp.value.update(() => {
+  //       // In the browser you can use the native DOMParser API to parse the HTML string.
+  //       const parser = new DOMParser();
+  //       const dom = parser.parseFromString(value, "text/html");
 
-        // Once you have the DOM instance it's easy to generate LexicalNodes.
-        const nodes = $generateNodesFromDOM(this.reactApp.value, dom);
+  //       // Once you have the DOM instance it's easy to generate LexicalNodes.
+  //       const nodes = $generateNodesFromDOM(this.reactApp.value, dom);
 
-        // Select the root
-        $getRoot().select();
+  //       // Select the root
+  //       $getRoot().select();
 
-        // Insert them at a selection.
-        $insertNodes(nodes);
-      });
-    }
-  }
+  //       // Insert them at a selection.
+  //       $insertNodes(nodes);
+  //     });
+  //   }
+  // }
 }

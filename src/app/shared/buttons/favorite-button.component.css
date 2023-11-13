@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-favorite {
+  display: inline-flex;
+  padding: 3px;
+}
+
+.btn-favorite:hover {
+  border-radius: 10px;
+  border: solid 1px;
+}

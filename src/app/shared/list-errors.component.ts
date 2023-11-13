@@ -5,6 +5,7 @@ import { NgForOf, NgIf } from "@angular/common";
 @Component({
   selector: "app-list-errors",
   templateUrl: "./list-errors.component.html",
+  styleUrls: ["./list-errors.component.css"],
   imports: [NgIf, NgForOf],
   standalone: true,
 })

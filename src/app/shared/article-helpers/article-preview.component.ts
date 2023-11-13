@@ -8,6 +8,7 @@ import { NgForOf } from "@angular/common";
 @Component({
   selector: "app-article-preview",
   templateUrl: "./article-preview.component.html",
+  styleUrls: ["./article-preview.component.css"],
   imports: [ArticleMetaComponent, FavoriteButtonComponent, RouterLink, NgForOf],
   standalone: true,
 })

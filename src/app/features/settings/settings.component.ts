@@ -17,6 +17,7 @@ import { SettingsForm } from "./SettingsForm";
 @Component({
   selector: "app-settings-page",
   templateUrl: "./settings.component.html",
+  styleUrls: ["./settings.component.css"],
   imports: [ListErrorsComponent, ReactiveFormsModule],
   standalone: true,
 })
