@@ -748,6 +748,13 @@ i.justify-align {
   text-decoration: none;
 }
 
+.tag-list a {
+  background-color: #f2f2f2;
+  text-decoration: none;
+  border-radius: 18px;
+  padding: 4px 16px;
+}
+
 .author {
   text-decoration: none;
   font-weight: bold;

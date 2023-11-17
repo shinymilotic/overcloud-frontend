@@ -1,8 +1,27 @@
 <div class="home-page p-12">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-9">
-        <!-- <div class="feed-toggle">
+  <div class="col-md-3" *rxLet="tags$; let tags">
+    <div class="sidebar">
+      <p style="font-style: bold; padding-bottom: 10px">Danh sách thẻ:</p>
+      <div class="tag-list">
+        <a
+          *ngFor="let tag of tags"
+          (click)="setListTo({ tag: tag })"
+          class="tag-default tag-pill"
+        >
+          {{ tag }}
+        </a>
+      </div>
+
+      <div [hidden]="tagsLoaded">Loading tags...</div>
+
+      <div [hidden]="!tagsLoaded || tags.length > 0">
+        No tags are here... yet.
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <!-- <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
             </li>
@@ -25,29 +44,6 @@
           </ul>
         </div> -->
 
-        <app-article-list [limit]="10" [config]="listConfig"></app-article-list>
-      </div>
-
-      <div class="col-md-3" *rxLet="tags$; let tags">
-        <div class="sidebar">
-          <p style="font-style: bold; padding-bottom: 10px">Danh sách thẻ:</p>
-          <div class="tag-list">
-            <a
-              *ngFor="let tag of tags"
-              (click)="setListTo({ tag: tag })"
-              class="tag-default tag-pill"
-            >
-              {{ tag }}
-            </a>
-          </div>
-
-          <div [hidden]="tagsLoaded">Loading tags...</div>
-
-          <div [hidden]="!tagsLoaded || tags.length > 0">
-            No tags are here... yet.
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-article-list [limit]="10" [config]="listConfig"></app-article-list>
   </div>
 </div>

@@ -183,10 +183,14 @@
 
     <!-- Show this for logged in users -->
     <ul *appShowAuthed="true" class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+      <li class="nav-item dropdown-menu">
+        <a class="nav-link dropbtn cursor-pointer" routerLinkActive="active">
           <span class="material-symbols-outlined"> edit_square </span>
         </a>
+        <div class="dropdown-content">
+          <a routerLink="/editor">Viết blog</a>
+          <a routerLink="/createTest">Tạo đề thi</a>
+        </div>
       </li>
 
       <!-- <li class="nav-item">

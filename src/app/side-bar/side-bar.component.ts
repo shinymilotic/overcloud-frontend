@@ -6,11 +6,13 @@ import {
   ViewChild,
 } from "@angular/core";
 import { SidebarService } from "../core/services/sidebar.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-side-bar",
   templateUrl: "./side-bar.component.html",
   styleUrls: ["./side-bar.component.css"],
+  imports: [RouterLink],
   standalone: true,
 })
 export class SideBarComponent {
