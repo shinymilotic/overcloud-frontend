@@ -749,6 +749,14 @@ i.justify-align {
   text-decoration: none;
 }
 
+.tag-list li:hover {
+  background-color: #dbdbdb;
+}
+
+.tag-list a:hover {
+  background-color: #dbdbdb;
+}
+
 .tag-list a {
   background-color: #f2f2f2;
   text-decoration: none;

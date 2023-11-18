@@ -1,1 +1,34 @@
-<p>create-test works!</p>
+<div class="p-12 flex justify-between flex-col">
+  <app-list-errors [errors]="errors"></app-list-errors>
+
+  <form>
+    <fieldset [disabled]="isSubmitting">
+      <fieldset class="form-group">
+        <input
+          class="form-control form-control-lg w-full outline-none"
+          formControlName="question"
+          type="text"
+          placeholder="Câu hỏi"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <input
+          class="form-control w-full outline-none"
+          formControlName="answer"
+          type="text"
+          placeholder="Câu trả lời"
+        />
+      </fieldset>
+
+      <button
+        id="submitBtn"
+        class="btn btn-lg btn-primary"
+        type="button"
+        (click)="submitForm()"
+      >
+        Tạo đề thi
+      </button>
+    </fieldset>
+  </form>
+</div>
