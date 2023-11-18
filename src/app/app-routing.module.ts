@@ -19,6 +19,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "createTest",
+    loadComponent: () =>
+      import("./features/create-test/create-test.component").then(
+        (m) => m.CreateTestComponent
+      ),
+  },
+  {
     path: "login",
     loadComponent: () =>
       import("./login/login.component").then((m) => m.LoginComponent),

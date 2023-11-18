@@ -4,5 +4,6 @@ import { Component } from "@angular/core";
   selector: "app-create-test",
   templateUrl: "./create-test.component.html",
   styleUrls: ["./create-test.component.css"],
+  standalone: true,
 })
 export class CreateTestComponent {}
