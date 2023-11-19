@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Output, inject } from "@angular/core";
 import { UserService } from "../services/user.service";
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  RouterLink,
+  RouterLinkActive,
+} from "@angular/router";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { SearchBarComponent } from "../../search-bar/search-bar.component";
@@ -29,17 +34,30 @@ export class HeaderComponent {
   currentUser$ = inject(UserService).currentUser;
   messages!: string[];
   private destroy$ = new Subject();
+  mySubscription;
 
   constructor(
     private readonly router: Router,
+    private activatedRoute: ActivatedRoute,
     private readonly sidebarService: SidebarService
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
   onConnected(): void {
@@ -52,5 +70,9 @@ export class HeaderComponent {
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
+  }
+
+  refreshPage() {
+    this.router.navigateByUrl("/");
   }
 }

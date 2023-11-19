@@ -3,6 +3,7 @@
     <div class="sidebar">
       <p style="font-style: bold; padding-bottom: 10px">Danh sách thẻ:</p>
       <div class="tag-list">
+        <a (click)="setListTo()" class="tag-default tag-pill"> Tất cả </a>
         <a
           *ngFor="let tag of tags"
           (click)="setListTo({ tag: tag })"

@@ -1,6 +1,6 @@
 {
-  "name": "angular-conduit",
-  "short_name": "angular-conduit",
+  "name": "overcloud",
+  "short_name": "overcloud",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
