@@ -1,2 +1,6 @@
 <!-- Page Content -->
-<div class="w3-teal">test list</div>
+<div class="w3-teal" *ngFor="let test of this.tests">
+  <a [routerLink]="['/tests', test.slug]" routerLinkActive="active">{{
+    test.title
+  }}</a>
+</div>

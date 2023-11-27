@@ -12,11 +12,16 @@ const routes: Routes = [
       import("./features/home/home.component").then((m) => m.HomeComponent),
   },
   {
-    path: "test",
+    path: "tests",
     loadComponent: () =>
       import("./features/test-list/test-list.component").then(
         (m) => m.TestListComponent
       ),
+  },
+  {
+    path: "tests/:slug",
+    loadComponent: () =>
+      import("./features/test/test.component").then((m) => m.TestComponent),
   },
   {
     path: "createTest",
