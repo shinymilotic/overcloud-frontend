@@ -25,6 +25,12 @@ export class TestService {
       .pipe(map((data) => data.tests));
   }
 
+  getOne(slug: string): Observable<TestResponse> {
+    return this.http
+      .get<TestResponse>(`/test/${slug}`)
+      .pipe(map((data) => data));
+  }
+
   create(test: Partial<Test>): Observable<string> {
     return this.http
       .post<string>("/test", { test: test })

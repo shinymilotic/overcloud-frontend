@@ -3,7 +3,6 @@ import { Component } from "@angular/core";
 import { RouterLinkActive, RouterLink } from "@angular/router";
 import { Errors } from "src/app/core/models/errors.model";
 import { TestResponse } from "src/app/core/models/test-response.model";
-import { Test } from "src/app/core/models/test.model";
 import { TestService } from "src/app/core/services/test.service";
 
 @Component({
