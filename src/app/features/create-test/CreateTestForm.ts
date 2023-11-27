@@ -1,5 +1,7 @@
-import { Question } from "./Question";
+import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { QuestionForm } from "./Question";
 
 export interface CreateTestForm {
-  question: Question[];
+  title: FormControl<string | null>;
+  questions: FormArray<FormGroup<QuestionForm>>;
 }

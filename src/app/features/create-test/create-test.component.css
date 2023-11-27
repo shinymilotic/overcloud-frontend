@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.question {
+  border: 1px solid;
+  border-radius: 10px;
+}
+fieldset.form-group {
+  padding: 5px;
+  border: solid 1px;
+  border-radius: 10px;
+}
+.addAnswerBtn {
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 3px;
+}
+.deleteAnswerBtn {
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 3px;
+}
+
+.addQuestionBtn {
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 3px;
+}
+.deleteQuestionBtn {
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 3px;
+}
+#submitBtn {
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #eee;
+  padding: 3px;
+}

@@ -1,32 +1,91 @@
 <div class="p-12 flex justify-between flex-col">
   <app-list-errors [errors]="errors"></app-list-errors>
 
-  <form>
-    <fieldset [disabled]="isSubmitting">
-      <fieldset class="form-group">
+  <form [formGroup]="testForm" (ngSubmit)="submitForm()">
+    <fieldset class="flex flex-col" [disabled]="isSubmitting">
+      <fieldset class="form-group mb-3">
         <input
+          id="title"
           class="form-control form-control-lg w-full outline-none"
-          formControlName="question"
+          formControlName="title"
           type="text"
-          placeholder="Câu hỏi"
+          placeholder="Tiêu đề"
         />
       </fieldset>
 
-      <fieldset class="form-group">
-        <input
-          class="form-control w-full outline-none"
-          formControlName="answer"
-          type="text"
-          placeholder="Câu trả lời"
-        />
-      </fieldset>
+      <div formArrayName="questions">
+        <div
+          class="question p-2"
+          *ngFor="let question of questionsFormArr.controls; let qIndex = index"
+          [formGroupName]="qIndex"
+        >
+          <fieldset class="form-group mb-3">
+            <input
+              id="question-{{ qIndex }}"
+              class="form-control form-control-lg w-full outline-none"
+              formControlName="question"
+              type="text"
+              placeholder="Câu hỏi"
+            />
+          </fieldset>
+          <button
+            type="button"
+            class="deleteQuestionBtn"
+            (click)="deleteQuestion(qIndex)"
+          >
+            Xóa câu hỏi
+          </button>
 
-      <button
-        id="submitBtn"
-        class="btn btn-lg btn-primary"
-        type="button"
-        (click)="submitForm()"
-      >
+          <div formArrayName="answers">
+            <div
+              class="flex"
+              *ngFor="
+                let answer of getAnswerFormArr(question).controls;
+                let aIndex = index
+              "
+              [formGroupName]="aIndex"
+            >
+              <fieldset class="form-group mr-3">
+                <input
+                  class="form-control w-full outline-none"
+                  formControlName="answer"
+                  type="text"
+                  placeholder="Câu trả lời"
+                />
+              </fieldset>
+              <fieldset class="form-group mr-3">
+                <input
+                  class="form-control w-full outline-none border-none"
+                  formControlName="truth"
+                  type="checkbox"
+                />
+              </fieldset>
+
+              <button
+                type="button"
+                class="deleteAnswerBtn"
+                (click)="deleteAnswer(question, aIndex)"
+              >
+                Xóa
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="addAnswerBtn"
+            (click)="addAnswer(question)"
+          >
+            Thêm câu trả lời
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="addQuestionBtn" (click)="addQuestion()">
+        Thêm câu hỏi
+      </button>
+
+      <button id="submitBtn" class="btn btn-lg btn-primary" type="submit">
         Tạo đề thi
       </button>
     </fieldset>
