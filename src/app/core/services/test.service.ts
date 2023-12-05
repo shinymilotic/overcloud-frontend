@@ -27,7 +27,7 @@ export class TestService {
 
   getOne(slug: string): Observable<TestResponse> {
     return this.http
-      .get<TestResponse>(`/test/${slug}`)
+      .get<TestResponse>(`/tests/${slug}`)
       .pipe(map((data) => data));
   }
 
@@ -35,6 +35,10 @@ export class TestService {
     return this.http
       .post<string>("/test", { test: test })
       .pipe(map((data) => data));
+  }
+
+  delete(slug: string): Observable<boolean> {
+    return this.http.delete<boolean>(`/tests/${slug}`);
   }
 
   // update(article: Partial<Article>): Observable<Article> {

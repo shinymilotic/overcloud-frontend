@@ -1,1 +1,23 @@
-<p>test works!</p>
+<p>{{ this.test.title }}</p>
+<button (click)="deleteTest()">Xóa bài test</button>
+<form (ngSubmit)="createPractice()" [formGroup]="practiceForm">
+  <ol>
+    <li *ngFor="let question of this.test.questions; let qIndex = index">
+      {{ question.question }}
+
+      <ol class="answers-list" formArrayName="answers">
+        <li *ngFor="let answer of question.answers; let aIndex = index">
+          <input
+            type="radio"
+            id="{{ aIndex + ' ' + qIndex }}"
+            value="{{ answer.answer }}"
+            formControlName="{{ qIndex }}"
+          />
+          <label for="{{ aIndex + ' ' + qIndex }}">{{ answer.answer }}</label>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <button type="submit">Nộp bài test</button>
+</form>

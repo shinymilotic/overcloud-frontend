@@ -105,7 +105,9 @@ export class CreateTestComponent implements OnInit {
       .create(test)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => void this.router.navigate(["/"]),
+        next: () => {
+          this.router.navigate(["/tests"]);
+        },
         error: ({ errors }) => {
           this.errors = errors;
           this.isSubmitting = false;
