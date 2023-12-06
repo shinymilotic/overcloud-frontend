@@ -75,6 +75,13 @@ const routes: Routes = [
                 (m) => m.ProfileFavoritesComponent
               ),
           },
+          {
+            path: "practices",
+            loadComponent: () =>
+              import("./features/user-practice/user-practice.component").then(
+                (m) => m.UserPracticeComponent
+              ),
+          },
         ],
       },
     ],

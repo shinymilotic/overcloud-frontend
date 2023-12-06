@@ -43,7 +43,7 @@
                 Bài viết đã tạo
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-2">
               <a
                 class="nav-link"
                 routerLinkActive="active"
@@ -51,6 +51,16 @@
                 [routerLink]="['/profile', profile.username, 'favorites']"
               >
                 Bài viết yêu thích
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/profile', profile.username, 'practices']"
+              >
+                Lịch sử test
               </a>
             </li>
           </ul>

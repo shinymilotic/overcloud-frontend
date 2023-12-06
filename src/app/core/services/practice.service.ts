@@ -12,4 +12,8 @@ export class PracticeService {
   createPractice(practice: Practice): Observable<void> {
     return this.http.post<void>(`/practice`, { practice: practice });
   }
+
+  getPractices(username: string): void {
+    // return this.http.post<void>(`/practice`, { practice: practice });
+  }
 }

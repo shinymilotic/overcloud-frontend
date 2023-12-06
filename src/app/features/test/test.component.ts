@@ -18,9 +18,6 @@ import { TestResponse } from "src/app/core/models/test-response.model";
 import { User } from "src/app/core/models/user.model";
 import { TestService } from "src/app/core/services/test.service";
 import { UserService } from "src/app/core/services/user.service";
-import { PracticeForm } from "./PracticeForm";
-import { QuestionForm } from "../create-test/Question";
-import { AnswerForm } from "../create-test/Answer";
 import { Errors } from "src/app/core/models/errors.model";
 import { PracticeService } from "src/app/core/services/practice.service";
 import { Practice } from "src/app/core/models/practice.model";
@@ -68,15 +65,16 @@ export class TestComponent implements OnInit {
       .pipe(
         catchError((err) => {
           void this.router.navigate(["/"]);
-          return throwError(err);
+          return throwError(() => err);
         })
       )
       .subscribe(([test, currentUser]) => {
         this.test = test;
         this.test.questions.forEach((question) =>
-          question.answers.forEach((answer) =>
-            this.getAnswers().push(this.fb.control("", Validators.required))
-          )
+          question.answers.forEach((answer) => {
+            this.getAnswers().push(this.fb.control("", Validators.required));
+            console.log(answer);
+          })
         );
         this.currentUser = currentUser;
       });
@@ -90,7 +88,7 @@ export class TestComponent implements OnInit {
     let answers: string[] = this.practiceForm.value.answers.filter(
       (answer: string) => answer != ""
     );
-    // answers = answers.filter((answer: string) => answer != '');
+
     const practice: Practice = {
       slug: this.test.slug,
       answers: answers,

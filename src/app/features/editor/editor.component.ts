@@ -145,7 +145,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         .pipe(
           catchError((err) => {
             void this.router.navigate(["/editor"]);
-            return throwError(err);
+            return throwError(() => err);
           }),
           takeUntil(this.destroy$)
         )
