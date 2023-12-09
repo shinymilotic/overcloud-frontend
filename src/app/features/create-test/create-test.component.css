@@ -6,6 +6,9 @@
   border: 1px solid;
   border-radius: 10px;
 }
+.answer {
+  width: 50vh;
+}
 fieldset.form-group {
   padding: 5px;
   border: solid 1px;
@@ -41,4 +44,8 @@ fieldset.form-group {
   border-radius: 2px;
   background-color: #eee;
   padding: 3px;
+}
+
+.container {
+  width: 100vh;
 }

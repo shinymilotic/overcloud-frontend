@@ -22,9 +22,11 @@ import * as React from "react";
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import { EditorState, LexicalEditor } from "lexical";
 import { Root, createRoot } from 'react-dom/client';
+import onChange from "./onChange";
 
 export class LEditor {
   value!: LexicalEditor;
+  
   root!: Root;
   placeholder = () => {
     return <div className="editor-placeholder">Nhập nội dung...</div>;

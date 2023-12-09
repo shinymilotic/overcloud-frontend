@@ -106,7 +106,7 @@ export class CreateTestComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.router.navigate(["/tests"]);
+          void this.router.navigate(["/tests"]);
         },
         error: ({ errors }) => {
           this.errors = errors;
@@ -115,7 +115,7 @@ export class CreateTestComponent implements OnInit {
       });
   }
 
-  addAnswer(question: FormGroup<QuestionForm>) {
+  addAnswer(question: FormGroup<QuestionForm>, event?: KeyboardEvent) {
     this.getAnswerFormArr(question).push(
       this.fb.group<AnswerForm>({
         answer: this.fb.control("", Validators.required),

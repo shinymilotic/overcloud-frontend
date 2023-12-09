@@ -4,6 +4,7 @@ import { map, shareReplay } from "rxjs/operators";
 import { Profile } from "../models/profile.model";
 import { HttpClient } from "@angular/common/http";
 import { Practice } from "../models/practice.model";
+import { UserPractice } from "../models/user-practices.model";
 
 @Injectable({ providedIn: "root" })
 export class PracticeService {
@@ -13,7 +14,9 @@ export class PracticeService {
     return this.http.post<void>(`/practice`, { practice: practice });
   }
 
-  getPractices(username: string): void {
-    // return this.http.post<void>(`/practice`, { practice: practice });
+  getPractices(username: string): Observable<UserPractice[]> {
+    return this.http
+      .get<{ practices: UserPractice[] }>(`/practices/${username}`)
+      .pipe(map((data: { practices: UserPractice[] }) => data.practices));
   }
 }

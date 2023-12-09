@@ -1,4 +1,4 @@
-<div class="p-12 flex justify-between flex-col">
+<div class="p-12 flex justify-between flex-col container">
   <app-list-errors [errors]="errors"></app-list-errors>
 
   <form [formGroup]="testForm" (ngSubmit)="submitForm()">
@@ -20,13 +20,12 @@
           [formGroupName]="qIndex"
         >
           <fieldset class="form-group mb-3">
-            <input
+            <textarea
               id="question-{{ qIndex }}"
               class="form-control form-control-lg w-full outline-none"
               formControlName="question"
-              type="text"
               placeholder="Câu hỏi"
-            />
+            ></textarea>
           </fieldset>
           <button
             type="button"
@@ -47,10 +46,11 @@
             >
               <fieldset class="form-group mr-3">
                 <input
-                  class="form-control w-full outline-none"
+                  class="form-control answer outline-none"
                   formControlName="answer"
                   type="text"
                   placeholder="Câu trả lời"
+                  (keydown)="addAnswer(question, $event)"
                 />
               </fieldset>
               <fieldset class="form-group mr-3">
