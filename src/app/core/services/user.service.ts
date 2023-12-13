@@ -4,11 +4,11 @@ import { Observable, BehaviorSubject, pipe } from "rxjs";
 import { JwtService } from "./jwt.service";
 import { map, distinctUntilChanged, tap, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
-import { User } from "../models/user.model";
+import { User } from "../models/auth/user.model";
 import { Router } from "@angular/router";
 import { CookieService } from "./cookies.service";
-import { RefreshTokenResponse } from "../models/refreshtoken.model";
-import { Auth } from "../models/auth.model";
+import { RefreshTokenResponse } from "../models/auth/refreshtoken.model";
+import { Auth } from "../models/auth/auth.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {

@@ -10,7 +10,7 @@ import { switchMap, takeUntil } from "rxjs/operators";
 import { EMPTY, Subject } from "rxjs";
 import { ProfileService } from "../../core/services/profile.service";
 import { UserService } from "../../core/services/user.service";
-import { Profile } from "../../core/models/profile.model";
+import { Profile } from "../../core/models/auth/profile.model";
 import { NgClass } from "@angular/common";
 
 @Component({

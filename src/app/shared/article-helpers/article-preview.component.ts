@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Article } from "../../core/models/article.model";
+import { Article } from "../../core/models/blog/article.model";
 import { ArticleMetaComponent } from "./article-meta.component";
 import { FavoriteButtonComponent } from "../buttons/favorite-button.component";
 import { RouterLink } from "@angular/router";

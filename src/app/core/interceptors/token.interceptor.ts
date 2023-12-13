@@ -20,7 +20,7 @@ import {
 import { JwtService } from "../services/jwt.service";
 import { UserService } from "../services/user.service";
 import { CookieService } from "../services/cookies.service";
-import { Auth } from "../models/auth.model";
+import { Auth } from "../models/auth/auth.model";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {

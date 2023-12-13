@@ -11,7 +11,7 @@ import { takeUntil } from "rxjs/operators";
 import { NgClass } from "@angular/common";
 import { ArticlesService } from "../../core/services/articles.service";
 import { UserService } from "../../core/services/user.service";
-import { Article } from "../../core/models/article.model";
+import { Article } from "../../core/models/blog/article.model";
 
 @Component({
   selector: "app-favorite-button",

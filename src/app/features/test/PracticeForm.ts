@@ -1,7 +1,7 @@
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { QuestionForm } from "../create-test/Question";
+import { ChoiceQuestionForm } from "../create-test/form-model/ChoiceQuestionForm";
 
 export interface PracticeForm {
   slug: FormControl<string>;
-  questions: FormArray<FormGroup<QuestionForm>>;
+  questions: FormArray<FormGroup<ChoiceQuestionForm>>;
 }

@@ -35,22 +35,23 @@
             Xóa câu hỏi
           </button>
 
-          <div formArrayName="answers">
+          <div *ngIf="this.isChoiceQuestion(qIndex)" formArrayName="answers">
             <div
               class="flex"
               *ngFor="
-                let answer of getAnswerFormArr(question).controls;
+                let answer of getAnswerFormArr(qIndex).controls;
                 let aIndex = index
               "
               [formGroupName]="aIndex"
             >
               <fieldset class="form-group mr-3">
                 <input
+                  id="{{ aIndex }}"
                   class="form-control answer outline-none"
                   formControlName="answer"
                   type="text"
                   placeholder="Câu trả lời"
-                  (keydown)="addAnswer(question, $event)"
+                  (keydown)="addAnswer(qIndex, $event)"
                 />
               </fieldset>
               <fieldset class="form-group mr-3">
@@ -64,7 +65,7 @@
               <button
                 type="button"
                 class="deleteAnswerBtn"
-                (click)="deleteAnswer(question, aIndex)"
+                (click)="deleteAnswer(qIndex, aIndex)"
               >
                 Xóa
               </button>
@@ -74,7 +75,7 @@
           <button
             type="button"
             class="addAnswerBtn"
-            (click)="addAnswer(question)"
+            (click)="addAnswer(qIndex)"
           >
             Thêm câu trả lời
           </button>
@@ -82,7 +83,11 @@
       </div>
 
       <button type="button" class="addQuestionBtn" (click)="addQuestion()">
-        Thêm câu hỏi
+        Thêm câu hỏi trắc nghiệm
+      </button>
+
+      <button type="button" class="addQuestionBtn" (click)="addEssayQuestion()">
+        Thêm câu hỏi tự luận
       </button>
 
       <button id="submitBtn" class="btn btn-lg btn-primary" type="submit">

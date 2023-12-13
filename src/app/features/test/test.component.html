@@ -2,7 +2,7 @@
 <button (click)="deleteTest()">Xóa bài test</button>
 <form (ngSubmit)="createPractice()" [formGroup]="practiceForm">
   <ol>
-    <li *ngFor="let question of this.test.questions; let qIndex = index">
+    <li *ngFor="let question of getChoiceQuestion; let qIndex = index">
       {{ question.question }}
 
       <ol class="answers-list" formArrayName="answers">

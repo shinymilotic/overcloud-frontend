@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { ArticleListComponent } from "../../shared/article-helpers/article-list.component";
 import { takeUntil } from "rxjs/operators";
 import { ProfileService } from "../../core/services/profile.service";
-import { Profile } from "../../core/models/profile.model";
-import { ArticleListConfig } from "../../core/models/article-list-config.model";
+import { Profile } from "../../core/models/auth/profile.model";
+import { ArticleListConfig } from "../../core/models/blog/article-list-config.model";
 import { Subject } from "rxjs";
 
 @Component({

@@ -14,13 +14,16 @@ import {
   RouterLinkActive,
 } from "@angular/router";
 import { combineLatest, catchError, throwError } from "rxjs";
-import { TestResponse } from "src/app/core/models/test-response.model";
-import { User } from "src/app/core/models/user.model";
+import { TestResponse } from "src/app/core/models/test/test-response.model";
+import { User } from "src/app/core/models/auth/user.model";
 import { TestService } from "src/app/core/services/test.service";
 import { UserService } from "src/app/core/services/user.service";
 import { Errors } from "src/app/core/models/errors.model";
 import { PracticeService } from "src/app/core/services/practice.service";
-import { Practice } from "src/app/core/models/practice.model";
+import { Practice } from "src/app/core/models/test/practice.model";
+import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
+import { QuestionType } from "../create-test/enum/QuestionType";
+import { Question } from "src/app/core/models/test/question.model";
 
 @Component({
   selector: "app-test",
@@ -70,7 +73,7 @@ export class TestComponent implements OnInit {
       )
       .subscribe(([test, currentUser]) => {
         this.test = test;
-        this.test.questions.forEach((question) =>
+        this.getChoiceQuestion.forEach((question: ChoiceQuestion) =>
           question.answers.forEach((answer) => {
             this.getAnswers().push(this.fb.control("", Validators.required));
             console.log(answer);
@@ -78,6 +81,17 @@ export class TestComponent implements OnInit {
         );
         this.currentUser = currentUser;
       });
+  }
+
+  get getChoiceQuestion(): Array<ChoiceQuestion> {
+    let choiceQuestion: Array<ChoiceQuestion> = [];
+    this.test.questions.forEach((question: Question) => {
+      if (question.questionType == QuestionType.CHOICE) {
+        choiceQuestion.push(question as ChoiceQuestion);
+      }
+    });
+
+    return choiceQuestion;
   }
 
   getAnswers(): FormArray {

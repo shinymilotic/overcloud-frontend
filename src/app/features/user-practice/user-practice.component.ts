@@ -1,7 +1,7 @@
 import { NgFor } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { UserPractice } from "src/app/core/models/user-practices.model";
+import { UserPractice } from "src/app/core/models/test/user-practices.model";
 import { PracticeService } from "src/app/core/services/practice.service";
 
 @Component({

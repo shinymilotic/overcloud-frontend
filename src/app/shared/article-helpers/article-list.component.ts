@@ -6,8 +6,8 @@ import {
   OnInit,
 } from "@angular/core";
 import { ArticlesService } from "../../core/services/articles.service";
-import { ArticleListConfig } from "../../core/models/article-list-config.model";
-import { Article } from "../../core/models/article.model";
+import { ArticleListConfig } from "../../core/models/blog/article-list-config.model";
+import { Article } from "../../core/models/blog/article.model";
 import { ArticlePreviewComponent } from "./article-preview.component";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { LoadingState } from "../../core/models/loading-state.model";

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
-import { Comment } from "../models/comment.model";
+import { Comment } from "../models/blog/comment.model";
 
 @Injectable({ providedIn: "root" })
 export class CommentsService {

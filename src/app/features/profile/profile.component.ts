@@ -9,7 +9,7 @@ import {
 import { catchError, switchMap, takeUntil } from "rxjs/operators";
 import { combineLatest, of, Subject, throwError } from "rxjs";
 import { UserService } from "../../core/services/user.service";
-import { Profile } from "../../core/models/profile.model";
+import { Profile } from "../../core/models/auth/profile.model";
 import { ProfileService } from "../../core/services/profile.service";
 import { FollowButtonComponent } from "../../shared/buttons/follow-button.component";
 import { AsyncPipe, NgIf } from "@angular/common";

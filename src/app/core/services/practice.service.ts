@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
-import { Profile } from "../models/profile.model";
+import { Profile } from "../models/auth/profile.model";
 import { HttpClient } from "@angular/common/http";
-import { Practice } from "../models/practice.model";
-import { UserPractice } from "../models/user-practices.model";
+import { Practice } from "../models/test/practice.model";
+import { UserPractice } from "../models/test/user-practices.model";
 
 @Injectable({ providedIn: "root" })
 export class PracticeService {

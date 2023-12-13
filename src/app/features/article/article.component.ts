@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { User } from "../../core/models/user.model";
-import { Article } from "../../core/models/article.model";
+import { User } from "../../core/models/auth/user.model";
+import { Article } from "../../core/models/blog/article.model";
 import { ArticlesService } from "../../core/services/articles.service";
 import { CommentsService } from "../../core/services/comments.service";
 import { UserService } from "../../core/services/user.service";
@@ -15,10 +15,10 @@ import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { ArticleCommentComponent } from "./article-comment.component";
 import { catchError, takeUntil } from "rxjs/operators";
 import { Subject, combineLatest, throwError } from "rxjs";
-import { Comment } from "../../core/models/comment.model";
+import { Comment } from "../../core/models/blog/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { Errors } from "../../core/models/errors.model";
-import { Profile } from "../../core/models/profile.model";
+import { Profile } from "../../core/models/auth/profile.model";
 
 @Component({
   selector: "app-article-page",

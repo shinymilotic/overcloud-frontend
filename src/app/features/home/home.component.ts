@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { TagsService } from "../../core/services/tags.service";
-import { ArticleListConfig } from "../../core/models/article-list-config.model";
+import { ArticleListConfig } from "../../core/models/blog/article-list-config.model";
 import { AsyncPipe, NgClass, NgForOf } from "@angular/common";
 import { ArticleListComponent } from "../../shared/article-helpers/article-list.component";
 import { takeUntil, tap } from "rxjs/operators";
