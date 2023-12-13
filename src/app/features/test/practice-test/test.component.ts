@@ -50,8 +50,20 @@ export class TestComponent implements OnInit {
   };
 
   practiceForm: FormGroup = this.fb.group({
-    answers: this.fb.array([{}]),
+    questions: this.fb.array([
+      {
+        questionId: this.fb.nonNullable.control("", Validators.required),
+        questionType: this.fb.nonNullable.control(1, Validators.required),
+        answerId: this.fb.nonNullable.control("", Validators.required),
+      },
+      {
+        questionId: this.fb.nonNullable.control("", Validators.required),
+        questionType: this.fb.nonNullable.control(2, Validators.required),
+        answer: this.fb.nonNullable.control("", Validators.required),
+      },
+    ]),
   });
+  // {questionId, answer}
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -76,11 +88,14 @@ export class TestComponent implements OnInit {
         this.getChoiceQuestion.forEach((question: ChoiceQuestion) =>
           question.answers.forEach((answer) => {
             this.getAnswers().push(this.fb.control("", Validators.required));
-            console.log(answer);
           })
         );
         this.currentUser = currentUser;
       });
+  }
+
+  asChoiceQuestion(question: Question): ChoiceQuestion {
+    return question as ChoiceQuestion;
   }
 
   get getChoiceQuestion(): Array<ChoiceQuestion> {

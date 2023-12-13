@@ -32,9 +32,7 @@ export class TestService {
   }
 
   create(test: Partial<Test>): Observable<string> {
-    return this.http
-      .post<string>("/test", { test: test })
-      .pipe(map((data) => data));
+    return this.http.post<string>("/test", { test: test });
   }
 
   delete(slug: string): Observable<boolean> {

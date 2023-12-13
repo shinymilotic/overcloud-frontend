@@ -21,7 +21,6 @@ export class TestListComponent {
   ngOnInit() {
     this.testService.get().subscribe({
       next: (data) => {
-        console.log(data);
         this.tests = data;
       },
       error: (err) => {

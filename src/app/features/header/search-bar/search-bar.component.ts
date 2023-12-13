@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
-import { Article } from "../core/models/blog/article.model";
-import { SearchService } from "../core/services/search.service";
-import { SearchParam } from "../core/models/search.model";
+import { Article } from "../../../core/models/blog/article.model";
+import { SearchService } from "../../../core/services/search.service";
+import { SearchParam } from "../../../core/models/search.model";
 import { Subject, takeUntil } from "rxjs";
 import { Router } from "@angular/router";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";

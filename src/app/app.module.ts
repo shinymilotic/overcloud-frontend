@@ -3,8 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { FooterComponent } from "./core/layout/footer.component";
-import { HeaderComponent } from "./core/layout/header.component";
+import { HeaderComponent } from "./features/header/header.component";
 import { JwtService } from "./core/services/jwt.service";
 import { UserService } from "./core/services/user.service";
 import { EMPTY } from "rxjs";
@@ -26,7 +25,6 @@ export function initAuth(jwtService: JwtService, userService: UserService) {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    FooterComponent,
     HeaderComponent,
     SideBarComponent,
     AppRoutingModule,

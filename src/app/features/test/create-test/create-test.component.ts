@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from "@angular/core";
 import { Errors } from "src/app/core/models/errors.model";
 import { ListErrorsComponent } from "src/app/shared/list-errors.component";
 import { CreateTestForm } from "./CreateTestForm";
@@ -40,7 +46,7 @@ import { QuestionType } from "./enum/QuestionType";
   ],
   standalone: true,
 })
-export class CreateTestComponent implements OnInit {
+export class CreateTestComponent implements OnInit, OnDestroy {
   isSubmitting = false;
   errors!: Errors[];
   testForm: FormGroup = this.fb.group({
@@ -58,7 +64,6 @@ export class CreateTestComponent implements OnInit {
     ]),
   });
   destroy$ = new Subject<void>();
-  QuestionType: QuestionType = 0;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -67,6 +72,11 @@ export class CreateTestComponent implements OnInit {
     private readonly elementRef: ElementRef,
     private readonly renderer: Renderer2
   ) {}
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   get questionsFormArr(): FormArray<FormGroup<QuestionForm>> {
     return this.testForm.get("questions") as FormArray<FormGroup<QuestionForm>>;
@@ -149,12 +159,12 @@ export class CreateTestComponent implements OnInit {
       title: title,
       questions: questions,
     };
-
+    console.log(test);
     this.testService
       .create(test)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => {
+        next: (data) => {
           void this.router.navigate(["/tests"]);
         },
         error: ({ errors }) => {

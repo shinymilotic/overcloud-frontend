@@ -1,4 +1,4 @@
 export enum QuestionType {
-  ESSAY,
-  CHOICE,
+  CHOICE = 1,
+  ESSAY = 2,
 }

@@ -2,8 +2,8 @@ import { inject, NgModule } from "@angular/core";
 import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { UserService } from "./core/services/user.service";
 import { map } from "rxjs/operators";
-import { ProfileComponent } from "./features/profile/profile.component";
-import { TestListComponent } from "./features/test-list/test-list.component";
+import { ProfileComponent } from "./features/profile/show-profile/profile.component";
+import { TestListComponent } from "./features/test/test-list/test-list.component";
 
 const routes: Routes = [
   {
@@ -14,26 +14,30 @@ const routes: Routes = [
   {
     path: "tests",
     loadComponent: () =>
-      import("./features/test-list/test-list.component").then(
+      import("./features/test/test-list/test-list.component").then(
         (m) => m.TestListComponent
       ),
   },
   {
     path: "tests/:slug",
     loadComponent: () =>
-      import("./features/test/test.component").then((m) => m.TestComponent),
+      import("./features/test/practice-test/test.component").then(
+        (m) => m.TestComponent
+      ),
   },
   {
     path: "createTest",
     loadComponent: () =>
-      import("./features/create-test/create-test.component").then(
+      import("./features/test/create-test/create-test.component").then(
         (m) => m.CreateTestComponent
       ),
   },
   {
     path: "login",
     loadComponent: () =>
-      import("./login/login.component").then((m) => m.LoginComponent),
+      import("./features/user/login/login.component").then(
+        (m) => m.LoginComponent
+      ),
     canActivate: [
       () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
     ],
@@ -41,7 +45,9 @@ const routes: Routes = [
   {
     path: "register",
     loadComponent: () =>
-      import("./register/register.component").then((m) => m.RegisterComponent),
+      import("./features/user/register/register.component").then(
+        (m) => m.RegisterComponent
+      ),
     canActivate: [
       () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
     ],
@@ -64,24 +70,24 @@ const routes: Routes = [
           {
             path: "",
             loadComponent: () =>
-              import("./features/profile/profile-articles.component").then(
-                (m) => m.ProfileArticlesComponent
-              ),
+              import(
+                "./features/profile/profile-articles/profile-articles.component"
+              ).then((m) => m.ProfileArticlesComponent),
           },
           {
             path: "favorites",
             loadComponent: () =>
-              import("./features/profile/profile-favorites.component").then(
-                (m) => m.ProfileFavoritesComponent
-              ),
+              import(
+                "./features/profile/profile-favorites/profile-favorites.component"
+              ).then((m) => m.ProfileFavoritesComponent),
           },
-          {
-            path: "practices",
-            loadComponent: () =>
-              import("./features/user-practice/user-practice.component").then(
-                (m) => m.UserPracticeComponent
-              ),
-          },
+          // {
+          //   path: "practices",
+          //   loadComponent: () =>
+          //     import("./features/profile/user-practice/user-practice.component").then(
+          //       (m) => m.UserPracticeComponent
+          //     ),
+          // },
         ],
       },
     ],

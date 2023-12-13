@@ -7,24 +7,28 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { NgIf } from "@angular/common";
-import { ListErrorsComponent } from "../shared/list-errors.component";
-import { Errors } from "../core/models/errors.model";
-import { UserService } from "../core/services/user.service";
-import { catchError, takeUntil } from "rxjs/operators";
-import { Subject, throwError } from "rxjs";
-import { LoginForm } from "./LoginForm";
+import { ListErrorsComponent } from "../../../shared/list-errors.component";
+import { Errors } from "../../../core/models/errors.model";
+import { UserService } from "../../../core/services/user.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+interface RegisterFrom {
+  email: FormControl<string>;
+  password: FormControl<string>;
+  username?: FormControl<string>;
+}
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"],
   imports: [RouterLink, NgIf, ListErrorsComponent, ReactiveFormsModule],
-  styleUrls: ["./login.component.css"],
   standalone: true,
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
   title = "";
   errors!: Errors[];
   isSubmitting = false;
-  authForm: FormGroup<LoginForm>;
+  authForm: FormGroup<RegisterFrom>;
   destroy$ = new Subject<void>();
 
   constructor(
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private readonly userService: UserService
   ) {
     // use FormBuilder to create a form group
-    this.authForm = new FormGroup<LoginForm>({
+    this.authForm = new FormGroup<RegisterFrom>({
       email: new FormControl("", {
         validators: [Validators.required],
         nonNullable: true,
@@ -46,7 +50,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title = "Đăng nhập";
+    this.title = "Đăng kí";
+    this.authForm.addControl(
+      "username",
+      new FormControl("", {
+        validators: [Validators.required],
+        nonNullable: true,
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -58,8 +69,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isSubmitting = true;
     // this.errors = { errors: {} };
 
-    let observable = this.userService.login(
-      this.authForm.value as { email: string; password: string }
+    let observable = this.userService.register(
+      this.authForm.value as {
+        email: string;
+        password: string;
+        username: string;
+      }
     );
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
