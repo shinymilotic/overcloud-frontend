@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -24,6 +25,7 @@ import { Practice } from "src/app/core/models/test/practice.model";
 import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
 import { QuestionType } from "../create-test/enum/QuestionType";
 import { Question } from "src/app/core/models/test/question.model";
+import { EssayQuestion } from "src/app/core/models/test/essayquestion.model";
 
 @Component({
   selector: "app-test",
@@ -50,17 +52,15 @@ export class TestComponent implements OnInit {
   };
 
   practiceForm: FormGroup = this.fb.group({
-    questions: this.fb.array([
-      {
-        questionId: this.fb.nonNullable.control("", Validators.required),
-        questionType: this.fb.nonNullable.control(1, Validators.required),
-        answerId: this.fb.nonNullable.control("", Validators.required),
-      },
-      {
-        questionId: this.fb.nonNullable.control("", Validators.required),
-        questionType: this.fb.nonNullable.control(2, Validators.required),
-        answer: this.fb.nonNullable.control("", Validators.required),
-      },
+    choiceQuestions: this.fb.array([
+      // this.fb.nonNullable.control('', Validators.required),
+    ]),
+
+    essayQuestions: this.fb.array([
+      // this.fb.group({
+      //   questionId: this.fb.nonNullable.control('', Validators.required),
+      //   answer: this.fb.nonNullable.control('', Validators.required)
+      // })
     ]),
   });
   // {questionId, answer}
@@ -85,32 +85,61 @@ export class TestComponent implements OnInit {
       )
       .subscribe(([test, currentUser]) => {
         this.test = test;
-        this.getChoiceQuestion.forEach((question: ChoiceQuestion) =>
-          question.answers.forEach((answer) => {
-            this.getAnswers().push(this.fb.control("", Validators.required));
-          })
-        );
+        // this.getChoiceQuestion.forEach((question: ChoiceQuestion) =>
+        //   question.answers.forEach((answer) => {
+        //     this.getAnswers().push(this.fb.control("", Validators.required));
+        //   })
+        // );
+        this.test.questions.forEach((question: Question) => {
+          if (question.questionType == QuestionType.CHOICE) {
+            this.choiceQuestionArrForm.push(
+              this.fb.nonNullable.control("", Validators.required)
+            );
+          } else if (question.questionType == QuestionType.ESSAY) {
+            this.essayQuestionArrForm.push(
+              this.fb.group({
+                questionId: this.fb.nonNullable.control(
+                  "",
+                  Validators.required
+                ),
+                answer: this.fb.nonNullable.control("", Validators.required),
+              })
+            );
+          }
+        });
         this.currentUser = currentUser;
       });
+  }
+
+  get choiceQuestionArrForm(): FormArray {
+    return this.practiceForm.get("choiceQuestions") as FormArray;
+  }
+
+  get essayQuestionArrForm(): FormArray {
+    return this.practiceForm.get("essayQuestions") as FormArray;
   }
 
   asChoiceQuestion(question: Question): ChoiceQuestion {
     return question as ChoiceQuestion;
   }
 
-  get getChoiceQuestion(): Array<ChoiceQuestion> {
-    let choiceQuestion: Array<ChoiceQuestion> = [];
-    this.test.questions.forEach((question: Question) => {
-      if (question.questionType == QuestionType.CHOICE) {
-        choiceQuestion.push(question as ChoiceQuestion);
-      }
-    });
-
-    return choiceQuestion;
+  asEssayQuestion(question: Question): EssayQuestion {
+    return question as EssayQuestion;
   }
 
+  // get getChoiceQuestion(): Array<ChoiceQuestion> {
+  //   let choiceQuestion: Array<ChoiceQuestion> = [];
+  //   this.test.questions.forEach((question: Question) => {
+  //     if (question.questionType == QuestionType.CHOICE) {
+  //       choiceQuestion.push(question as ChoiceQuestion);
+  //     }
+  //   });
+
+  //   return choiceQuestion;
+  // }
+
   getAnswers(): FormArray {
-    return this.practiceForm.get("answers") as FormArray;
+    return this.practiceForm.get("questions") as FormArray;
   }
 
   createPractice() {

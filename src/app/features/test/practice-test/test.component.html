@@ -5,7 +5,11 @@
     <li *ngFor="let question of this.test.questions; let qIndex = index">
       {{ question.question }}
 
-      <ol class="answers-list" formArrayName="answers">
+      <ol
+        class="answers-list"
+        *ngIf="question.questionType == 1"
+        formArrayName="choiceQuestions"
+      >
         <li
           *ngFor="
             let answer of asChoiceQuestion(question).answers;
@@ -20,10 +24,16 @@
           />
           <label for="{{ aIndex + ' ' + qIndex }}">{{ answer.answer }}</label>
         </li>
-        <div class="answers-list" *ngIf="question.questionType == 2">
-          <input type="text" id="{{ qIndex }}" formControlName="{{ qIndex }}" />
-        </div>
       </ol>
+      <div
+        class="answers-list"
+        *ngIf="question.questionType == 2"
+        formArrayName="essayQuestions"
+      >
+        <div formGroupName="{{ qIndex }}">
+          <input type="text" id="{{ qIndex }}" formControlName="answer" />
+        </div>
+      </div>
     </li>
   </ol>
 
