@@ -12,7 +12,7 @@ import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { SideBarComponent } from "./side-bar/side-bar.component";
+import { SideBarComponent } from "./features/side-bar/side-bar.component";
 
 export function initAuth(jwtService: JwtService, userService: UserService) {
   let accessToken = jwtService.getToken();

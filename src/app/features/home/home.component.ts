@@ -16,7 +16,7 @@ import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { SideBarComponent } from "src/app/side-bar/side-bar.component";
+import { SideBarComponent } from "src/app/features/side-bar/side-bar.component";
 
 @Component({
   selector: "app-home-page",

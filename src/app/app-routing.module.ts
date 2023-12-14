@@ -19,7 +19,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: "tests/:slug",
+    path: "practice/:slug",
     loadComponent: () =>
       import("./features/test/practice-test/test.component").then(
         (m) => m.TestComponent

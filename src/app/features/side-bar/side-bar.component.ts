@@ -5,7 +5,7 @@ import {
   Renderer2,
   ViewChild,
 } from "@angular/core";
-import { SidebarService } from "../core/services/sidebar.service";
+import { SidebarService } from "../../core/services/sidebar.service";
 import { RouterLink } from "@angular/router";
 
 @Component({
