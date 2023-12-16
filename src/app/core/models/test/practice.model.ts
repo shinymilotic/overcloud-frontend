@@ -1,4 +1,7 @@
+import { EssayAnswer } from "./essayanswer.model";
+
 export interface Practice {
   slug: string;
-  answers: string[];
+  choiceAnswers: string[];
+  essayAnswers: EssayAnswer[];
 }
