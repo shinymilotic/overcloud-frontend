@@ -14,7 +14,13 @@ import {
   RouterLink,
   RouterLinkActive,
 } from "@angular/router";
-import { combineLatest, catchError, throwError } from "rxjs";
+import {
+  combineLatest,
+  catchError,
+  throwError,
+  takeUntil,
+  Subject,
+} from "rxjs";
 import { TestResponse } from "src/app/core/models/test/test-response.model";
 import { User } from "src/app/core/models/auth/user.model";
 import { TestService } from "src/app/core/services/test.service";
@@ -74,6 +80,7 @@ export class TestComponent implements OnInit {
   slug: string = "";
   practiceForm: PracticeForm[] = [];
   // {questionId, answer}
+  destroy$ = new Subject<void>();
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -151,7 +158,7 @@ export class TestComponent implements OnInit {
   }
 
   createPractice() {
-    const practice: Practice = {
+    let practice: Practice = {
       slug: this.slug,
       choiceAnswers: [],
       essayAnswers: [],
@@ -172,35 +179,32 @@ export class TestComponent implements OnInit {
       }
     });
 
-    // let answers: string[] = this.practiceForm.value.answers.filter(
-    //   (answer: string) => answer != ""
-    // );
-
-    // const practice: Practice = {
-    //   slug: this.slug,
-    //   answers: answers,
-    // };
-
-    this.practiceService.createPractice(practice).subscribe({
-      next: (data) => {
-        this.router.navigate(["/tests"]);
-      },
-      error: (errors) => {
-        this.errors = errors.errors;
-        this.isSubmitting = false;
-      },
-    });
+    this.practiceService
+      .createPractice(practice)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.router.navigate(["/tests"]);
+        },
+        error: (errors) => {
+          this.errors = errors.errors;
+          this.isSubmitting = false;
+        },
+      });
   }
 
   deleteTest() {
-    this.testService.delete(this.slug).subscribe({
-      next: (result) => {
-        this.router.navigate(["/tests"]);
-      },
-      error: (errors) => {
-        this.errors = errors.errors;
-        this.isSubmitting = false;
-      },
-    });
+    this.testService
+      .delete(this.slug)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (result) => {
+          this.router.navigate(["/tests"]);
+        },
+        error: (errors) => {
+          this.errors = errors.errors;
+          this.isSubmitting = false;
+        },
+      });
   }
 }
