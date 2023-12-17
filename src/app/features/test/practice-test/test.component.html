@@ -1,6 +1,6 @@
 <p>{{ this.title }}</p>
 <button (click)="deleteTest()">Xóa bài test</button>
-<form>
+<form (ngSubmit)="createPractice()">
   <ol>
     <li *ngFor="let practice of this.practiceForm; let qIndex = index">
       {{ practice.question }}
@@ -18,14 +18,14 @@
       </ol>
       <div class="answers-list" *ngIf="practice.questionType == 2">
         <div>
-          <input
+          <textarea
             type="text"
             [formControl]="essayQuestionArrForm(qIndex).answer"
-          />
+          ></textarea>
         </div>
       </div>
     </li>
   </ol>
 
-  <button type="submit" (click)="createPractice()">Nộp bài test</button>
+  <button type="submit">Nộp bài test</button>
 </form>

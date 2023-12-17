@@ -58,28 +58,9 @@ export class TestComponent implements OnInit {
   errors!: Errors[];
   isSubmitting = false;
   currentUser!: User | null;
-  // test: TestResponse = {
-  //   title: "",
-  //   slug: "",
-  //   questions: [],
-  // };
-
-  // {
-  //   id: string;
-  //   question: string;
-  //   questionType: number;
-  //   practiceForm:
-  //   {
-  //     answer
-  //   }
-  //   {
-  //     answerId
-  //   }
-  // }
   title: string = "";
   slug: string = "";
-  practiceForm: PracticeForm[] = [];
-  // {questionId, answer}
+  questions: Question[] = [];
   destroy$ = new Subject<void>();
 
   constructor(
@@ -87,9 +68,19 @@ export class TestComponent implements OnInit {
     private readonly testService: TestService,
     private readonly userService: UserService,
     private readonly router: Router,
-    private readonly fb: FormBuilder,
+    public readonly fb: FormBuilder,
     private readonly practiceService: PracticeService
   ) {}
+
+  toFormGroup(questions: PracticeForm[]) {
+    const group: any = {};
+
+    questions.forEach((question) => {
+      group[question.id] = this.fb.control("");
+    });
+
+    return new FormGroup(group);
+  }
 
   ngOnInit(): void {
     const slug = this.route.snapshot.params["slug"];
@@ -110,7 +101,6 @@ export class TestComponent implements OnInit {
           if (question.questionType == QuestionType.CHOICE) {
             let choiceAnswerForm: PracticeChoiceQuestionForm = {
               answers: [],
-              answerId: this.fb.nonNullable.control("", Validators.required),
             };
 
             let choiceQuestion = question as ChoiceQuestion;
@@ -130,15 +120,10 @@ export class TestComponent implements OnInit {
               practiceForm: answer,
             });
           } else if (question.questionType == QuestionType.ESSAY) {
-            answer = {
-              answer: this.fb.nonNullable.control("", Validators.required),
-            };
-
             this.practiceForm.push({
               id: question.id,
               question: question.question,
               questionType: question.questionType,
-              practiceForm: answer,
             });
           } else {
             return;
@@ -163,7 +148,7 @@ export class TestComponent implements OnInit {
       choiceAnswers: [],
       essayAnswers: [],
     };
-
+    console.log("dsadsada");
     this.practiceForm.forEach((form) => {
       if (form.questionType == QuestionType.CHOICE) {
         const choiceQuestion: PracticeChoiceQuestionForm =
@@ -183,7 +168,8 @@ export class TestComponent implements OnInit {
       .createPractice(practice)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => {
+        next: (data) => {
+          console.log("d");
           this.router.navigate(["/tests"]);
         },
         error: (errors) => {

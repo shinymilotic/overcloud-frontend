@@ -10,8 +10,8 @@ import { UserPractice } from "../models/test/user-practices.model";
 export class PracticeService {
   constructor(private readonly http: HttpClient) {}
 
-  createPractice(practice: Practice): Observable<void> {
-    return this.http.post<void>(`/practice`, { practice: practice });
+  createPractice(practice: Practice): Observable<string> {
+    return this.http.post<string>(`/practice`, { practice: practice });
   }
 
   getPractices(username: string): Observable<UserPractice[]> {
