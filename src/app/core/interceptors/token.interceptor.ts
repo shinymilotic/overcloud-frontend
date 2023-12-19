@@ -41,7 +41,7 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = this.jwtService.getToken();
     const request = this.addTokenHeader(req, token);
-    console.log("TokenInterceptor");
+
     return next.handle(request).pipe(
       catchError((error: any) => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
