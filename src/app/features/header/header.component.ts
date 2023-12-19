@@ -34,20 +34,20 @@ export class HeaderComponent {
   currentUser$ = inject(UserService).currentUser;
   messages!: string[];
   private destroy$ = new Subject();
-  mySubscription;
+  // mySubscription;
 
   constructor(
     private readonly router: Router,
     private activatedRoute: ActivatedRoute,
     private readonly sidebarService: SidebarService
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.mySubscription = this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     // Trick the Router into believing it's last link wasn't previously loaded
+    //     this.router.navigated = false;
+    //   }
+    // });
   }
 
   ngOnInit(): void {}
@@ -55,17 +55,9 @@ export class HeaderComponent {
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.unsubscribe();
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
-  }
-
-  onConnected(): void {
-    console.log("Connected");
-  }
-
-  onError(): void {
-    console.log("Error");
+    // if (this.mySubscription) {
+    //   this.mySubscription.unsubscribe();
+    // }
   }
 
   toggleSidebar(): void {

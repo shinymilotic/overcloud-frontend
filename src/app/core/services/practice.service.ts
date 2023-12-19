@@ -11,7 +11,9 @@ export class PracticeService {
   constructor(private readonly http: HttpClient) {}
 
   createPractice(practice: Practice): Observable<string> {
-    return this.http.post<string>(`/practice`, { practice: practice });
+    return this.http
+      .post<string>(`/practice`, { practice: practice })
+      .pipe(map((data) => data));
   }
 
   getPractices(username: string): Observable<UserPractice[]> {

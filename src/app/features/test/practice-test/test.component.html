@@ -1,27 +1,24 @@
 <p>{{ this.title }}</p>
 <button (click)="deleteTest()">Xóa bài test</button>
-<form (ngSubmit)="createPractice()">
+<form (ngSubmit)="createPractice()" [formGroup]="this.questionForm">
   <ol>
-    <li *ngFor="let practice of this.practiceForm; let qIndex = index">
-      {{ practice.question }}
+    <li *ngFor="let question of this.questions; let qIndex = index">
+      {{ question.question }}
 
-      <ol class="answers-list" *ngIf="practice.questionType == 1">
-        <li *ngFor="let answer of choiceQuestionArrForm(qIndex).answers">
+      <ol class="answers-list" *ngIf="question.questionType == 1">
+        <li *ngFor="let answer of asChoiceQuestion(qIndex).answers">
           <input
             type="radio"
             id="{{ answer.id }}"
             value="{{ answer.id }}"
-            [formControl]="choiceQuestionArrForm(qIndex).answerId"
+            formControlName="{{ question.id }}"
           />
           <label for="{{ answer.id }}">{{ answer.answer }}</label>
         </li>
       </ol>
-      <div class="answers-list" *ngIf="practice.questionType == 2">
+      <div class="answers-list" *ngIf="question.questionType == 2">
         <div>
-          <textarea
-            type="text"
-            [formControl]="essayQuestionArrForm(qIndex).answer"
-          ></textarea>
+          <textarea type="text" formControlName="{{ question.id }}"></textarea>
         </div>
       </div>
     </li>

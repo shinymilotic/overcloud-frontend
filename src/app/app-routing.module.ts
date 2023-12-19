@@ -81,13 +81,13 @@ const routes: Routes = [
                 "./features/profile/profile-favorites/profile-favorites.component"
               ).then((m) => m.ProfileFavoritesComponent),
           },
-          // {
-          //   path: "practices",
-          //   loadComponent: () =>
-          //     import("./features/profile/user-practice/user-practice.component").then(
-          //       (m) => m.UserPracticeComponent
-          //     ),
-          // },
+          {
+            path: "practices",
+            loadComponent: () =>
+              import(
+                "./features/profile/user-practice/user-practice.component"
+              ).then((m) => m.UserPracticeComponent),
+          },
         ],
       },
     ],

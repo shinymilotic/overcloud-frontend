@@ -62,6 +62,7 @@ export class TestComponent implements OnInit {
   slug: string = "";
   questions: Question[] = [];
   destroy$ = new Subject<void>();
+  questionForm: FormGroup = new FormGroup([]);
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -72,7 +73,7 @@ export class TestComponent implements OnInit {
     private readonly practiceService: PracticeService
   ) {}
 
-  toFormGroup(questions: PracticeForm[]) {
+  toFormGroup(questions: Question[]) {
     const group: any = {};
 
     questions.forEach((question) => {
@@ -96,50 +97,23 @@ export class TestComponent implements OnInit {
           this.slug = test.slug;
           this.title = test.title;
           this.currentUser = currentUser;
-
-          let answer: PracticeQuestionForm;
           if (question.questionType == QuestionType.CHOICE) {
-            let choiceAnswerForm: PracticeChoiceQuestionForm = {
-              answers: [],
-            };
-
-            let choiceQuestion = question as ChoiceQuestion;
-            choiceQuestion.answers.forEach((answer) => {
-              choiceAnswerForm.answers.push({
-                id: answer.id,
-                answer: answer.answer,
-              });
-            });
-
-            answer = choiceAnswerForm;
-
-            this.practiceForm.push({
-              id: question.id,
-              question: question.question,
-              questionType: question.questionType,
-              practiceForm: answer,
-            });
+            const choiceQuestion = question as ChoiceQuestion;
+            this.questions.push(choiceQuestion);
           } else if (question.questionType == QuestionType.ESSAY) {
-            this.practiceForm.push({
-              id: question.id,
-              question: question.question,
-              questionType: question.questionType,
-            });
-          } else {
-            return;
+            this.questions.push(question);
           }
         });
+        this.questionForm = this.toFormGroup(this.questions);
       });
   }
 
-  choiceQuestionArrForm(index: number): PracticeChoiceQuestionForm {
-    return this.practiceForm.at(index)
-      ?.practiceForm as PracticeChoiceQuestionForm;
+  asChoiceQuestion(qIndex: number): ChoiceQuestion {
+    return this.questions[qIndex] as ChoiceQuestion;
   }
 
-  essayQuestionArrForm(index: number): PracticeEssayQuestionForm {
-    return this.practiceForm.at(index)
-      ?.practiceForm as PracticeEssayQuestionForm;
+  asEssayQuestion(qIndex: number): EssayQuestion {
+    return this.questions[qIndex] as EssayQuestion;
   }
 
   createPractice() {
@@ -148,18 +122,18 @@ export class TestComponent implements OnInit {
       choiceAnswers: [],
       essayAnswers: [],
     };
-    console.log("dsadsada");
-    this.practiceForm.forEach((form) => {
-      if (form.questionType == QuestionType.CHOICE) {
-        const choiceQuestion: PracticeChoiceQuestionForm =
-          form.practiceForm as PracticeChoiceQuestionForm;
-        practice.choiceAnswers.push(choiceQuestion.answerId.value);
-      } else if (form.questionType == QuestionType.ESSAY) {
-        const essayQuestion: PracticeEssayQuestionForm =
-          form.practiceForm as PracticeEssayQuestionForm;
+
+    this.questions.forEach((question) => {
+      const answerControl: FormControl = this.questionForm.controls[
+        question.id
+      ] as FormControl;
+
+      if (question.questionType == QuestionType.CHOICE) {
+        practice.choiceAnswers.push(answerControl.value);
+      } else if (question.questionType == QuestionType.ESSAY) {
         practice.essayAnswers.push({
-          questionId: form.id,
-          answer: essayQuestion.answer.value,
+          questionId: question.id,
+          answer: answerControl.value,
         });
       }
     });
@@ -169,7 +143,6 @@ export class TestComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
-          console.log("d");
           this.router.navigate(["/tests"]);
         },
         error: (errors) => {
