@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       .update(this.settingsForm.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (user) => void this.router.navigate(["/profile/", user.username]),
+        next: (user) => void this.router.navigate(["/@".concat(user.username)]),
         error: (err) => {
           this.errors = err.errors;
           this.isSubmitting = false;

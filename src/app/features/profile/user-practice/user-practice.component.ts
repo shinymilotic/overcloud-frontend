@@ -1,6 +1,7 @@
 import { NgFor } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Errors } from "src/app/core/models/errors.model";
 import { UserPractice } from "src/app/core/models/test/user-practices.model";
 import { PracticeService } from "src/app/core/services/practice.service";
 
@@ -8,7 +9,7 @@ import { PracticeService } from "src/app/core/services/practice.service";
   selector: "app-user-practice",
   templateUrl: "./user-practice.component.html",
   styleUrls: ["./user-practice.component.css"],
-  imports: [NgFor],
+  imports: [NgFor, RouterLink],
   standalone: true,
 })
 export class UserPracticeComponent implements OnInit {
@@ -21,18 +22,12 @@ export class UserPracticeComponent implements OnInit {
 
   ngOnInit() {
     const username = this.getUsername();
-    this.practiceService.getPractices(username).subscribe({
-      next: (practices) => {
-        this.practices = practices;
-      },
-      error: (errors) => {
-        // this.isSubmitting = false;
-        // this.commentFormErrors = errors;
-      },
+    this.practiceService.getPractices(username).subscribe((practices) => {
+      this.practices = practices;
     });
   }
 
-  getUsername() {
+  getUsername(): string {
     return this.route.parent?.snapshot.params["username"];
   }
 }

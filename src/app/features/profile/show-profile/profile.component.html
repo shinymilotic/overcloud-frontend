@@ -38,7 +38,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="['/profile', profile.username]"
+                [routerLink]="['/@'.concat(profile.username)]"
               >
                 Bài viết đã tạo
               </a>
@@ -48,7 +48,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="['/profile', profile.username, 'favorites']"
+                [routerLink]="['/@'.concat(profile.username), 'favorites']"
               >
                 Bài viết yêu thích
               </a>
@@ -58,7 +58,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="['/profile', profile.username, 'practices']"
+                [routerLink]="['/@'.concat(profile.username), 'practices']"
               >
                 Lịch sử test
               </a>

@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Output, inject } from "@angular/core";
 import { UserService } from "../../core/services/user.service";
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  RouterLink,
-  RouterLinkActive,
-} from "@angular/router";
+import { ActivatedRoute, RouterLink, RouterLinkActive } from "@angular/router";
 import { AsyncPipe, NgIf } from "@angular/common";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { SearchBarComponent } from "./search-bar/search-bar.component";

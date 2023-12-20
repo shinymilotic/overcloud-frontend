@@ -24,6 +24,7 @@ export class ProfileFavoritesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log("Favorites");
     this.profileService
       .get(this.route.parent?.snapshot.params["username"])
       .pipe(takeUntil(this.destroy$))

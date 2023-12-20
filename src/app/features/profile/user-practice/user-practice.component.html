@@ -1,3 +1,5 @@
 <div *ngFor="let practice of practices">
-  <a>{{ practice.testTitle }} {{ practice.date }}</a>
+  <a [routerLink]="['/@' + this.getUsername(), 'practices', practice.id]"
+    >{{ practice.testTitle }} {{ practice.date }}</a
+  >
 </div>

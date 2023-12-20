@@ -7,7 +7,7 @@
   <div class="card-footer">
     <a
       class="comment-author"
-      [routerLink]="['/profile', comment.author.username]"
+      [routerLink]="['/@'.concat(comment.author.username)]"
     >
       <img
         [src]="comment.author.image"

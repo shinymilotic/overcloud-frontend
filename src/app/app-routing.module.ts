@@ -1,11 +1,17 @@
 import { inject, NgModule } from "@angular/core";
-import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
+import {
+  Routes,
+  RouterModule,
+  PreloadAllModules,
+  UrlSegment,
+} from "@angular/router";
 import { UserService } from "./core/services/user.service";
 import { map } from "rxjs/operators";
 import { ProfileComponent } from "./features/profile/show-profile/profile.component";
 import { TestListComponent } from "./features/test/test-list/test-list.component";
+import { PracticeResultComponent } from "./features/profile/practice-result/practice-result.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "",
     loadComponent: () =>
@@ -61,34 +67,58 @@ const routes: Routes = [
     canActivate: [() => inject(UserService).isAuthenticated],
   },
   {
-    path: "profile",
+    // path: ":username",
+    matcher: (url) => {
+      const username: string = url[0].path;
+      if (url.length === 1 && username.match(/^@[\w]+$/gm)) {
+        return {
+          consumed: url,
+          posParams: { username: new UrlSegment(username.slice(1), {}) },
+        };
+      } else if (
+        url.length === 2 &&
+        username.match(/^@[\w]+$/gm) &&
+        (url[1].path.match("favorites") || url[1].path.match("practices"))
+      ) {
+        return {
+          consumed: url.slice(0, 1),
+          posParams: { username: new UrlSegment(username.slice(1), {}) },
+        };
+      }
+      return null;
+    },
+    component: ProfileComponent,
     children: [
       {
-        path: ":username",
-        component: ProfileComponent,
-        children: [
-          {
-            path: "",
-            loadComponent: () =>
-              import(
-                "./features/profile/profile-articles/profile-articles.component"
-              ).then((m) => m.ProfileArticlesComponent),
-          },
-          {
-            path: "favorites",
-            loadComponent: () =>
-              import(
-                "./features/profile/profile-favorites/profile-favorites.component"
-              ).then((m) => m.ProfileFavoritesComponent),
-          },
-          {
-            path: "practices",
-            loadComponent: () =>
-              import(
-                "./features/profile/user-practice/user-practice.component"
-              ).then((m) => m.UserPracticeComponent),
-          },
-        ],
+        path: "",
+        loadComponent: () =>
+          import(
+            "./features/profile/profile-articles/profile-articles.component"
+          ).then((m) => m.ProfileArticlesComponent),
+      },
+      {
+        path: "favorites",
+        loadComponent: () =>
+          import(
+            "./features/profile/profile-favorites/profile-favorites.component"
+          ).then((m) => m.ProfileFavoritesComponent),
+      },
+      {
+        path: "practices",
+        loadComponent: () =>
+          import(
+            "./features/profile/user-practice/user-practice.component"
+          ).then((m) => m.UserPracticeComponent),
+        // children: [
+        //   {
+        //     path: ":id",
+        //     component: PracticeResultComponent,
+        //     // loadComponent: () =>
+        //     //   import(
+        //     //     "./features/profile/practice-result/practice-result.component"
+        //     //   ).then((m) => m.PracticeResultComponent)
+        //   }
+        // ]
       },
     ],
   },
@@ -119,6 +149,22 @@ const routes: Routes = [
       import("./features/article/article.component").then(
         (m) => m.ArticleComponent
       ),
+  },
+  {
+    matcher: (url) => {
+      if (
+        url.length === 2 &&
+        url[0].path.match(/^@[\w]+$/gm) &&
+        url[1].path === "practice"
+      ) {
+        return {
+          consumed: url,
+          posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
+        };
+      }
+      return null;
+    },
+    component: PracticeResultComponent,
   },
 ];
 
