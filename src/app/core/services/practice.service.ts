@@ -21,4 +21,10 @@ export class PracticeService {
       .get<{ practices: UserPractice[] }>(`/practices/${username}`)
       .pipe(map((data: { practices: UserPractice[] }) => data.practices));
   }
+
+  getPractice(id: string): Observable<UserPractice[]> {
+    return this.http
+      .get<{ practices: UserPractice[] }>(`/practices/${id}`)
+      .pipe(map((data: { practices: UserPractice[] }) => data.practices));
+  }
 }

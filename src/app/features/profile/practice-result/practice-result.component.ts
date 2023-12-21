@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { PracticeService } from "src/app/core/services/practice.service";
 
 @Component({
   selector: "app-practice-result",
@@ -8,8 +9,11 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class PracticeResultComponent implements OnInit {
   @Input() username!: string;
+  @Input() id!: string;
+
+  constructor(private readonly practiceService: PracticeService) {}
 
   ngOnInit(): void {
-    console.log("dsdsadas");
+    this.practiceService.getPractice(this.id).subscribe(() => {});
   }
 }

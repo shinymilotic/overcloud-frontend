@@ -51,17 +51,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
   errors!: Errors[];
   testForm: FormGroup = this.fb.group({
     title: this.fb.control(""),
-    questions: this.fb.array([
-      // this.fb.group<QuestionForm>({
-      //   question: this.fb.nonNullable.control("", Validators.required),
-      //   answers: this.fb.array([
-      //     this.fb.group<ChoiceAnswerForm>({
-      //       answer: this.fb.nonNullable.control("", Validators.required),
-      //       truth: this.fb.nonNullable.control(false, Validators.required),
-      //     }),
-      //   ]),
-      // }),
-    ]),
+    questions: this.fb.array([]),
   });
   destroy$ = new Subject<void>();
 

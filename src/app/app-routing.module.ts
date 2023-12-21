@@ -112,15 +112,48 @@ export const routes: Routes = [
         // children: [
         //   {
         //     path: ":id",
-        //     component: PracticeResultComponent,
-        //     // loadComponent: () =>
-        //     //   import(
-        //     //     "./features/profile/practice-result/practice-result.component"
-        //     //   ).then((m) => m.PracticeResultComponent)
+        //     // matcher: (url) => {
+        //     //   console.log(url);
+        //     //   if (url.length === 1 && url[0].path.match("practices")) {
+        //     //     return {
+        //     //       consumed: url,
+        //     //       posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
+        //     //     };
+        //     //   }
+        //     //   return null;
+        //     // },
+        //     loadComponent: () =>
+        //       import(
+        //         "./features/profile/practice-result/practice-result.component"
+        //       ).then((m) => m.PracticeResultComponent)
         //   }
         // ]
       },
     ],
+  },
+  {
+    matcher: (url) => {
+      const username: string = url[0].path;
+      const id: string = url[2].path;
+      if (
+        url.length === 3 &&
+        username.match(/^@[\w]+$/gm) &&
+        url[1].path.match("practices")
+      ) {
+        return {
+          consumed: url,
+          posParams: {
+            username: new UrlSegment(username.slice(1), {}),
+            id: new UrlSegment(id, {}),
+          },
+        };
+      }
+      return null;
+    },
+    loadComponent: () =>
+      import(
+        "./features/profile/practice-result/practice-result.component"
+      ).then((m) => m.PracticeResultComponent),
   },
   {
     path: "editor",
@@ -150,22 +183,22 @@ export const routes: Routes = [
         (m) => m.ArticleComponent
       ),
   },
-  {
-    matcher: (url) => {
-      if (
-        url.length === 2 &&
-        url[0].path.match(/^@[\w]+$/gm) &&
-        url[1].path === "practice"
-      ) {
-        return {
-          consumed: url,
-          posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
-        };
-      }
-      return null;
-    },
-    component: PracticeResultComponent,
-  },
+  // {
+  //   matcher: (url) => {
+  //     if (
+  //       url.length === 2 &&
+  //       url[0].path.match(/^@[\w]+$/gm) &&
+  //       url[1].path === "practice"
+  //     ) {
+  //       return {
+  //         consumed: url,
+  //         posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
+  //       };
+  //     }
+  //     return null;
+  //   },
+  //   component: PracticeResultComponent,
+  // },
 ];
 
 @NgModule({
