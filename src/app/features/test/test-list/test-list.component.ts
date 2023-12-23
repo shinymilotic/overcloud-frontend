@@ -2,7 +2,7 @@ import { NgForOf, CommonModule, NgIf } from "@angular/common";
 import { Component } from "@angular/core";
 import { RouterLinkActive, RouterLink } from "@angular/router";
 import { Errors } from "src/app/core/models/errors.model";
-import { TestResponse } from "src/app/core/models/test/test-response.model";
+import { TestListResponse } from "src/app/core/models/test/test-list-response.model";
 import { TestService } from "src/app/core/services/test.service";
 
 @Component({
@@ -14,7 +14,7 @@ import { TestService } from "src/app/core/services/test.service";
 })
 export class TestListComponent {
   errors!: Errors[];
-  tests: TestResponse[] = [];
+  tests: TestListResponse[] = [];
 
   constructor(private readonly testService: TestService) {}
 
