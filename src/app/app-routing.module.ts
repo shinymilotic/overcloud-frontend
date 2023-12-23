@@ -67,6 +67,34 @@ export const routes: Routes = [
     canActivate: [() => inject(UserService).isAuthenticated],
   },
   {
+    path: "editor",
+    children: [
+      {
+        path: "",
+        loadComponent: () =>
+          import("./features/editor/editor.component").then(
+            (m) => m.EditorComponent
+          ),
+        canActivate: [() => inject(UserService).isAuthenticated],
+      },
+      {
+        path: ":slug",
+        loadComponent: () =>
+          import("./features/editor/editor.component").then(
+            (m) => m.EditorComponent
+          ),
+        canActivate: [() => inject(UserService).isAuthenticated],
+      },
+    ],
+  },
+  {
+    path: "articles/:slug",
+    loadComponent: () =>
+      import("./features/article/article.component").then(
+        (m) => m.ArticleComponent
+      ),
+  },
+  {
     // path: ":username",
     matcher: (url) => {
       const username: string = url[0].path;
@@ -154,34 +182,6 @@ export const routes: Routes = [
       import(
         "./features/profile/practice-result/practice-result.component"
       ).then((m) => m.PracticeResultComponent),
-  },
-  {
-    path: "editor",
-    children: [
-      {
-        path: "",
-        loadComponent: () =>
-          import("./features/editor/editor.component").then(
-            (m) => m.EditorComponent
-          ),
-        canActivate: [() => inject(UserService).isAuthenticated],
-      },
-      {
-        path: ":slug",
-        loadComponent: () =>
-          import("./features/editor/editor.component").then(
-            (m) => m.EditorComponent
-          ),
-        canActivate: [() => inject(UserService).isAuthenticated],
-      },
-    ],
-  },
-  {
-    path: "articles/:slug",
-    loadComponent: () =>
-      import("./features/article/article.component").then(
-        (m) => m.ArticleComponent
-      ),
   },
   // {
   //   matcher: (url) => {
