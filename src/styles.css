@@ -805,4 +805,11 @@ app-register {
   display: flex;
   flex: 1 1 auto;
   justify-content: center;
+  /* flex-direction: column; */
+}
+
+app-root {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
