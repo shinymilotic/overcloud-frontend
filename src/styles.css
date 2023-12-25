@@ -791,3 +791,16 @@ i.justify-align {
 .author:hover {
   color: #3ea6ff;
 }
+
+app-home-page,
+app-editor-page,
+app-profile-page,
+app-test-list,
+app-test,
+app-create-test,
+app-settings-page,
+app-article-page {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+}

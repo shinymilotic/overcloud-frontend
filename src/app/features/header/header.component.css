@@ -95,3 +95,7 @@ nav ul li {
 .dropdown-menu:hover .dropdown-content {
   display: block;
 }
+
+app-search-bar {
+  margin-left: 6rem;
+}
