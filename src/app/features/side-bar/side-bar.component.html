@@ -1,0 +1,15 @@
+<!-- Sidebar -->
+<div
+  #menu
+  class="sidebar absolute"
+  [style.display]="isOpen ? 'inline-block' : 'none'"
+  id="mySidebar"
+>
+  <a href="#" class="no-underline text-sm sidebar-items">Bài viết</a>
+  <a
+    routerLinkActive="active"
+    [routerLink]="['/tests']"
+    class="no-underline text-sm sidebar-items"
+    >Thực hành</a
+  >
+</div>

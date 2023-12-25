@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.user-img {
+  border-radius: 50%;
+  background-image: url(../../../../images/no-avatar.png);
+}
+
+.setting-btn {
+  background-color: #f2f2f2;
+  border-radius: 100px;
+  padding: 4px 16px;
+}
+
+.nav-item {
+  background-color: #f2f2f2;
+  border-radius: 18px;
+  padding: 4px 16px;
+}
+
+.setting-btn:hover,
+.nav-item:hover {
+  background-color: #def1ff;
+}
+
+.setting-btn:focus,
+.nav-item:focus {
+  background-color: #3ea6ff;
+}

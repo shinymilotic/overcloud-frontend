@@ -1,0 +1,73 @@
+<div class="profile-page" *ngIf="profile">
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1 flex flex-row p-4">
+          <img src="/no-avatar.png" class="user-img" width="160" height="160" />
+          <img [src]="profile.image" class="user-img" />
+          <div class="user-info flex flex-col ml-5 relative">
+            <h1 class="font-bold mb-4">{{ profile.username }}</h1>
+            <p>{{ profile.bio }}</p>
+
+            <a
+              [routerLink]="['/settings']"
+              *ngIf="isUser"
+              class="setting-btn absolute bottom-0"
+            >
+              <i class="ion-gear-a"></i> Thay đổi cài đặt
+            </a>
+          </div>
+          <app-follow-button
+            *ngIf="!isUser"
+            [profile]="profile"
+            (toggle)="onToggleFollowing($event)"
+          >
+          </app-follow-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="articles-toggle">
+          <ul class="nav nav-pills outline-active flex">
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username)]"
+              >
+                Bài viết đã tạo
+              </a>
+            </li>
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username), 'favorites']"
+              >
+                Bài viết yêu thích
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username), 'practices']"
+              >
+                Lịch sử test
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

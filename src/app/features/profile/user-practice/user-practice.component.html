@@ -1,0 +1,7 @@
+<div *ngFor="let practice of practices" class="p-3">
+  <a
+    [routerLink]="['/@' + this.getUsername(), 'practices', practice.id]"
+    class="font-bold title"
+    >{{ practice.testTitle }} {{ practice.date }}</a
+  >
+</div>

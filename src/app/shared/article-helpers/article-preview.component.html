@@ -1,0 +1,28 @@
+<div
+  class="article-preview"
+  [routerLink]="['/articles', article.slug]"
+  (click)="$event.stopPropagation()"
+>
+  <app-article-meta [article]="article"> </app-article-meta>
+
+  <!-- <a class="preview-link"> -->
+  <h1 class="font-bold mb-4 title">{{ article.title }}</h1>
+  <p class="mb-4">{{ article.description }}</p>
+  <ul class="tag-list mb-4">
+    <li
+      class="tag-default tag-pill tag-outline"
+      *ngFor="let tag of article.tagList"
+    >
+      {{ tag }}
+    </li>
+  </ul>
+  <!-- </a> -->
+
+  <app-favorite-button
+    [article]="article"
+    (toggle)="toggleFavorite($event)"
+    class="pull-xs-right"
+  >
+    {{ article.favoritesCount }}
+  </app-favorite-button>
+</div>

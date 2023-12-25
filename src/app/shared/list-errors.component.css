@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ul {
+  display: block;
+  list-style-type: none;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}

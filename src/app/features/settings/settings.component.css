@@ -1,0 +1,18 @@
+@tailwind base;
+
+@tailwind components;
+@tailwind utilities;
+
+.text-settings {
+  font-weight: bold;
+  font-size: large;
+}
+.form-control {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.btn-logout {
+  background-color: #e5e7eb;
+}

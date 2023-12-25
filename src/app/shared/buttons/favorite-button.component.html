@@ -1,0 +1,12 @@
+<button
+  class="btn-favorite"
+  [ngClass]="{
+    disabled: isSubmitting,
+    'btn-outline-primary': !article.favorited,
+    'btn-primary': article.favorited
+  }"
+  (click)="toggleFavorite($event)"
+>
+  <i class="material-symbols-outlined"> favorite </i>
+  <span><ng-content></ng-content></span>
+</button>

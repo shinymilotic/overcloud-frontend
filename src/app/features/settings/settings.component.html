@@ -1,0 +1,55 @@
+<div class="settings-page flex flex-col">
+  <h1 class="text-settings">Cài đặt</h1>
+
+  <app-list-errors [errors]="errors"></app-list-errors>
+
+  <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+    <fieldset [disabled]="isSubmitting">
+      <fieldset class="form-group">
+        <input
+          class="form-control outline-none mb-5"
+          type="text"
+          placeholder="Đường dẫn tới hình ảnh đại diện của bạn"
+          formControlName="image"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <input
+          class="form-control form-control-lg outline-none"
+          type="text"
+          placeholder="Tên đăng nhập"
+          formControlName="username"
+        />
+      </fieldset>
+
+      <fieldset class="form-group">
+        <textarea
+          class="form-control form-control-lg outline-none"
+          rows="8"
+          placeholder="Mô tả về bản thân"
+          formControlName="bio"
+        >
+        </textarea>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <input
+          class="form-control form-control-lg outline-none"
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </fieldset>
+
+      <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+        Thay đổi
+      </button>
+    </fieldset>
+  </form>
+
+  <!-- Line break for logout button -->
+  <hr />
+
+  <button class="btn-logout" (click)="logout()">Đăng xuất</button>
+</div>
