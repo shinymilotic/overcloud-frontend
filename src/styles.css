@@ -799,7 +799,9 @@ app-test-list,
 app-test,
 app-create-test,
 app-settings-page,
-app-article-page {
+app-article-page,
+app-login,
+app-register {
   display: flex;
   flex: 1 1 auto;
   justify-content: center;
