@@ -49,9 +49,7 @@
             *ngFor="let tag of filteredTags | async"
             (mouseenter)="mouseEnterTag($event)"
             (mousedown)="clickTag()"
-          >
-            {{ tag }}
-          </div>
+          >{{ tag }}</div>
         </div>
       </fieldset>
       <div class="inTag">
