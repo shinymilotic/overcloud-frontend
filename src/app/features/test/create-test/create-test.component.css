@@ -13,6 +13,10 @@ fieldset.form-group {
   border: solid 1px;
   border-radius: 10px;
 }
+input,
+textarea {
+  border: none;
+}
 .addAnswerBtn {
   border: 1px solid;
   border-radius: 2px;

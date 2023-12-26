@@ -33,7 +33,7 @@ h1 {
   text-align: left;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  width: 100vh;
+  /* width: 100vh; */
 }
 
 .editor-inner {
@@ -804,17 +804,18 @@ app-login,
 app-register {
   display: flex;
   flex: 1 1 auto;
-  justify-content: center;
+  align-self: center;
+  max-width: 590px;
   /* flex-direction: column; */
 }
 app-test-list,
 app-test {
   flex-direction: column;
   align-self: center;
+  max-width: 590px;
 }
 app-root {
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 

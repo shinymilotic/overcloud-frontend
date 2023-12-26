@@ -81,25 +81,26 @@
         </div>
       </div>
 
-      <button
-        type="button"
-        class="addQuestionBtn overcloud-btn"
-        (click)="addQuestion()"
-      >
-        Thêm câu hỏi trắc nghiệm
-      </button>
+      <div>
+        <button
+          type="button"
+          class="addQuestionBtn overcloud-btn"
+          (click)="addQuestion()"
+        >
+          Thêm câu hỏi trắc nghiệm
+        </button>
 
-      <button
-        type="button"
-        class="addQuestionBtn overcloud-btn"
-        (click)="addEssayQuestion()"
-      >
-        Thêm câu hỏi tự luận
-      </button>
-
-      <button id="submitBtn" class="btn btn-lg btn-primary" type="submit">
-        Tạo đề thi
-      </button>
+        <button
+          type="button"
+          class="addQuestionBtn overcloud-btn"
+          (click)="addEssayQuestion()"
+        >
+          Thêm câu hỏi tự luận
+        </button>
+      </div>
     </fieldset>
+    <button class="overcloud-btn float-right mt-2" type="submit">
+      Tạo đề thi
+    </button>
   </form>
 </div>

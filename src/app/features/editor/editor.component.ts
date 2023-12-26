@@ -26,14 +26,7 @@ import { Errors } from "../../core/models/errors.model";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { TagsService } from "src/app/core/services/tags.service";
 import { LexicalEditorBinding } from "src/app/lexical-editor.component";
-import {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
-  $getSelection,
-  EditorState,
-  LexicalEditor,
-} from "lexical";
+import { LexicalEditor } from "lexical";
 import { $generateHtmlFromNodes } from "@lexical/html";
 
 interface ArticleForm {
