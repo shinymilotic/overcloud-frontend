@@ -93,18 +93,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.selectedTagIndex = -1;
   }
 
-  // add(event: MatChipInputEvent): void {
-  //   const value = (event.value || "").trim();
-
-  //   if (value) {
-  //     this.inTags.push(value);
-  //   }
-
-  //   event.chipInput!.clear();
-
-  //   this.tagField.setValue("");
-  // }
-
   remove(tag: string): void {
     const index = this.inTags.indexOf(tag);
 
@@ -113,12 +101,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.announcer.announce(`Removed ${tag}`);
     }
   }
-
-  // selected(event: MatAutocompleteSelectedEvent): void {
-  //   this.inTags.push(event.option.viewValue);
-  //   this.tagInput.nativeElement.value = "";
-  //   this.tagField.setValue("");
-  // }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
