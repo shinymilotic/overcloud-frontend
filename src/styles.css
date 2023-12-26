@@ -807,9 +807,30 @@ app-register {
   justify-content: center;
   /* flex-direction: column; */
 }
-
+app-test-list,
+app-test {
+  flex-direction: column;
+  align-self: center;
+}
 app-root {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.overcloud-btn {
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer;
+}
+
+.overcloud-btn:hover {
+  background-color: #def1ff !important;
+}
+
+.overcloud-btn:focus {
+  background-color: #3ea6ff !important;
 }

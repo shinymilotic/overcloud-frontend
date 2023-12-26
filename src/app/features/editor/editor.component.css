@@ -14,17 +14,20 @@ fieldset.form-group {
   border-radius: 10px;
 }
 
-button {
+button,
+.overcloud-btn {
   border-radius: 20px;
   padding: 12px;
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
 
-button:hover {
+button:hover,
+overcloud-btn {
   background-color: #def1ff !important;
 }
 
-button:focus {
+button:focus,
+overcloud-btn {
   background-color: #3ea6ff !important;
 }
 

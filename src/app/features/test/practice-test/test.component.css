@@ -1,6 +1,15 @@
-/* @tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
+
 .answers-list {
   list-style-type: upper-latin;
+}
+
+#submitBtn {
+  display: block;
+  float: right;
+}
+
+textarea {
+  border: 1px solid;
 }
