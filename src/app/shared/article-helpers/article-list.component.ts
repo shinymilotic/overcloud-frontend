@@ -26,7 +26,7 @@ import { SearchParam } from "src/app/core/models/search.model";
 export class ArticleListComponent implements OnDestroy, OnInit {
   query!: ArticleListConfig;
   results: Article[] = [];
-  currentPage = 1;
+  lastArticleId = 'a373d706-8fe0-4610-bfcf-7742b2d5ace8';
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
@@ -37,8 +37,8 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   set config(config: ArticleListConfig) {
     if (config) {
       this.query = config;
-      this.currentPage = 1;
-      this.runQuery(this.currentPage);
+      this.lastArticleId = 'a373d706-8fe0-4610-bfcf-7742b2d5ace8';
+      this.runQuery(this.lastArticleId);
     }
   }
 
@@ -55,14 +55,14 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     this.destroy$.complete();
   }
 
-  setPageTo(pageNumber: number) {
+  setPageTo(lastArticleId: string) {
     // this.runQuery(pageNumber);
     this.loading = LoadingState.LOADING;
     // this.results = [];
     // Create limit and offset filter (if necessary)
     if (this.limit) {
       this.query.filters.size = this.limit;
-      this.query.filters.page = pageNumber;
+      this.query.filters.lastArticleId = lastArticleId;
     }
 
     this.route.queryParamMap.subscribe((params: any) => {
@@ -73,7 +73,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
       const param: SearchParam = {
         q: this.q,
         size: this.limit,
-        page: pageNumber,
+        lastArticleId: lastArticleId,
       };
 
       this.searchService
@@ -85,7 +85,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
             data.articles.forEach((element) => {
               this.results.push(element);
             });
-            this.currentPage = pageNumber;
+            this.lastArticleId = lastArticleId;
           }
         });
     } else {
@@ -98,19 +98,17 @@ export class ArticleListComponent implements OnDestroy, OnInit {
             data.articles.forEach((element) => {
               this.results.push(element);
             });
-            this.currentPage = pageNumber;
+            this.lastArticleId = lastArticleId;
           }
         });
     }
   }
 
-  runQuery(pageNumber: number) {
+  runQuery(lastArticleId: string) {
     this.loading = LoadingState.LOADING;
-    // this.results = [];
-    // Create limit and offset filter (if necessary)
     if (this.limit) {
       this.query.filters.size = this.limit;
-      this.query.filters.page = pageNumber;
+      this.query.filters.lastArticleId = lastArticleId;
     }
 
     this.route.queryParamMap.subscribe((params: any) => {
@@ -121,7 +119,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
       const param: SearchParam = {
         q: this.q,
         size: this.limit,
-        page: pageNumber,
+        lastArticleId: lastArticleId,
       };
 
       this.searchService
@@ -145,7 +143,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   @HostListener("window:scroll", ["$event"])
   onScroll(event: any) {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      this.setPageTo(this.currentPage + 1);
+      // this.setPageTo(this.currentPage + 1);
     }
   }
 }

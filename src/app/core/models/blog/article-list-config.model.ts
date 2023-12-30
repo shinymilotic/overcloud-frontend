@@ -4,6 +4,6 @@ export interface ArticleListConfig {
     author?: string;
     favorited?: string;
     size?: number;
-    page?: number;
+    lastArticleId?: string;
   };
 }
