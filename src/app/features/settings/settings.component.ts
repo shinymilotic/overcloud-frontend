@@ -13,13 +13,14 @@ import { Errors } from "../../core/models/errors.model";
 import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { SettingsForm } from "./SettingsForm";
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
-  selector: "app-settings-page",
-  templateUrl: "./settings.component.html",
-  styleUrls: ["./settings.component.css"],
-  imports: [ListErrorsComponent, ReactiveFormsModule],
-  standalone: true,
+    selector: "app-settings-page",
+    templateUrl: "./settings.component.html",
+    styleUrls: ["./settings.component.css"],
+    standalone: true,
+    imports: [ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   user!: User;

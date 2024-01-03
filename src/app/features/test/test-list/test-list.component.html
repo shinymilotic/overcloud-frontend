@@ -1,9 +1,15 @@
 <!-- Page Content -->
-<div class="w3-teal p-2" *ngFor="let test of this.tests">
-  <a
-    [routerLink]="['/practice', test.slug]"
-    class="font-bold"
-    routerLinkActive="active"
-    >{{ test.title }}
-  </a>
+
+<div>
+  <app-side-bar></app-side-bar>
+
+  <div class="w3-teal p-2" *ngFor="let test of this.tests">
+    <a
+      [routerLink]="['/practice', test.slug]"
+      class="font-bold"
+      routerLinkActive="active"
+      >{{ test.title }}
+    </a>
+  </div>
 </div>
+

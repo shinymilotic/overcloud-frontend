@@ -1,4 +1,5 @@
 <div class="p-12 flex justify-between flex-col container">
+  <app-side-bar></app-side-bar>
   <app-list-errors [errors]="errors"></app-list-errors>
 
   <form [formGroup]="testForm" (ngSubmit)="submitForm()">

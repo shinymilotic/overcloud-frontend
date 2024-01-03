@@ -31,20 +31,22 @@ import { Test } from "src/app/core/models/test/test.model";
 import { QuestionForm } from "./form-model/QuestionForm";
 import { EssayQuestionForm } from "./form-model/EssayQuestionForm";
 import { QuestionType } from "./enum/QuestionType";
+import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
-  selector: "app-create-test",
-  templateUrl: "./create-test.component.html",
-  styleUrls: ["./create-test.component.css"],
-  imports: [
-    ListErrorsComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    NgForOf,
-    CommonModule,
-    NgIf,
-  ],
-  standalone: true,
+    selector: "app-create-test",
+    templateUrl: "./create-test.component.html",
+    styleUrls: ["./create-test.component.css"],
+    standalone: true,
+    imports: [
+        ListErrorsComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        NgForOf,
+        CommonModule,
+        NgIf,
+        SideBarComponent
+    ]
 })
 export class CreateTestComponent implements OnInit, OnDestroy {
   isSubmitting = false;

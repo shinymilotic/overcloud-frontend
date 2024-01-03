@@ -13,6 +13,10 @@
   transition-duration: 0.1s;
 }
 
+#mySidebar {
+  background-color: white;
+}
+
 .sidebar-items:hover {
   /* filter: brightness(200%); */
   background-color: #def1ff !important;

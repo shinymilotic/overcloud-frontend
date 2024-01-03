@@ -13,20 +13,22 @@ import { Profile } from "../../../core/models/auth/profile.model";
 import { ProfileService } from "../../../core/services/profile.service";
 import { FollowButtonComponent } from "../../../shared/buttons/follow-button.component";
 import { AsyncPipe, NgIf } from "@angular/common";
+import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
-  selector: "app-profile-page",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
-  imports: [
-    FollowButtonComponent,
-    NgIf,
-    RouterLink,
-    AsyncPipe,
-    RouterLinkActive,
-    RouterOutlet,
-  ],
-  standalone: true,
+    selector: "app-profile-page",
+    templateUrl: "./profile.component.html",
+    styleUrls: ["./profile.component.css"],
+    standalone: true,
+    imports: [
+        FollowButtonComponent,
+        NgIf,
+        RouterLink,
+        AsyncPipe,
+        RouterLinkActive,
+        RouterOutlet,
+        SideBarComponent
+    ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   profile!: Profile;
