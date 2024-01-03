@@ -28,6 +28,7 @@ import { TagsService } from "src/app/core/services/tags.service";
 import { LexicalEditorBinding } from "src/app/lexical-editor.component";
 import { LexicalEditor } from "lexical";
 import { $generateHtmlFromNodes } from "@lexical/html";
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 interface ArticleForm {
   title: FormControl<string>;
@@ -37,20 +38,21 @@ interface ArticleForm {
 }
 
 @Component({
-  selector: "app-editor-page",
-  templateUrl: "./editor.component.html",
-  imports: [
-    ListErrorsComponent,
-    ReactiveFormsModule,
-    NgForOf,
-    ReactiveFormsModule,
-    NgFor,
-    AsyncPipe,
-    FormsModule,
-    LexicalEditorBinding,
-  ],
-  styleUrls: ["./editor.component.css"],
-  standalone: true,
+    selector: "app-editor-page",
+    templateUrl: "./editor.component.html",
+    styleUrls: ["./editor.component.css"],
+    standalone: true,
+    imports: [
+        ListErrorsComponent,
+        ReactiveFormsModule,
+        NgForOf,
+        ReactiveFormsModule,
+        NgFor,
+        AsyncPipe,
+        FormsModule,
+        LexicalEditorBinding,
+        SideBarComponent
+    ]
 })
 export class EditorComponent implements OnInit, OnDestroy {
   @HostBinding("class") classes = "app-editor-page";
