@@ -1,107 +1,112 @@
-<div class="p-12 flex justify-between flex-col container">
+<div class="flex justify-between">
   <app-side-bar></app-side-bar>
-  <app-list-errors [errors]="errors"></app-list-errors>
 
-  <form [formGroup]="testForm" (ngSubmit)="submitForm()">
-    <fieldset class="flex flex-col" [disabled]="isSubmitting">
-      <fieldset class="form-group mb-3">
-        <input
-          id="title"
-          class="form-control form-control-lg w-full outline-none"
-          formControlName="title"
-          type="text"
-          placeholder="Tiêu đề"
-        />
-      </fieldset>
+  <div>
+    <app-list-errors [errors]="errors"></app-list-errors>
 
-      <div formArrayName="questions">
-        <div
-          class="question p-2"
-          *ngFor="let question of questionsFormArr.controls; let qIndex = index"
-          [formGroupName]="qIndex"
-        >
-          <fieldset class="form-group mb-3">
-            <textarea
-              id="question-{{ qIndex }}"
-              class="form-control form-control-lg w-full outline-none"
-              formControlName="question"
-              placeholder="Câu hỏi"
-            ></textarea>
-          </fieldset>
-          <button
-            type="button"
-            class="deleteQuestionBtn"
-            (click)="deleteQuestion(qIndex)"
+    <form [formGroup]="testForm" (ngSubmit)="submitForm()">
+      <fieldset class="flex flex-col" [disabled]="isSubmitting">
+        <fieldset class="form-group mb-3">
+          <input
+            id="title"
+            class="form-control form-control-lg w-full outline-none"
+            formControlName="title"
+            type="text"
+            placeholder="Tiêu đề"
+          />
+        </fieldset>
+  
+        <div formArrayName="questions">
+          <div
+            class="question p-2"
+            *ngFor="let question of questionsFormArr.controls; let qIndex = index"
+            [formGroupName]="qIndex"
           >
-            Xóa câu hỏi
-          </button>
-
-          <div *ngIf="this.isChoiceQuestion(qIndex)" formArrayName="answers">
-            <div
-              class="flex"
-              *ngFor="
-                let answer of getAnswerFormArr(qIndex).controls;
-                let aIndex = index
-              "
-              [formGroupName]="aIndex"
-            >
-              <fieldset class="form-group mr-3">
-                <input
-                  id="{{ aIndex }}"
-                  class="form-control answer outline-none"
-                  formControlName="answer"
-                  type="text"
-                  placeholder="Câu trả lời"
-                  (keydown)="addAnswer(qIndex, $event)"
-                />
-              </fieldset>
-              <fieldset class="form-group mr-3">
-                <input
-                  class="form-control w-full outline-none border-none"
-                  formControlName="truth"
-                  type="checkbox"
-                />
-              </fieldset>
-
-              <button
-                type="button"
-                class="deleteAnswerBtn"
-                (click)="deleteAnswer(qIndex, aIndex)"
-              >
-                Xóa
-              </button>
-            </div>
+            <fieldset class="form-group mb-3">
+              <textarea
+                id="question-{{ qIndex }}"
+                class="form-control form-control-lg w-full outline-none"
+                formControlName="question"
+                placeholder="Câu hỏi"
+              ></textarea>
+            </fieldset>
             <button
               type="button"
-              class="addAnswerBtn"
-              (click)="addAnswer(qIndex)"
+              class="deleteQuestionBtn"
+              (click)="deleteQuestion(qIndex)"
             >
-              Thêm câu trả lời
+              Xóa câu hỏi
             </button>
+  
+            <div *ngIf="this.isChoiceQuestion(qIndex)" formArrayName="answers">
+              <div
+                class="flex"
+                *ngFor="
+                  let answer of getAnswerFormArr(qIndex).controls;
+                  let aIndex = index
+                "
+                [formGroupName]="aIndex"
+              >
+                <fieldset class="form-group mr-3">
+                  <input
+                    id="{{ aIndex }}"
+                    class="form-control answer outline-none"
+                    formControlName="answer"
+                    type="text"
+                    placeholder="Câu trả lời"
+                    (keydown)="addAnswer(qIndex, $event)"
+                  />
+                </fieldset>
+                <fieldset class="form-group mr-3">
+                  <input
+                    class="form-control w-full outline-none border-none"
+                    formControlName="truth"
+                    type="checkbox"
+                  />
+                </fieldset>
+  
+                <button
+                  type="button"
+                  class="deleteAnswerBtn"
+                  (click)="deleteAnswer(qIndex, aIndex)"
+                >
+                  Xóa
+                </button>
+              </div>
+              <button
+                type="button"
+                class="addAnswerBtn"
+                (click)="addAnswer(qIndex)"
+              >
+                Thêm câu trả lời
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          class="addQuestionBtn overcloud-btn"
-          (click)="addQuestion()"
-        >
-          Thêm câu hỏi trắc nghiệm
-        </button>
-
-        <button
-          type="button"
-          class="addQuestionBtn overcloud-btn"
-          (click)="addEssayQuestion()"
-        >
-          Thêm câu hỏi tự luận
-        </button>
-      </div>
-    </fieldset>
-    <button class="overcloud-btn float-right mt-2" type="submit">
-      Tạo đề thi
-    </button>
-  </form>
+  
+        <div>
+          <button
+            type="button"
+            class="addQuestionBtn overcloud-btn"
+            (click)="addQuestion()"
+          >
+            Thêm câu hỏi trắc nghiệm
+          </button>
+  
+          <button
+            type="button"
+            class="addQuestionBtn overcloud-btn"
+            (click)="addEssayQuestion()"
+          >
+            Thêm câu hỏi tự luận
+          </button>
+        </div>
+      </fieldset>
+      <button class="overcloud-btn float-right mt-2" type="submit">
+        Tạo đề thi
+      </button>
+    </form>
+  </div>
+  
+  <div class="invisible">Item</div>
 </div>
