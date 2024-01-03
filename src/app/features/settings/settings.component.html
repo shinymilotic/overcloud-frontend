@@ -1,57 +1,61 @@
 <div class="settings-page flex justify-between">
   <app-side-bar></app-side-bar>
 
-  <h1 class="text-settings">Cài đặt</h1>
+  <div>
+    <h1 class="text-settings">Cài đặt</h1>
 
-  <app-list-errors [errors]="errors"></app-list-errors>
+    <app-list-errors [errors]="errors"></app-list-errors>
 
-  <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-    <fieldset [disabled]="isSubmitting">
-      <fieldset class="form-group">
-        <input
-          class="form-control w-full outline-none"
-          type="text"
-          placeholder="Đường dẫn tới hình ảnh đại diện của bạn"
-          formControlName="image"
-        />
+    <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+      <fieldset [disabled]="isSubmitting">
+        <fieldset class="form-group">
+          <input
+            class="form-control w-full outline-none"
+            type="text"
+            placeholder="Đường dẫn tới hình ảnh đại diện của bạn"
+            formControlName="image"
+          />
+        </fieldset>
+  
+        <fieldset class="form-group">
+          <input
+            class="form-control form-control-lg outline-none w-full"
+            type="text"
+            placeholder="Tên đăng nhập"
+            formControlName="username"
+          />
+        </fieldset>
+  
+        <fieldset class="form-group">
+          <textarea
+            class="form-control form-control-lg outline-none w-full"
+            rows="8"
+            placeholder="Mô tả về bản thân"
+            formControlName="bio"
+          >
+          </textarea>
+        </fieldset>
+  
+        <fieldset class="form-group">
+          <input
+            class="form-control form-control-lg outline-none w-full"
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+        </fieldset>
+  
+        <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+          Thay đổi
+        </button>
       </fieldset>
-
-      <fieldset class="form-group">
-        <input
-          class="form-control form-control-lg outline-none w-full"
-          type="text"
-          placeholder="Tên đăng nhập"
-          formControlName="username"
-        />
-      </fieldset>
-
-      <fieldset class="form-group">
-        <textarea
-          class="form-control form-control-lg outline-none w-full"
-          rows="8"
-          placeholder="Mô tả về bản thân"
-          formControlName="bio"
-        >
-        </textarea>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <input
-          class="form-control form-control-lg outline-none w-full"
-          type="email"
-          placeholder="Email"
-          formControlName="email"
-        />
-      </fieldset>
-
-      <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
-        Thay đổi
-      </button>
-    </fieldset>
-  </form>
-
-  <!-- Line break for logout button -->
-  <hr />
-
-  <button class="btn-logout" (click)="logout()">Đăng xuất</button>
+    </form>
+  
+    <!-- Line break for logout button -->
+    <hr />
+  
+    <button class="btn-logout" (click)="logout()">Đăng xuất</button>
+  </div>
+  
+  <div class="invisible"> Item invisible</div>
 </div>

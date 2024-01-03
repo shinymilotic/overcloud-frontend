@@ -39,20 +39,22 @@ import { PracticeChoiceQuestionForm } from "./PracticeChoiceQuestionForm";
 import { PracticeEssayQuestionForm } from "./PracticeEssayQuestionForm";
 import { ChoiceAnswerForm } from "../create-test/form-model/ChoiceAnswerForm";
 import { ChoiceQuestionForm } from "../create-test/form-model/ChoiceQuestionForm";
+import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
-  selector: "app-test",
-  templateUrl: "./test.component.html",
-  styleUrls: ["./test.component.css"],
-  imports: [
-    RouterLinkActive,
-    RouterLink,
-    NgForOf,
-    CommonModule,
-    NgIf,
-    ReactiveFormsModule,
-  ],
-  standalone: true,
+    selector: "app-test",
+    templateUrl: "./test.component.html",
+    styleUrls: ["./test.component.css"],
+    standalone: true,
+    imports: [
+        RouterLinkActive,
+        RouterLink,
+        NgForOf,
+        CommonModule,
+        NgIf,
+        ReactiveFormsModule,
+        SideBarComponent
+    ]
 })
 export class TestComponent implements OnInit {
   errors!: Errors[];
