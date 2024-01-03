@@ -1,15 +1,19 @@
 <!-- Page Content -->
 
-<div>
+<div class="flex justify-between">
   <app-side-bar></app-side-bar>
 
-  <div class="w3-teal p-2" *ngFor="let test of this.tests">
-    <a
-      [routerLink]="['/practice', test.slug]"
-      class="font-bold"
-      routerLinkActive="active"
-      >{{ test.title }}
-    </a>
+  <div>
+    <div class="w3-teal p-2" *ngFor="let test of this.tests">
+      <a
+        [routerLink]="['/practice', test.slug]"
+        class="font-bold"
+        routerLinkActive="active"
+        >{{ test.title }}
+      </a>
+    </div>
   </div>
+  
+  <div class="invisible"> Item invisible</div>
 </div>
 
