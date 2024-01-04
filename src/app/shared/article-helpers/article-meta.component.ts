@@ -6,6 +6,7 @@ import { DatePipe } from "@angular/common";
 @Component({
   selector: "app-article-meta",
   templateUrl: "./article-meta.component.html",
+  styleUrls: ['./article-meta.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, DatePipe],
   standalone: true,

@@ -1,7 +1,7 @@
 <div class="article-page flex justify-between" *ngIf="article">
   <app-side-bar></app-side-bar>
 
-  <div>
+  <div class="article-container flex flex-col">
     <div class="banner">
       <div class="container">
         <h1>{{ article.title }}</h1>
@@ -82,15 +82,14 @@
         </app-article-meta>
       </div>
   
-      <div class="row">
-        <div class="col-xs-12 col-md-8 offset-md-2">
+      <div class="row max-w-lg m-auto">
           <div *appShowAuthed="true">
             <app-list-errors></app-list-errors>
             <form class="card comment-form" (ngSubmit)="addComment()">
-              <fieldset [disabled]="isSubmitting">
+              <fieldset [disabled]="isSubmitting" class="border-none">
                 <div class="card-block">
                   <textarea
-                    class="form-control"
+                    class="form-control max-w-md w-11/12 outline-none"
                     placeholder="Hãy bình luận..."
                     rows="3"
                     [formControl]="commentControl"
@@ -121,10 +120,7 @@
             (delete)="deleteComment(comment)"
           >
           </app-article-comment>
-        </div>
       </div>
     </div>
   </div>
-  
-  <div class="invisible"> Item invisibledsdasdsadsa</div>
 </div>

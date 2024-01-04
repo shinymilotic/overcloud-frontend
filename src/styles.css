@@ -6,6 +6,10 @@ html * {
   line-height: 24px;
 }
 
+body {
+  background-color: #f1e9d7;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -836,6 +840,3 @@ app-root {
   background-color: #3ea6ff !important;
 }
 
-/* .container {
-  width: 100vh!important;
-} */

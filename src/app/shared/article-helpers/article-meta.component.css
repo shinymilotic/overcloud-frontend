@@ -1,0 +1,9 @@
+.article-author {
+    text-decoration: none;
+    font-weight: bold;
+    color: #FF8C00;
+}
+
+.author:hover {
+    color: #FF8C00;
+}

@@ -9,6 +9,7 @@ import { AsyncPipe, DatePipe, NgIf } from "@angular/common";
 @Component({
   selector: "app-article-comment",
   templateUrl: "./article-comment.component.html",
+  styleUrls: ['./article-comment.component.css'],
   imports: [RouterLink, DatePipe, NgIf, AsyncPipe],
   standalone: true,
 })
