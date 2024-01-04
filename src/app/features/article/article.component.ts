@@ -19,27 +19,30 @@ import { Comment } from "../../core/models/blog/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { Errors } from "../../core/models/errors.model";
 import { Profile } from "../../core/models/auth/profile.model";
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
-  selector: "app-article-page",
-  templateUrl: "./article.component.html",
-  imports: [
-    ArticleMetaComponent,
-    RouterLink,
-    NgClass,
-    FollowButtonComponent,
-    FavoriteButtonComponent,
-    NgForOf,
-    MarkdownPipe,
-    AsyncPipe,
-    ListErrorsComponent,
-    FormsModule,
-    ArticleCommentComponent,
-    ReactiveFormsModule,
-    ShowAuthedDirective,
-    NgIf,
-  ],
-  standalone: true,
+    selector: "app-article-page",
+    templateUrl: "./article.component.html",
+    styleUrls: ['./article.component.css'],
+    standalone: true,
+    imports: [
+        ArticleMetaComponent,
+        RouterLink,
+        NgClass,
+        FollowButtonComponent,
+        FavoriteButtonComponent,
+        NgForOf,
+        MarkdownPipe,
+        AsyncPipe,
+        ListErrorsComponent,
+        FormsModule,
+        ArticleCommentComponent,
+        ReactiveFormsModule,
+        ShowAuthedDirective,
+        NgIf,
+        SideBarComponent
+    ]
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   article!: Article;

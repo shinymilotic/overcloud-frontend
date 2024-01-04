@@ -1,124 +1,130 @@
-<div class="article-page" *ngIf="article">
-  <div class="banner">
-    <div class="container">
-      <h1>{{ article.title }}</h1>
+<div class="article-page flex justify-between" *ngIf="article">
+  <app-side-bar></app-side-bar>
 
-      <app-article-meta [article]="article">
-        <span *ngIf="canModify">
-          <a
-            class="btn btn-sm btn-outline-secondary"
-            [routerLink]="['/editor', article.slug]"
-          >
-            <i class="ion-edit"></i> Sửa
-          </a>
-          <span>&nbsp;&nbsp;</span>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            [ngClass]="{ disabled: isDeleting }"
-            (click)="deleteArticle()"
-          >
-            <i class="ion-trash-a"></i> Xóa
-          </button>
-        </span>
-
-        <span *ngIf="!canModify">
-          <app-follow-button
-            [profile]="article.author"
-            (toggle)="toggleFollowing($event)"
-          >
-          </app-follow-button>
-          &nbsp;&nbsp;
-          <app-favorite-button
-            [article]="article"
-            (toggle)="onToggleFavorite($event)"
-          >
-            {{ article.favorited ? "Bỏ thích" : "Thích" }}
-            <span class="counter">({{ article.favoritesCount }})</span>
-          </app-favorite-button>
-        </span>
-      </app-article-meta>
-    </div>
-  </div>
-
-  <div class="container page">
-    <div class="row article-content">
-      <div class="col-md-12">
-        <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
-        <div [outerHTML]="article.body"></div>
-        <ul class="tag-list">
-          <li
-            *ngFor="let tag of article.tagList"
-            class="tag-default tag-pill tag-outline"
-          >
-            {{ tag }}
-          </li>
-        </ul>
+  <div>
+    <div class="banner">
+      <div class="container">
+        <h1>{{ article.title }}</h1>
+  
+        <app-article-meta [article]="article">
+          <span *ngIf="canModify">
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/editor', article.slug]"
+            >
+              <i class="ion-edit"></i> Sửa
+            </a>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              [ngClass]="{ disabled: isDeleting }"
+              (click)="deleteArticle()"
+            >
+              <i class="ion-trash-a"></i> Xóa
+            </button>
+          </span>
+  
+          <span *ngIf="!canModify">
+            <app-follow-button
+              [profile]="article.author"
+              (toggle)="toggleFollowing($event)"
+            >
+            </app-follow-button>
+            &nbsp;&nbsp;
+            <app-favorite-button
+              [article]="article"
+              (toggle)="onToggleFavorite($event)"
+            >
+              {{ article.favorited ? "Bỏ thích" : "Thích" }}
+              <span class="counter">({{ article.favoritesCount }})</span>
+            </app-favorite-button>
+          </span>
+        </app-article-meta>
       </div>
     </div>
-
-    <hr />
-
-    <div class="article-actions">
-      <app-article-meta [article]="article">
-        <span *ngIf="canModify">
-          <a
-            class="btn btn-sm btn-outline-secondary"
-            [routerLink]="['/editor', article.slug]"
-          >
-            <i class="ion-edit"></i> Sửa
-          </a>
-          <span>&nbsp;&nbsp;</span>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            [ngClass]="{ disabled: isDeleting }"
-            (click)="deleteArticle()"
-          >
-            <i class="ion-trash-a"></i> Xóa
-          </button>
-        </span>
-      </app-article-meta>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
-        <div *appShowAuthed="true">
-          <app-list-errors></app-list-errors>
-          <form class="card comment-form" (ngSubmit)="addComment()">
-            <fieldset [disabled]="isSubmitting">
-              <div class="card-block">
-                <textarea
-                  class="form-control"
-                  placeholder="Hãy bình luận..."
-                  rows="3"
-                  [formControl]="commentControl"
-                ></textarea>
-              </div>
-              <div class="card-footer">
-                <img
-                  [src]="currentUser?.image === null ? '' : currentUser?.image"
-                  class="comment-author-img"
-                />
-                <button class="btn btn-sm btn-primary" type="submit">
-                  Bình luận
-                </button>
-              </div>
-            </fieldset>
-          </form>
+  
+    <div class="container page">
+      <div class="row article-content">
+        <div class="col-md-12">
+          <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
+          <div [outerHTML]="article.body"></div>
+          <ul class="tag-list">
+            <li
+              *ngFor="let tag of article.tagList"
+              class="tag-default tag-pill tag-outline"
+            >
+              {{ tag }}
+            </li>
+          </ul>
         </div>
-
-        <div *appShowAuthed="false">
-          <a [routerLink]="['/login']">Đăng nhập</a> or
-          <a [routerLink]="['/register']">Đăng ký</a> để bình luận vào các bài
-          đăng.
+      </div>
+  
+      <hr />
+  
+      <div class="article-actions">
+        <app-article-meta [article]="article">
+          <span *ngIf="canModify">
+            <a
+              class="btn btn-sm btn-outline-secondary"
+              [routerLink]="['/editor', article.slug]"
+            >
+              <i class="ion-edit"></i> Sửa
+            </a>
+            <span>&nbsp;&nbsp;</span>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              [ngClass]="{ disabled: isDeleting }"
+              (click)="deleteArticle()"
+            >
+              <i class="ion-trash-a"></i> Xóa
+            </button>
+          </span>
+        </app-article-meta>
+      </div>
+  
+      <div class="row">
+        <div class="col-xs-12 col-md-8 offset-md-2">
+          <div *appShowAuthed="true">
+            <app-list-errors></app-list-errors>
+            <form class="card comment-form" (ngSubmit)="addComment()">
+              <fieldset [disabled]="isSubmitting">
+                <div class="card-block">
+                  <textarea
+                    class="form-control"
+                    placeholder="Hãy bình luận..."
+                    rows="3"
+                    [formControl]="commentControl"
+                  ></textarea>
+                </div>
+                <div class="card-footer">
+                  <img
+                    [src]="currentUser?.image === null ? '' : currentUser?.image"
+                    class="comment-author-img"
+                  />
+                  <button class="btn btn-sm btn-primary" type="submit">
+                    Bình luận
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+  
+          <div *appShowAuthed="false">
+            <a [routerLink]="['/login']">Đăng nhập</a> or
+            <a [routerLink]="['/register']">Đăng ký</a> để bình luận vào các bài
+            đăng.
+          </div>
+  
+          <app-article-comment
+            *ngFor="let comment of comments; trackBy: trackById"
+            [comment]="comment"
+            (delete)="deleteComment(comment)"
+          >
+          </app-article-comment>
         </div>
-
-        <app-article-comment
-          *ngFor="let comment of comments; trackBy: trackById"
-          [comment]="comment"
-          (delete)="deleteComment(comment)"
-        >
-        </app-article-comment>
       </div>
     </div>
   </div>
+  
+  <div class="invisible"> Item invisibledsdasdsadsa</div>
 </div>
