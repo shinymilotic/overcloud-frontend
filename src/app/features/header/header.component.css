@@ -13,11 +13,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+  background-color: #392215;
+  color: white;
 }
 
 nav ul {
@@ -36,11 +39,11 @@ nav ul li {
 }
 
 .nav-item:hover {
-  background-color: #def1ff !important;
+  background-color: #8a5917 !important;
 }
 
 .nav-item:focus {
-  background-color: #3ea6ff !important;
+  background-color: #8a5917 !important;
 }
 
 .navbar-brand {

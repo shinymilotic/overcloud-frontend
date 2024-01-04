@@ -21,10 +21,10 @@
 
 .setting-btn:hover,
 .nav-item:hover {
-  background-color: #def1ff;
+  background-color: #8a5917;
 }
 
 .setting-btn:focus,
 .nav-item:focus {
-  background-color: #3ea6ff;
+  background-color: #8a5917;
 }

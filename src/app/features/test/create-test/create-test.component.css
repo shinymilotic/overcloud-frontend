@@ -12,6 +12,7 @@ fieldset.form-group {
   padding: 5px;
   border: solid 1px;
   border-radius: 10px;
+  background: white;
 }
 input,
 textarea {

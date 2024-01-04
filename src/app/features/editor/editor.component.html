@@ -6,7 +6,7 @@
 
     <form [formGroup]="articleForm">
       <fieldset [disabled]="isSubmitting">
-        <fieldset class="form-group">
+        <fieldset class="form-group bg-white">
           <input
             class="form-control form-control-lg w-full outline-none"
             formControlName="title"
@@ -15,7 +15,7 @@
           />
         </fieldset>
   
-        <fieldset class="form-group">
+        <fieldset class="form-group bg-white">
           <input
             class="form-control w-full outline-none"
             formControlName="description"
@@ -24,14 +24,14 @@
           />
         </fieldset>
   
-        <fieldset class="form-group">
+        <fieldset class="form-group bg-white">
           <lexical-editor
             id="lexical-editor"
             (changeValueEvent)="this.updateBodyChange($event)"
           ></lexical-editor>
         </fieldset>
   
-        <fieldset class="form-group">
+        <fieldset class="form-group bg-white">
           <input
             #tagInputTextElement
             class="form-control w-full outline-none"

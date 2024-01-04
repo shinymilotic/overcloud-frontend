@@ -8,6 +8,7 @@ html * {
 
 body {
   background-color: #f1e9d7;
+  margin: 0px;
 }
 
 .App {
@@ -789,11 +790,11 @@ i.justify-align {
 }
 
 .title:hover {
-  color: #3ea6ff;
+  color: #8a5917;
 }
 
 .author:hover {
-  color: #3ea6ff;
+  color: #8a5917;
 }
 
 app-home-page,
@@ -833,10 +834,10 @@ app-root {
 }
 
 .overcloud-btn:hover {
-  background-color: #def1ff !important;
+  background-color: #8a5917 !important;
 }
 
 .overcloud-btn:focus {
-  background-color: #3ea6ff !important;
+  background-color: #8a5917 !important;
 }
 

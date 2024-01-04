@@ -26,7 +26,7 @@
       {{ comment.createdAt | date : "longDate" }}
     </span>
     <span class="mod-options" *ngIf="canModify$ | async">
-      <i class="ion-trash-a" (click)="delete.emit(true)"></i>
+      <i class="ion-trash-a cursor-pointer" (click)="delete.emit(true)">X</i>
     </span>
   </div>
 </div>

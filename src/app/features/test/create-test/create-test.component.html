@@ -1,7 +1,7 @@
 <div class="flex justify-between">
   <app-side-bar></app-side-bar>
 
-  <div>
+  <div class="mt-3">
     <app-list-errors [errors]="errors"></app-list-errors>
 
     <form [formGroup]="testForm" (ngSubmit)="submitForm()">

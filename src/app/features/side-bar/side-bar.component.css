@@ -5,24 +5,23 @@
 .sidebar-items {
   /* flex h-14 p-4 items-center */
   display: flex;
-  height: 40px;
+  height: 30px;
   padding: 1rem;
   align-items: center;
   border-radius: 25px;
   width: 190px;
   transition-duration: 0.1s;
+  color: white;
+  background-color: #8a5917;
+  margin-top: 5px;
 }
 
-#mySidebar {
-  background-color: white;
-}
 
 .sidebar-items:hover {
-  /* filter: brightness(200%); */
-  background-color: #def1ff !important;
+  background-color: #8a5917;
 }
 
 .sidebar-items:focus {
-  background-color: #3ea6ff !important;
+  background-color: #8a5917;
   /* background: rgba(40, 40, 40, 0.3); */
 }
