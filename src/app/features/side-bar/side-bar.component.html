@@ -1,8 +1,9 @@
 <!-- Sidebar -->
 <div
   #menu
-  class="sidebar absolute"
-  [style.display]="isOpen ? 'inline-block' : 'none'"
+  class="sidebar"
+  [style.display]="'inline-block'"
+  [style.visibility]="isOpen ? 'visible' : 'hidden'"
   id="mySidebar"
 >
   <a href="#" class="no-underline text-sm sidebar-items">Bài viết</a>

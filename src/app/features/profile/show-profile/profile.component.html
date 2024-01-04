@@ -1,7 +1,7 @@
-<div class="profile-page flex justify-between"  *ngIf="profile">
+<div class="profile-page flex justify-between" >
   <app-side-bar></app-side-bar>
 
-  <div>
+  <div  *ngIf="profile">
     <div class="user-info" >
       <div class="flex flex-row p-4 user-info">
         <img src="/no-avatar.png" class="user-img" width="160" height="160" />
