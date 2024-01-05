@@ -26,18 +26,18 @@ import { SearchParam } from "src/app/core/models/search.model";
 export class ArticleListComponent implements OnDestroy, OnInit {
   query!: ArticleListConfig;
   results: Article[] = [];
-  lastArticleId = 'a373d706-8fe0-4610-bfcf-7742b2d5ace8';
+  lastArticleId = '';
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
-  q: string = "";
+  q: string = '';
 
   @Input() limit!: number;
   @Input()
   set config(config: ArticleListConfig) {
     if (config) {
       this.query = config;
-      this.lastArticleId = 'a373d706-8fe0-4610-bfcf-7742b2d5ace8';
+      this.lastArticleId = '';
       this.runQuery(this.lastArticleId);
     }
   }
