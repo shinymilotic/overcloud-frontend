@@ -26,7 +26,7 @@ import { SearchParam } from "src/app/core/models/search.model";
 export class ArticleListComponent implements OnDestroy, OnInit {
   query!: ArticleListConfig;
   results: Article[] = [];
-  lastArticleId = '';
+  lastArticleId : string | undefined = '';
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
@@ -104,7 +104,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     }
   }
 
-  runQuery(lastArticleId: string) {
+  runQuery(lastArticleId: string | undefined) {
     this.loading = LoadingState.LOADING;
     if (this.limit) {
       this.query.filters.size = this.limit;
@@ -135,7 +135,11 @@ export class ArticleListComponent implements OnDestroy, OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe((data) => {
           this.loading = LoadingState.LOADED;
-          this.results = data.articles;
+          this.results.push(...data.articles);
+          if (data.articles != undefined && data.articles.length > 0) {
+            this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
+          }
+          console.log(this.lastArticleId);
         });
     }
   }
@@ -144,6 +148,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   onScroll(event: any) {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
       // this.setPageTo(this.currentPage + 1);
+      this.runQuery(this.lastArticleId);
     }
   }
 }

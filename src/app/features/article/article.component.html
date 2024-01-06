@@ -4,7 +4,7 @@
   <div class="article-container flex flex-col">
     <div class="banner">
       <div class="container">
-        <h1>{{ article.title }}</h1>
+        <h1 class="title">{{ article.title }}</h1>
   
         <app-article-meta [article]="article">
           <span *ngIf="canModify">
@@ -100,7 +100,7 @@
                     [src]="currentUser?.image === null ? '' : currentUser?.image"
                     class="comment-author-img"
                   />
-                  <button class="btn btn-sm btn-primary" type="submit">
+                  <button class="btn btn-sm btn-primary comment-btn" type="submit">
                     Bình luận
                   </button>
                 </div>

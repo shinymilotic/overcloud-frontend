@@ -223,3 +223,14 @@ page
     cursor: pointer;
 }
 
+.title {
+    color: #f1e9d7;
+}
+
+.comment-btn {
+    background-color: #8a5917;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 0 #392407, inset 0 -3px 8px -3px #55360c;
+    font-weight: 100;
+}
