@@ -741,6 +741,7 @@ i.justify-align {
   display: flex;
   flex-direction: row;
   list-style: none;
+  padding: 0;
 }
 
 .tag-list li {
