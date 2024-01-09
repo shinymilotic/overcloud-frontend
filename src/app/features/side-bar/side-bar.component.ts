@@ -23,21 +23,7 @@ export class SideBarComponent {
     private renderer: Renderer2,
     private readonly sidebarService: SidebarService
   ) {
-    /**
-     * This events get called by all clicks on the page
-     */
-    this.renderer.listen("window", "click", (e: Event) => {
-      /**
-       * Only run when toggleButton is not clicked
-       * If we don't check this, all clicks (even on the toggle button) gets into this
-       * section which in the result we might never see the menu open!
-       * And the menu itself is checked here, and it's where we check just outside of
-       * the menu and button the condition abbove must close the menu
-       */
-      if (e.target != this.menu.nativeElement) {
-        //  this.isOpen = false;
-      }
-    });
+    
   }
 
   ngOnInit() {

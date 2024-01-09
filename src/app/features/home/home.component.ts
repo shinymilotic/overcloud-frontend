@@ -50,11 +50,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly userService: UserService
   ) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.router.navigated = false;
-      }
-    });
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.router.navigated = false;
+    //   }
+    // });
   }
 
   ngOnInit(): void {

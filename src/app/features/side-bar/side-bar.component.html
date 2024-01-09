@@ -6,7 +6,7 @@
   [style.visibility]="isOpen ? 'visible' : 'hidden'"
   id="mySidebar"
 >
-  <a href="#" class="no-underline text-sm sidebar-items">Bài viết</a>
+  <a [routerLink]="['/']" class="no-underline text-sm sidebar-items">Bài viết</a>
   <a
     routerLinkActive="active"
     [routerLink]="['/tests']"
