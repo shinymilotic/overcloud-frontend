@@ -8,8 +8,6 @@ import {
 import { UserService } from "./core/services/user.service";
 import { map } from "rxjs/operators";
 import { ProfileComponent } from "./features/profile/show-profile/profile.component";
-import { TestListComponent } from "./features/test/test-list/test-list.component";
-import { PracticeResultComponent } from "./features/profile/practice-result/practice-result.component";
 
 export const routes: Routes = [
   {
