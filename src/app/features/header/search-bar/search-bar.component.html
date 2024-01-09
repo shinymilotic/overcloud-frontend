@@ -1,11 +1,11 @@
-<form (submit)="onSearch()">
+<form (ngSubmit)="this.onSearch()" [formGroup]="this.searchForm" >
   <div class="flex bg-white">
     <input
       matInput
       type="text"
       placeholder="  Tìm kiếm..."
       name="q"
-      [value]="this.searchInput"
+      formControlName="searchInput"
       class="outline-none pl-6 w-96 text-black"
     />
     <button type="submit" class="w-12 h-8">

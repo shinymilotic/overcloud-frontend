@@ -11,7 +11,7 @@ import { Article } from "../../core/models/blog/article.model";
 import { ArticlePreviewComponent } from "./article-preview.component";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { LoadingState } from "../../core/models/loading-state.model";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SearchService } from "src/app/core/services/search.service";
@@ -31,6 +31,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
   q: string = '';
+  subscription!: Subscription;
 
   @Input() limit!: number;
   @Input()
@@ -38,7 +39,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     if (config) {
       this.query = config;
       this.lastArticleId = '';
-      this.runQuery(this.lastArticleId);
+      this.runQuery();
     }
   }
 
@@ -48,107 +49,66 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription = this.searchService.getMessage().subscribe(message => {
+      if (message) {
+        this.search(message);
+      } else {
+        this.lastArticleId = '';
+        this.runQuery()
+      }
+    });
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  setPageTo(lastArticleId: string) {
-    // this.runQuery(pageNumber);
-    this.loading = LoadingState.LOADING;
-    // this.results = [];
-    // Create limit and offset filter (if necessary)
-    if (this.limit) {
-      this.query.filters.size = this.limit;
-      this.query.filters.lastArticleId = lastArticleId;
-    }
-
-    this.route.queryParamMap.subscribe((params: any) => {
-      this.q = params["params"].q;
-    });
-
-    if (this.q != undefined && this.q != "" && this.q != null) {
+  search(message: string) {
       const param: SearchParam = {
-        q: this.q,
+        q: message,
         size: this.limit,
-        lastArticleId: lastArticleId,
+        lastArticleId: this.lastArticleId,
       };
-
+  
       this.searchService
         .search(param)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data) => {
           this.loading = LoadingState.LOADED;
-          if (data.articles.length != 0) {
-            data.articles.forEach((element) => {
-              this.results.push(element);
-            });
-            this.lastArticleId = lastArticleId;
-          }
-        });
-    } else {
-      this.articlesService
-        .query(this.query)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data) => {
-          this.loading = LoadingState.LOADED;
-          if (data.articles.length != 0) {
-            data.articles.forEach((element) => {
-              this.results.push(element);
-            });
-            this.lastArticleId = lastArticleId;
-          }
-        });
-    }
-  }
-
-  runQuery(lastArticleId: string | undefined) {
-    this.loading = LoadingState.LOADING;
-    if (this.limit) {
-      this.query.filters.size = this.limit;
-      this.query.filters.lastArticleId = lastArticleId;
-    }
-
-    this.route.queryParamMap.subscribe((params: any) => {
-      this.q = params["params"].q;
-    });
-
-    if (this.q != undefined && this.q != "" && this.q != null) {
-      const param: SearchParam = {
-        q: this.q,
-        size: this.limit,
-        lastArticleId: lastArticleId,
-      };
-
-      this.searchService
-        .search(param)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data) => {
-          this.loading = LoadingState.LOADED;
-          this.results = data.articles;
-        });
-    } else {
-      this.articlesService
-        .query(this.query)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data) => {
-          this.loading = LoadingState.LOADED;
+          this.results = [];
           this.results.push(...data.articles);
           if (data.articles != undefined && data.articles.length > 0) {
             this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
           }
-          console.log(this.lastArticleId);
         });
+  }
+
+  runQuery() {
+    this.loading = LoadingState.LOADING;
+    if (this.limit) {
+      this.query.filters.size = this.limit;
+      this.query.filters.lastArticleId = this.lastArticleId;
     }
+  
+    this.articlesService
+      .query(this.query)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.loading = LoadingState.LOADED;
+        this.results.push(...data.articles);
+        if (data.articles != undefined && data.articles.length > 0) {
+          this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
+        }
+      });
   }
 
   @HostListener("window:scroll", ["$event"])
   onScroll(event: any) {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
       // this.setPageTo(this.currentPage + 1);
-      this.runQuery(this.lastArticleId);
+      this.runQuery();
     }
   }
 }
