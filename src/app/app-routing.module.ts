@@ -137,25 +137,6 @@ export const routes: Routes = [
           import(
             "./features/profile/user-practice/user-practice.component"
           ).then((m) => m.UserPracticeComponent),
-        // children: [
-        //   {
-        //     path: ":id",
-        //     // matcher: (url) => {
-        //     //   console.log(url);
-        //     //   if (url.length === 1 && url[0].path.match("practices")) {
-        //     //     return {
-        //     //       consumed: url,
-        //     //       posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
-        //     //     };
-        //     //   }
-        //     //   return null;
-        //     // },
-        //     loadComponent: () =>
-        //       import(
-        //         "./features/profile/practice-result/practice-result.component"
-        //       ).then((m) => m.PracticeResultComponent)
-        //   }
-        // ]
       },
     ],
   },
@@ -183,22 +164,13 @@ export const routes: Routes = [
         "./features/profile/practice-result/practice-result.component"
       ).then((m) => m.PracticeResultComponent),
   },
-  // {
-  //   matcher: (url) => {
-  //     if (
-  //       url.length === 2 &&
-  //       url[0].path.match(/^@[\w]+$/gm) &&
-  //       url[1].path === "practice"
-  //     ) {
-  //       return {
-  //         consumed: url,
-  //         posParams: { username: new UrlSegment(url[0].path.slice(1), {}) },
-  //       };
-  //     }
-  //     return null;
-  //   },
-  //   component: PracticeResultComponent,
-  // },
+  {
+    path: "search",
+    loadComponent: () =>
+      import("./features/search-result/search-result.component").then(
+        (m) => m.SearchResultComponent
+      ),
+  },
 ];
 
 @NgModule({
