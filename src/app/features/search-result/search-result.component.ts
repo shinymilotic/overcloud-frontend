@@ -6,7 +6,7 @@ import { SearchParam } from 'src/app/core/models/search.model';
 import { SearchService } from 'src/app/core/services/search.service';
 import { SideBarComponent } from "../side-bar/side-bar.component";
 import { NgIf, AsyncPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-search-result',
@@ -31,13 +31,19 @@ export class SearchResultComponent implements OnInit, OnDestroy{
   destroy$ = new Subject<void>();
   subscription!: Subscription;
   message: string = '';
+  q: string = '';
 
   constructor(
-    private searchService: SearchService
+    private searchService: SearchService,
+    private route: ActivatedRoute
   ) {}
 
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.q = params['q'];
+      console.log(this.q);
+  });
     this.subscription = this.searchService.getMessage().subscribe(message => {
       if (message) {
         this.message = message;

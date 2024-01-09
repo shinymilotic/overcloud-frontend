@@ -18,6 +18,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
+                [queryParams]="{q: this.q}"
                 [routerLink]="['/search', 'articles']"
               >
                 Bài viết
@@ -28,6 +29,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
+                [queryParams]="{q: this.q}"
                 [routerLink]="['/search', 'users']"
               >
                 Người dùng
@@ -38,6 +40,7 @@
                 class="nav-link"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
+                [queryParams]="{q: this.q}"
                 [routerLink]="['/search', 'tests']"
               >
                 Bài kiểm tra
