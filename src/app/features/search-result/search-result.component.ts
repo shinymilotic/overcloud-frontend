@@ -29,7 +29,6 @@ export class SearchResultComponent implements OnInit, OnDestroy{
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
-  subscription!: Subscription;
   message: string = '';
   q: string = '';
 
@@ -42,18 +41,17 @@ export class SearchResultComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.q = params['q'];
+      this.search();
       console.log(this.q);
-  });
-    this.subscription = this.searchService.getMessage().subscribe(message => {
-      if (message) {
-        this.message = message;
-        this.search();
-      }
     });
+    // this.subscription = this.searchService.getMessage().subscribe(message => {
+    //   if (message) {
+    //     this.message = message;
+    //   }
+    // });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   search() {
