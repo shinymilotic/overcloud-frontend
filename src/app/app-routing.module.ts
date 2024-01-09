@@ -95,6 +95,39 @@ export const routes: Routes = [
       ),
   },
   {
+    path: "search",
+    loadComponent: () =>
+      import("./features/search-result/search-result.component").then(
+        (m) => m.SearchResultComponent
+      ),
+    children: [
+      {
+        path: "articles",
+        loadComponent: () =>
+          import("./features/search-result/search-articles/search-articles.component").then(
+            (m) => m.SearchArticlesComponent
+          ),
+        // canActivate: [() => inject(UserService).isAuthenticated],
+      },
+      {
+        path: "users",
+        loadComponent: () =>
+          import("./features/search-result/search-users/search-users.component").then(
+            (m) => m.SearchUsersComponent
+          ),
+        // canActivate: [() => inject(UserService).isAuthenticated],
+      },
+      {
+        path: "tests",
+        loadComponent: () =>
+          import("./features/search-result/search-tests/search-tests.component").then(
+            (m) => m.SearchTestsComponent
+          ),
+        // canActivate: [() => inject(UserService).isAuthenticated],
+      }
+    ]
+  },
+  {
     // path: ":username",
     matcher: (url) => {
       const username: string = url[0].path;
@@ -164,13 +197,7 @@ export const routes: Routes = [
         "./features/profile/practice-result/practice-result.component"
       ).then((m) => m.PracticeResultComponent),
   },
-  {
-    path: "search",
-    loadComponent: () =>
-      import("./features/search-result/search-result.component").then(
-        (m) => m.SearchResultComponent
-      ),
-  },
+  
 ];
 
 @NgModule({

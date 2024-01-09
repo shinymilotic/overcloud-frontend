@@ -30,7 +30,6 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
-  q: string = '';
   subscription!: Subscription;
 
   @Input() limit!: number;
@@ -45,44 +44,15 @@ export class ArticleListComponent implements OnDestroy, OnInit {
 
   constructor(
     private articlesService: ArticlesService,
-    private searchService: SearchService,
-    private route: ActivatedRoute
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.searchService.getMessage().subscribe(message => {
-      if (message) {
-        this.search(message);
-      } else {
-        this.lastArticleId = '';
-        this.runQuery()
-      }
-    });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  search(message: string) {
-      const param: SearchParam = {
-        q: message,
-        size: this.limit,
-        lastArticleId: this.lastArticleId,
-      };
-  
-      this.searchService
-        .search(param)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data) => {
-          this.loading = LoadingState.LOADED;
-          this.results = [];
-          this.results.push(...data.articles);
-          if (data.articles != undefined && data.articles.length > 0) {
-            this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
-          }
-        });
   }
 
   runQuery() {

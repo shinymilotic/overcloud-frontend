@@ -46,5 +46,6 @@ export class SearchBarComponent implements OnDestroy {
   onSearch() {
     const searchInput :string = this.searchForm.get("searchInput")?.value;
     this.searchService.sendMessage(searchInput);
+    this.router.navigate(["/search"]);
   }
 }

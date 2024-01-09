@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.nav-item {
+  background-color: #f2f2f2;
+  border-radius: 18px;
+  padding: 4px 16px;
+}
+
+.setting-btn:hover,
+.nav-item:hover {
+  background-color: #8a5917;
+}
+
+.setting-btn:focus,
+.nav-item:focus {
+  background-color: #8a5917;
+}

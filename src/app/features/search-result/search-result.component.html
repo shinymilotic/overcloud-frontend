@@ -1,1 +1,54 @@
-<p>search-result works!</p>
+<div class="search-page flex justify-between" >
+    <app-side-bar></app-side-bar>
+  
+    <div>
+      <div class="search-result" >
+        <div class="flex flex-row p-4 user-info">
+          <div class="user-info flex flex-col ml-5 relative">
+            <h1 class="font-bold mb-4">Kết quả tìm kiếm</h1>    
+          </div>
+        </div>
+      </div>
+    
+      <div class="container">
+        <div class="articles-toggle">
+          <ul class="nav nav-pills outline-active flex">
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/search', 'articles']"
+              >
+                Bài viết
+              </a>
+            </li>
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/search', 'users']"
+              >
+                Người dùng
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/search', 'tests']"
+              >
+                Bài kiểm tra
+              </a>
+            </li>
+          </ul>
+        </div>
+    
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    
+    <div class="invisible"> Item invisibleeeeeeeeee</div>
+  </div>
