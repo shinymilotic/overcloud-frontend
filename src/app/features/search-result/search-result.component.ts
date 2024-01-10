@@ -22,14 +22,10 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@ang
       RouterOutlet
     ]
 })
-export class SearchResultComponent implements OnInit, OnDestroy{
-  limit: number = 10;
-  results: Article[] = [];
-  lastArticleId : string | undefined = '';
+export class SearchResultComponent implements OnInit{
   loading = LoadingState.NOT_LOADED;
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
-  message: string = '';
   q: string = '';
 
   constructor(
@@ -37,46 +33,9 @@ export class SearchResultComponent implements OnInit, OnDestroy{
     private route: ActivatedRoute
   ) {}
 
-
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.q = params['q'];
-      this.search();
-      console.log(this.q);
     });
-    // this.subscription = this.searchService.getMessage().subscribe(message => {
-    //   if (message) {
-    //     this.message = message;
-    //   }
-    // });
-  }
-
-  ngOnDestroy() {
-  }
-
-  search() {
-    const param: SearchParam = {
-      q: this.message,
-      size: this.limit,
-      lastArticleId: this.lastArticleId,
-    };
-
-    this.searchService
-      .search(param)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.loading = LoadingState.LOADED;
-        this.results.push(...data.articles);
-        if (data.articles != undefined && data.articles.length > 0) {
-          this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
-        }
-      });
-  }
-
-  @HostListener("window:scroll", ["$event"])
-  onScroll(event: any) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      this.search();
-    }
   }
 }
