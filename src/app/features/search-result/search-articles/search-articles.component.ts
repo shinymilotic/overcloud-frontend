@@ -5,12 +5,15 @@ import { Article } from 'src/app/core/models/blog/article.model';
 import { LoadingState } from 'src/app/core/models/loading-state.model';
 import { SearchParam } from 'src/app/core/models/search.model';
 import { SearchService } from 'src/app/core/services/search.service';
+import { ArticlePreviewComponent } from "../../../shared/article-helpers/article-preview.component";
+import { NgFor, NgForOf, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-search-articles',
-  templateUrl: './search-articles.component.html',
-  styleUrls: ['./search-articles.component.css'],
-  standalone: true
+    selector: 'app-search-articles',
+    templateUrl: './search-articles.component.html',
+    styleUrls: ['./search-articles.component.css'],
+    standalone: true,
+    imports: [ArticlePreviewComponent, NgForOf, NgIf]
 })
 export class SearchArticlesComponent {
   limit: number = 10;
@@ -32,7 +35,6 @@ export class SearchArticlesComponent {
       this.q = params['q'];
       this.search();
     });
-
   }
 
   ngOnDestroy() {
@@ -40,7 +42,7 @@ export class SearchArticlesComponent {
 
   search() {
     const param: SearchParam = {
-      q: this.message,
+      q: this.q,
       size: this.limit,
       lastArticleId: this.lastArticleId,
     };

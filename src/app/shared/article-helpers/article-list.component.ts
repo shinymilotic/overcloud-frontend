@@ -38,6 +38,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
     if (config) {
       this.query = config;
       this.lastArticleId = '';
+      this.results = [];
       this.runQuery();
     }
   }

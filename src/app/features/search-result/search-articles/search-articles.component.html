@@ -1,1 +1,13 @@
-<p>search-articles works!</p>
+<app-article-preview *ngFor="let article of results" [article]="article">
+</app-article-preview>
+
+<div class="article-preview" *ngIf="loading === LoadingState.LOADING">
+  Loading articles...
+</div>
+
+<div
+  class="article-preview"
+  *ngIf="loading === LoadingState.LOADED && !results.length"
+>
+  Không có bài viết nào.
+</div>
