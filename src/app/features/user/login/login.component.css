@@ -1,2 +1,14 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-control {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 8px;
+}
+  
+fieldset {
+    border: none;
+    margin-bottom: 20px;
+}

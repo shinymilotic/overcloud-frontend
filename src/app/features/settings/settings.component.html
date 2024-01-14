@@ -1,12 +1,12 @@
 <div class="settings-page flex justify-between">
   <app-side-bar></app-side-bar>
 
-  <div>
+  <div class="flex flex-col justify-center">
     <h1 class="text-settings">Cài đặt</h1>
 
     <app-list-errors [errors]="errors"></app-list-errors>
 
-    <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="settingsForm" (ngSubmit)="submitForm()" >
       <fieldset [disabled]="isSubmitting">
         <fieldset class="form-group">
           <input
@@ -42,10 +42,11 @@
             type="email"
             placeholder="Email"
             formControlName="email"
-          />
+        />
         </fieldset>
-  
-        <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+        <button class="btn btn-outline-danger" (click)="logout()">Đăng xuất</button>
+
+        <button class="btn btn-lg btn-primary float-right" type="submit">
           Thay đổi
         </button>
       </fieldset>
@@ -54,7 +55,6 @@
     <!-- Line break for logout button -->
     <hr />
   
-    <button class="btn-logout" (click)="logout()">Đăng xuất</button>
   </div>
   
   <div class="invisible">Item Invisiabeeeeeeeeeeeee</div>

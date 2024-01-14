@@ -798,28 +798,6 @@ i.justify-align {
   color: #8a5917;
 }
 
-app-home-page,
-app-editor-page,
-app-profile-page,
-app-test-list,
-app-test,
-app-create-test,
-app-settings-page,
-app-article-page,
-app-login,
-app-register {
-  /* display: flex; */
-  /* flex: 1 0.25 auto; */
-  /* align-self: center; */
-  /* max-width: 590px; */
-  /* flex-direction: column; */
-}
-app-test-list,
-app-test {
-  /* flex-direction: column;
-  align-self: center; */
-  /* max-width: 590px; */
-}
 app-root {
   display: flex;
   flex-direction: column;
@@ -842,3 +820,76 @@ app-root {
   background-color: #8a5917 !important;
 }
 
+.btn-outline-danger{
+  color:#b85c5c;
+  background-image:none;
+  background-color:transparent;
+  border-color:#b85c5c
+}
+.btn-outline-danger:hover{
+  color:#fff;
+  background-color:#b85c5c;
+  border-color:#b85c5c
+}
+.btn-outline-danger:focus,.btn-outline-danger.focus{
+  color:#fff;
+  background-color:#b85c5c;
+  border-color:#b85c5c
+}
+.btn-outline-danger:active,.btn-outline-danger.active,.open>.btn-outline-danger.dropdown-toggle{
+  color:#fff;
+  background-color:#b85c5c;
+  border-color:#b85c5c
+}
+.btn-outline-danger:active:hover,.btn-outline-danger:active:focus,.btn-outline-danger:active.focus,.btn-outline-danger.active:hover,.btn-outline-danger.active:focus,.btn-outline-danger.active.focus,.open>.btn-outline-danger.dropdown-toggle:hover,.open>.btn-outline-danger.dropdown-toggle:focus,.open>.btn-outline-danger.dropdown-toggle.focus{
+  color:#fff;
+  background-color:#843939;
+  border-color:#672d2d
+}
+.btn-outline-danger.disabled:focus,.btn-outline-danger.disabled.focus,.btn-outline-danger:disabled:focus,.btn-outline-danger:disabled.focus{
+  border-color:#d7a3a3
+}
+.btn-outline-danger.disabled:hover,.btn-outline-danger:disabled:hover{
+  border-color:#d7a3a3
+}
+.btn{
+  display:inline-block;
+  font-weight:400;
+  line-height:1.25;
+  text-align:center;
+  white-space:nowrap;
+  vertical-align:middle;
+  cursor:pointer;
+  user-select:none;
+  border:1px solid transparent;
+  padding:.5rem 1rem;
+  font-size:1rem;
+  border-radius:.25rem
+}
+.btn:focus,.btn.focus,.btn:active:focus,.btn:active.focus,.btn.active:focus,.btn.active.focus{
+  outline:thin dotted;
+  outline:5px auto -webkit-focus-ring-color;
+  outline-offset:-2px
+}
+.btn:focus,.btn:hover{
+  text-decoration:none
+}
+.btn.focus{
+  text-decoration:none
+}
+.btn:active,.btn.active{
+  background-image:none;
+  outline:0
+}
+.btn.disabled,.btn:disabled{
+  cursor:not-allowed;
+  opacity:.65
+}
+a.btn.disabled,fieldset[disabled] a.btn{
+  pointer-events:none
+} 
+.btn-sm,.btn-group-sm>.btn{
+  padding:.25rem .5rem;
+  font-size:.875rem;
+  border-radius:.2rem
+}
