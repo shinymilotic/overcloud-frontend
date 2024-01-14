@@ -1,9 +1,10 @@
 <div class="article-meta">
-  <a [routerLink]="['/@'.concat(article.author.username)]">
-    <img [src]="article.author.image" />
-  </a>
+  
 
   <div class="info">
+    <a [routerLink]="['/@'.concat(article.author.username)]">
+      <img [src]="article.author.image" />
+    </a>
     <a class="article-author" [routerLink]="['/@'.concat(article.author.username)]">
       {{ article.author.username }}
     </a>

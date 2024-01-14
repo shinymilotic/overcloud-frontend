@@ -893,3 +893,10 @@ a.btn.disabled,fieldset[disabled] a.btn{
   font-size:.875rem;
   border-radius:.2rem
 }
+.article-meta img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  width: 32px;
+  border-radius: 30px;
+}

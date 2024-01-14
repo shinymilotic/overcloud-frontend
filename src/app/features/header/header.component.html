@@ -67,11 +67,7 @@
           [routerLink]="['/@'.concat(currentUser.username)]"
           routerLinkActive="active"
         >
-          <img
-            [src]="currentUser.image"
-            *ngIf="currentUser.image"
-            class="user-pic"
-          />
+
           {{ currentUser.username }}
         </a>
       </li>
