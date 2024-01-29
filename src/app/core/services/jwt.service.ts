@@ -10,15 +10,18 @@ export class JwtService {
   }
 
   getToken(): string {
-    return window.localStorage["jwtToken"];
+    return this.cookieService.getCookie("jwtToken");
+    // return window.localStorage["jwtToken"];
   }
 
   saveToken(token: string): void {
-    window.localStorage["jwtToken"] = token;
+    this.cookieService.setCookie("jwtToken", token, 10000000000,"");
+    // window.localStorage["jwtToken"] = token;
   }
 
   destroyToken(): void {
-    window.localStorage.removeItem("jwtToken");
+    // window.localStorage.removeItem("jwtToken");
     this.cookieService.deleteCookie("refreshToken");
+    this.cookieService.deleteCookie("jwtToken");
   }
 }
