@@ -26,7 +26,7 @@ import { Errors } from "../../core/models/errors.model";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { TagsService } from "src/app/core/services/tags.service";
 import { LexicalEditorBinding } from "src/app/lexical-editor.component";
-import { LexicalEditor } from "lexical";
+import { $getRoot, LexicalEditor } from "lexical";
 import { $generateHtmlFromNodes } from "@lexical/html";
 import { SideBarComponent } from "../side-bar/side-bar.component";
 
@@ -161,7 +161,11 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.addTag();
     let htmlString = "";
     this.editor.update(() => {
-      htmlString = $generateHtmlFromNodes(this.editor, null);
+      const root = $getRoot();
+  
+      if(root?.getTextContent()) {
+        htmlString = $generateHtmlFromNodes(this.editor, null);
+      }
     });
     this.articleForm.controls.body.setValue(htmlString);
     if (this.isUpdate === true) {
