@@ -16,6 +16,7 @@ import { NgClass } from "@angular/common";
 @Component({
   selector: "app-follow-button",
   templateUrl: "./follow-button.component.html",
+  styleUrls: ["./follow-button.component.css"],
   imports: [NgClass],
   standalone: true,
 })

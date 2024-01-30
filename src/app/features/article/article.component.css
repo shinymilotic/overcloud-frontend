@@ -234,3 +234,7 @@ page
     box-shadow: 0 0 2px 0 #392407, inset 0 -3px 8px -3px #55360c;
     font-weight: 100;
 }
+
+.follow-favorites-panel {
+    display: flex;
+}

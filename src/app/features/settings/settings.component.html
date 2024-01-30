@@ -1,7 +1,7 @@
 <div class="settings-page flex justify-between">
   <app-side-bar></app-side-bar>
 
-  <div class="flex flex-col justify-center">
+  <div class="flex flex-col justify-center settings-panel">
     <h1 class="text-settings">Cài đặt</h1>
 
     <app-list-errors [errors]="errors"></app-list-errors>
@@ -44,7 +44,7 @@
             formControlName="email"
         />
         </fieldset>
-        <button class="btn btn-outline-danger" (click)="logout()">Đăng xuất</button>
+        <button class="btn btn-outline-danger btn-logout" (click)="logout()">Đăng xuất</button>
 
         <button class="btn btn-lg btn-primary float-right" type="submit">
           Thay đổi

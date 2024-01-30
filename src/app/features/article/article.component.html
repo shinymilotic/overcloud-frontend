@@ -24,7 +24,7 @@
             </button>
           </span>
   
-          <span *ngIf="!canModify">
+          <div class="follow-favorites-panel" *ngIf="!canModify">
             <app-follow-button
               [profile]="article.author"
               (toggle)="toggleFollowing($event)"
@@ -34,11 +34,11 @@
             <app-favorite-button
               [article]="article"
               (toggle)="onToggleFavorite($event)"
-            >
-              {{ article.favorited ? "Bỏ thích" : "Thích" }}
+            > 
+              {{ article.favorited ? " " : " " }}
               <span class="counter">({{ article.favoritesCount }})</span>
             </app-favorite-button>
-          </span>
+          </div>
         </app-article-meta>
       </div>
     </div>

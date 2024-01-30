@@ -16,5 +16,14 @@ fieldset {
 }
 
 .btn-logout {
-  background-color: #e5e7eb;
+  float: left;
+  margin-left: 15px;
+}
+
+.settings-panel {
+  margin-top: 20px;
+  width: 450px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 7px;
 }
