@@ -14,6 +14,7 @@ import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { SettingsForm } from "./SettingsForm";
 import { SideBarComponent } from "../side-bar/side-bar.component";
+import { JwtService } from "src/app/core/services/jwt.service";
 
 @Component({
     selector: "app-settings-page",
@@ -56,7 +57,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.userService.logout();
+    this.userService.logout().subscribe({
+      next: (isLogout) => {
+        if (isLogout) {
+          this.userService.purgeAuth();
+          void this.router.navigate(["/"]);
+        }
+      }
+    });
   }
 
   submitForm() {

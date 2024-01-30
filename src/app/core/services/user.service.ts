@@ -42,9 +42,9 @@ export class UserService {
       .pipe(tap((user) => this.setAuth(user)));
   }
 
-  logout(): void {
-    this.purgeAuth();
-    void this.router.navigate(["/"]);
+  logout(): Observable<boolean> {
+    const token = this.jwtService.getRefreshToken();
+    return this.http.post<boolean>("/users/logout", token);
   }
 
   getCurrentUser(): Observable<User> {

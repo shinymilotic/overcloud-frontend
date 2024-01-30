@@ -13,7 +13,7 @@ import { FavoriteButtonComponent } from "../../shared/buttons/favorite-button.co
 import { MarkdownPipe } from "./markdown.pipe";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { ArticleCommentComponent } from "./article-comment.component";
-import { catchError, takeUntil } from "rxjs/operators";
+import { catchError, map, takeUntil } from "rxjs/operators";
 import { Subject, combineLatest, throwError } from "rxjs";
 import { Comment } from "../../core/models/blog/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";

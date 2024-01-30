@@ -1,13 +1,11 @@
 <div class="auth-page flex justify-between">
     <app-side-bar></app-side-bar>
 
-    <div class="row">
+    <div class="flex flex-col justify-center register-panel">
       <h1 class="text-xs-center">{{ title }}</h1>
       <p class="text-xs-center">
         <a [routerLink]="['/login']">Bạn đã có tài khoản?</a>
       </p>
-      <br />
-      <br />
       <app-list-errors [errors]="errors"></app-list-errors>
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
         <fieldset [disabled]="isSubmitting">
@@ -36,7 +34,7 @@
             />
           </fieldset>
           <button
-            class="btn btn-lg btn-primary pull-xs-right float-right"
+            class="btn btn-register"
             [disabled]="!authForm.valid"
             type="submit"
           >

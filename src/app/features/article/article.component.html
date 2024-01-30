@@ -109,11 +109,11 @@
           </div>
   
           <div *appShowAuthed="false">
-            <a [routerLink]="['/login']">Đăng nhập</a> or
+            <a [routerLink]="['/login']">Đăng nhập</a> hay
             <a [routerLink]="['/register']">Đăng ký</a> để bình luận vào các bài
             đăng.
           </div>
-  
+          <br>
           <app-article-comment
             *ngFor="let comment of comments; trackBy: trackById"
             [comment]="comment"

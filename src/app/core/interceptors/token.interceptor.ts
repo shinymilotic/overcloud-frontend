@@ -11,16 +11,13 @@ import {
   Observable,
   catchError,
   filter,
-  shareReplay,
   switchMap,
   take,
-  tap,
   throwError,
 } from "rxjs";
 import { JwtService } from "../services/jwt.service";
 import { UserService } from "../services/user.service";
 import { CookieService } from "../services/cookies.service";
-import { Auth } from "../models/auth/auth.model";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {
@@ -45,6 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: any) => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
+          console.log('refresh')
           return this.handle401Error(request, next);
         }
         return throwError(() => error.error);
@@ -57,30 +55,30 @@ export class TokenInterceptor implements HttpInterceptor {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      const token = this.jwtService.getRefreshToken();
+      const gtoken = this.jwtService.getRefreshToken();
 
-      if (token) {
+      if (gtoken) {
         this.userService.purgeAuth();
-        return this.userService.refreshToken(token).pipe(
+        return this.userService.refreshToken(gtoken).pipe(
           switchMap((token: any) => {
             this.isRefreshing = true;
             this.jwtService.saveToken(token.accessToken);
             this.cookieService.setCookie(
               "refreshToken",
-              token.refreshToken,
+              gtoken,
               1000,
               ""
             );
             this.refreshTokenSubject.next(token.accessToken);
             this.userService
-              .auth(token.accessToken, token.refreshToken)
+              .auth(token.accessToken, gtoken)
               .subscribe();
             this.isRefreshing = false;
             return next.handle(this.addTokenHeader(request, token.accessToken));
           }),
           catchError((err) => {
             this.isRefreshing = false;
-            return throwError(err);
+            return throwError(() => err);
           })
         );
       }
