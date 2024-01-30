@@ -79,10 +79,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   setListTo(filters: Object = {}): void {
     // If feed is requested but user is not authenticated, redirect to login
-    if (!this.isAuthenticated) {
-      void this.router.navigate(["/login"]);
-      return;
-    }
+    // if (!this.isAuthenticated) {
+    //   void this.router.navigate(["/login"]);
+    //   return;
+    // }
 
     // Otherwise, set the list object
     this.listConfig = { filters: filters };
