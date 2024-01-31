@@ -77,8 +77,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
 
   @HostListener("window:scroll", ["$event"])
   onScroll(event: any) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      // this.setPageTo(this.currentPage + 1);
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1 && this.loading == LoadingState.LOADED) {
       this.runQuery();
     }
   }
