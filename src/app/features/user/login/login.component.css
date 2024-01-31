@@ -5,6 +5,7 @@
     border: 1px solid;
     border-radius: 10px;
     padding: 8px;
+    width: 100%;
     /* width: 70%; */
 }
   
@@ -19,16 +20,15 @@ fieldset {
   color: white;
   border-radius: 5px;
   box-shadow: 0 0 2px 0 #04AA6D, inset 0 -3px 8px -3px #04AA6D;
-  margin-left: 100px;
   border: none;
   cursor: pointer;
+  float: right;
 }
 
 .login-panel {
   margin-top: 20px;
   width: 450px;
   text-align: center;
-  border: 1px solid;
   border-radius: 7px;
 }
 

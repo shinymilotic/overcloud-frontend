@@ -1,5 +1,5 @@
 <div class="auth-page flex justify-between">
-    <app-side-bar></app-side-bar>
+    <app-side-bar class="col-sm-0 col-s-0"></app-side-bar>
 
     <div class="flex flex-col justify-center login-panel">
       <h1 class="text-xs-center">{{ title }}</h1>
@@ -13,7 +13,7 @@
             <input
               formControlName="email"
               placeholder="Email"
-              class="form-control form-control-lg"
+              class="form-control"
               type="text"
             />
           </fieldset>
@@ -21,7 +21,7 @@
             <input
               formControlName="password"
               placeholder="Mật khẩu"
-              class="form-control form-control-lg"
+              class="form-control"
               type="password"
             />
           </fieldset>
@@ -36,5 +36,5 @@
       </form>
     </div>
 
-    <div class="invisible"> Item invisibledsdasdsadsa</div>
+    <div class="invisible col-sm-0 col-s-0"> Item invisibledsdasdsadsa</div>
 </div>
