@@ -21,6 +21,7 @@ nav {
   padding: 5px;
   background-color: #392215;
   color: white;
+  flex-wrap: wrap;
 }
 
 nav ul {

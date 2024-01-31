@@ -1,6 +1,10 @@
 @tailwind components;
 @tailwind utilities;
 
+div, h1, p {
+  white-space:pre-wrap;
+  word-break:break-word;
+}
 .nav-link {
   cursor: pointer;
 }
