@@ -1,8 +1,8 @@
 <div class="home-page flex justify-between">
-  <app-side-bar></app-side-bar>
+  <app-side-bar class="col-sm-0 col-s-0"></app-side-bar>
 
-  <div class="flex flex-col justify-center w-full">
-      <div class="sidebar m-auto" *rxLet="tags$; let tags">
+  <div class="container flex flex-col justify-center w-full">
+      <div class="m-auto" *rxLet="tags$; let tags">
         <br>
         <div class="tag-list">
           <a (click)="setListTo()" class="tag-default tag-pill"> Tất cả </a>
@@ -25,5 +25,5 @@
     <app-article-list class="m-auto" [limit]="10" [config]="listConfig"></app-article-list>
   </div>
 
-  <!-- <div class="invisible">I'm invisibleeeeeeeeeeeee</div> -->
+  <div class="invisible col-sm-0 col-s-0">I'm invisibleeeeeeeeeeeee</div>
 </div>
