@@ -158,7 +158,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     this.isSubmitting = true;
-    this.addTag();
     let htmlString = "";
     this.editor.update(() => {
       const root = $getRoot();
