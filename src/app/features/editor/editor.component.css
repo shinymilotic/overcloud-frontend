@@ -23,12 +23,14 @@ button,
 
 button:hover,
 overcloud-btn {
-  background-color: #def1ff !important;
+  color: white;
+  background-color: green !important;
 }
 
 button:focus,
 overcloud-btn {
-  background-color: #8a5917 !important;
+  color: white;
+  background-color: green !important;
 }
 
 .inTag div {

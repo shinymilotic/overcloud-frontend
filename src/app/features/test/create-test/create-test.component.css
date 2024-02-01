@@ -2,15 +2,13 @@
 @tailwind utilities;
 
 .question {
-  border: 1px solid;
   border-radius: 10px;
 }
 .answer {
-  width: 50vh;
+  /* width: 50vh; */
 }
 fieldset.form-group {
   padding: 5px;
-  border: solid 1px;
   border-radius: 10px;
   background: white;
 }
@@ -19,16 +17,18 @@ textarea {
   border: none;
 }
 .addAnswerBtn {
-  border: 1px solid;
-  border-radius: 2px;
-  background-color: #eee;
   padding: 3px;
+  color: green;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 50px;
 }
 .deleteAnswerBtn {
-  border: 1px solid;
-  border-radius: 2px;
-  background-color: #eee;
   padding: 3px;
+  color: crimson;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
 }
 /* 
 .addQuestionBtn {
@@ -38,10 +38,12 @@ textarea {
   padding: 3px;
 } */
 .deleteQuestionBtn {
-  border: 1px solid;
-  border-radius: 2px;
-  background-color: #eee;
   padding: 3px;
+  color: crimson;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 10px;
 }
 #submitBtn {
   border: 1px solid;
@@ -51,5 +53,5 @@ textarea {
 }
 
 .container {
-  width: 100vh;
+  /* width: 100vh; */
 }

@@ -90,11 +90,13 @@ app-root {
 }
 
 .overcloud-btn:hover {
-  background-color: #8a5917 !important;
+  color: white;
+  background-color: green !important;
 }
 
 .overcloud-btn:focus {
-  background-color: #8a5917 !important;
+  color: white;
+  background-color: green !important;
 }
 
 .btn-outline-danger{
@@ -293,3 +295,36 @@ a.btn.disabled,fieldset[disabled] a.btn{
 
 
 
+input[type="checkbox"] {
+  width: 1em;
+  height: 1rem;
+  accent-color: green;
+}
+
+input[type="checkbox"] {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-size: 2rem;
+  padding: 0.1rem;
+  border: 0.25rem solid green;
+  border-radius: 0.5rem;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 5rem;
+  height: 5rem;
+  /* clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%); */
+  transform: scale(0);
+  /* background-color: green; */
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+
+input[type="checkbox"]:hover {
+  color: black;
+}
