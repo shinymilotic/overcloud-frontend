@@ -28,7 +28,7 @@
               },
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles.css", "src/lexical-editor.css"],
             "scripts": [],
             "aot": true,
             "serviceWorker": true,
@@ -89,7 +89,7 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles.css", "src/lexical-editor.css"],
             "scripts": []
           }
         }
