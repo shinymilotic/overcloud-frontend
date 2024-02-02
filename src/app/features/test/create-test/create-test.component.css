@@ -4,9 +4,7 @@
 .question {
   border-radius: 10px;
 }
-.answer {
-  /* width: 50vh; */
-}
+
 fieldset.form-group {
   padding: 5px;
   border-radius: 10px;
@@ -30,13 +28,7 @@ textarea {
   font-weight: bold;
   font-size: 30px;
 }
-/* 
-.addQuestionBtn {
-  border: 1px solid;
-  border-radius: 2px;
-  background-color: #eee;
-  padding: 3px;
-} */
+
 .deleteQuestionBtn {
   padding: 3px;
   color: crimson;
@@ -52,6 +44,4 @@ textarea {
   padding: 3px;
 }
 
-.container {
-  /* width: 100vh; */
-}
+

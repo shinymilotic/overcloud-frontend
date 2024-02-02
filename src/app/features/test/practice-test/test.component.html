@@ -3,7 +3,7 @@
 
   <div>
     <h1>{{ this.title }}</h1>
-    <button (click)="deleteTest()" class="overcloud-btn w-28">Xóa bài test</button>
+    <!-- <button (click)="deleteTest()" class="overcloud-btn w-28">Xóa bài test</button> -->
     <form (ngSubmit)="createPractice()" [formGroup]="this.questionForm">
       <ol>
         <li
@@ -25,9 +25,9 @@
               >
             </li>
           </ol>
-          <div *ngIf="question.questionType == 2">
-            <textarea type="text" formControlName="{{ question.id }}"></textarea>
-          </div>
+          <fieldset *ngIf="question.questionType == 2" class="form-group">
+            <textarea type="text" class="border-none outline-none w-full" formControlName="{{ question.id }}"></textarea>
+          </fieldset>
         </li>
       </ol>
     

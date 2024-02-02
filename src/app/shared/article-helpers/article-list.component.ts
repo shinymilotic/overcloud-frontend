@@ -31,6 +31,7 @@ export class ArticleListComponent implements OnDestroy, OnInit {
   LoadingState = LoadingState;
   destroy$ = new Subject<void>();
   subscription!: Subscription;
+  isNoMore: boolean = false;
 
   @Input() limit!: number;
   @Input()
@@ -72,13 +73,24 @@ export class ArticleListComponent implements OnDestroy, OnInit {
         if (data.articles != undefined && data.articles.length > 0) {
           this.lastArticleId = data.articles.at(data.articlesCount - 1)?.id;
         }
+
+        if (data.articles.length == 0) {
+          this.isNoMore = true;
+        }
       });
   }
 
   @HostListener("window:scroll", ["$event"])
   onScroll(event: any) {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1 && this.loading == LoadingState.LOADED) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1 &&
+       this.loading == LoadingState.LOADED &&
+       this.isNoMore == false) {
       this.runQuery();
     }
+  }
+
+  moreArticle() {
+    this.isNoMore = false;
+    this.runQuery();
   }
 }

@@ -15,11 +15,11 @@ margin-bottom: 20px;
 }
 
 .btn-register {
-  background-color: #04AA6D;
+  background-color: green;
   padding: 7px;
   color: white;
   border-radius: 5px;
-  box-shadow: 0 0 2px 0 #04AA6D, inset 0 -3px 8px -3px #04AA6D;
+  box-shadow: 0 0 2px 0 green, inset 0 -3px 8px -3px green;
   border: none;
   cursor: pointer;
   float: right;

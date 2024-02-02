@@ -1,9 +1,9 @@
 <app-article-preview *ngFor="let article of results" [article]="article">
 </app-article-preview>
 
-<!-- <div class="btn-moreArticle" (click)="this.moreArticle()">
+<div class="btn-moreArticle" *ngIf="this.isNoMore" (click)="this.moreArticle()">
   Xem thêm
-</div> -->
+</div>
 
 <div class="article-preview" *ngIf="loading === LoadingState.LOADING">
   Đang tải...

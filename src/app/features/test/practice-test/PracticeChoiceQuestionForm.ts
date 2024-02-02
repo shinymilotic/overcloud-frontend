@@ -6,4 +6,5 @@ import { Question } from "src/app/core/models/test/question.model";
 
 export interface PracticeChoiceQuestionForm extends Question {
   answers: PracticeChoiceAnswer[];
+  isMultipleAnswer: boolean;
 }
