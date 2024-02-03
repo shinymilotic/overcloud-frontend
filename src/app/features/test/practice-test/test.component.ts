@@ -31,14 +31,6 @@ import { Practice } from "src/app/core/models/test/practice.model";
 import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
 import { QuestionType } from "../create-test/enum/QuestionType";
 import { Question } from "src/app/core/models/test/question.model";
-import { EssayQuestion } from "src/app/core/models/test/essayquestion.model";
-import { PracticeForm } from "./PracticeForm";
-import { PracticeQuestionForm } from "./PracticeQuestionForm";
-import { PracticeChoiceAnswer } from "./PracticeChoiceAnswer";
-import { PracticeChoiceQuestionForm } from "./PracticeChoiceQuestionForm";
-import { PracticeEssayQuestionForm } from "./PracticeEssayQuestionForm";
-import { ChoiceAnswerForm } from "../create-test/form-model/ChoiceAnswerForm";
-import { ChoiceQuestionForm } from "../create-test/form-model/ChoiceQuestionForm";
 import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
@@ -79,7 +71,25 @@ export class TestComponent implements OnInit {
     const group: any = {};
 
     questions.forEach((question) => {
-      group[question.id] = this.fb.control("");
+
+      if (question.questionType == 1) {
+          const choiceQuestion = question as ChoiceQuestion;
+          if (choiceQuestion.isMultipleAnswers) {
+            let array: FormArray = this.fb.array([]);
+            choiceQuestion.answers.forEach(answer => {
+              array.push(this.fb.group({
+                answer: answer.id,
+                selected: false
+              }));
+            });
+
+            group[question.id] = array;
+          } else {
+            group[question.id] = this.fb.control("");
+          }
+      } else {
+        group[question.id] = this.fb.control("");
+      }
     });
 
     return new FormGroup(group);
@@ -106,16 +116,15 @@ export class TestComponent implements OnInit {
             this.questions.push(question);
           }
         });
+
         this.questionForm = this.toFormGroup(this.questions);
+        console.log(this.questions);
       });
   }
 
   asChoiceQuestion(qIndex: number): ChoiceQuestion {
-    return this.questions[qIndex] as ChoiceQuestion;
-  }
-
-  asEssayQuestion(qIndex: number): EssayQuestion {
-    return this.questions[qIndex] as EssayQuestion;
+    const q = this.questions[qIndex] as ChoiceQuestion
+    return q;
   }
 
   createPractice() {
@@ -129,7 +138,6 @@ export class TestComponent implements OnInit {
       const answerControl: FormControl = this.questionForm.controls[
         question.id
       ] as FormControl;
-
       if (question.questionType == QuestionType.CHOICE) {
         practice.choiceAnswers.push(answerControl.value);
       } else if (question.questionType == QuestionType.ESSAY) {

@@ -12,14 +12,28 @@
         >
           <div class="question m-2">{{ question.question }}</div>
           <ol class="answers-list" *ngIf="question.questionType == 1">
-            <li *ngFor="let answer of asChoiceQuestion(qIndex).answers">
-              <input
+            <li *ngFor="let answer of asChoiceQuestion(qIndex).answers; let aIndex = index">
+              
+              <input *ngIf="!asChoiceQuestion(qIndex).isMultipleAnswers"
                 class="cursor-pointer"
                 type="radio"
                 id="{{ answer.id }}"
                 value="{{ answer.id }}"
                 formControlName="{{ question.id }}"
               />
+
+              <span formArrayName="{{question.id}}" *ngIf="asChoiceQuestion(qIndex).isMultipleAnswers">
+              <span formGroupName="{{aIndex}}">
+                <input 
+                class="cursor-pointer"
+                type="checkbox"
+                id="{{ answer.id }}"
+                formControlName="selected"
+              />
+                </span>
+                
+              </span>
+              
               <label for="{{ answer.id }}" class="cursor-pointer">
                 {{ answer.answer }}</label
               >
