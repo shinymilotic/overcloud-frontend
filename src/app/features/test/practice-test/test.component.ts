@@ -78,7 +78,7 @@ export class TestComponent implements OnInit {
             let array: FormArray = this.fb.array([]);
             choiceQuestion.answers.forEach(answer => {
               array.push(this.fb.group({
-                answer: answer.id,
+                answerId: answer.id,
                 selected: false
               }));
             });
@@ -139,7 +139,24 @@ export class TestComponent implements OnInit {
         question.id
       ] as FormControl;
       if (question.questionType == QuestionType.CHOICE) {
-        practice.choiceAnswers.push(answerControl.value);
+        const choiceQuestion: ChoiceQuestion = question as ChoiceQuestion;
+        if (!choiceQuestion.isMultipleAnswers) {
+          practice.choiceAnswers.push({
+            questionId: question.id,
+            answerId: [answerControl.value]
+          });
+        } else {
+          let selectedAnswers: string[] = [];
+          answerControl.value.forEach((val : any) => {
+            if (val.selected) {
+              selectedAnswers.push(val.answerId);
+            }
+          });
+          practice.choiceAnswers.push({
+            questionId: question.id,
+            answerId: selectedAnswers
+          });
+        }
       } else if (question.questionType == QuestionType.ESSAY) {
         practice.essayAnswers.push({
           questionId: question.id,

@@ -3,4 +3,5 @@ import { Question } from "./question.model";
 
 export interface ChoiceQuestion extends Question {
   answers: Answer[];
+  isMultipleAnswers: boolean;
 }
