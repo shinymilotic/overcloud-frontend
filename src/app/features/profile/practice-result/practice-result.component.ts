@@ -14,6 +14,8 @@ export class PracticeResultComponent implements OnInit {
   constructor(private readonly practiceService: PracticeService) {}
 
   ngOnInit(): void {
-    this.practiceService.getPractice(this.id).subscribe(() => {});
+    this.practiceService.getPractice(this.id).subscribe((data) => {
+      console.log(data);
+    });
   }
 }
