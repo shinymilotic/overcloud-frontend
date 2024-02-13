@@ -41,7 +41,7 @@
   
             <div *ngIf="this.isChoiceQuestion(qIndex)" formArrayName="answers">
               <div
-                class="flex"
+                class="flex mb-2"
                 *ngFor="
                   let answer of getAnswerFormArr(qIndex).controls;
                   let aIndex = index

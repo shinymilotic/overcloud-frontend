@@ -6,7 +6,7 @@
   font-size: large;
 }
 .form-control {
-  border: 1px solid;
+  border: none;
   border-radius: 10px;
   padding: 8px;
 }
