@@ -63,7 +63,6 @@ export class TokenInterceptor implements HttpInterceptor {
         return this.userService.refreshToken(gtoken).pipe(
           switchMap((token: any) => {
             this.isRefreshing = false;
-            console.log("Refresh token: " + token.accessToken);
             this.jwtService.saveToken(token.accessToken);
             this.cookieService.setCookie(
               "refreshToken",
@@ -78,7 +77,6 @@ export class TokenInterceptor implements HttpInterceptor {
             return next.handle(this.addTokenHeader(request, token.accessToken));
           }),
           catchError((err) => {
-            console.log("CATCH ERROR");
             this.isRefreshing = false;
             return throwError(() => err);
           })
@@ -95,19 +93,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
-    console.log("API: " + request.url + " \n" + token);
-    // console.log("currentAccessToken: " + this.currentAccessToken);
-
-    // if (this.currentAccessToken != '') {
-    //   console.log("call this.currentAccessToken != '': " + this.currentAccessToken);
-
-    //   return request.clone({
-    //     setHeaders: {
-    //       ...(token ? { Authorization: `${this.currentAccessToken}` } : {}),
-    //     },
-    //   });
-    // } else {
-
       return request.clone({
         setHeaders: {
           ...(token ? { Authorization: `${token}` } : {}),
