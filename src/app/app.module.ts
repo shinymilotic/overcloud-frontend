@@ -6,7 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./features/header/header.component";
 import { JwtService } from "./core/services/jwt.service";
 import { UserService } from "./core/services/user.service";
-import { EMPTY } from "rxjs";
+import { EMPTY, Observable } from "rxjs";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
@@ -19,11 +19,14 @@ import {
   withRouterConfig,
 } from "@angular/router";
 import { routes } from "./app-routing.module";
+import { User } from "./core/models/auth/user.model";
 export function initAuth(jwtService: JwtService, userService: UserService) {
   let accessToken = jwtService.getToken();
   let refreshToken = jwtService.getRefreshToken();
-  return () =>
-    accessToken ? userService.auth(accessToken, refreshToken) : EMPTY;
+  userService.setAuth(accessToken, refreshToken);
+
+  return ()  =>
+    accessToken ? userService.auth(accessToken, refreshToken): EMPTY;
 }
 
 @NgModule({

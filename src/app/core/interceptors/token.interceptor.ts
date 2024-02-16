@@ -50,17 +50,20 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    while (!this.isRefreshing) {
+
+    if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
       const gtoken = this.jwtService.getRefreshToken();
 
       if (gtoken) {
-        this.userService.purgeAuth();
+        // this.userService.purgeAuth();
+        this.jwtService.destroyToken();
         return this.userService.refreshToken(gtoken).pipe(
           switchMap((token: any) => {
-            this.isRefreshing = true;
+            this.isRefreshing = false;
+            console.log("Refresh token: " + token.accessToken);
             this.jwtService.saveToken(token.accessToken);
             this.cookieService.setCookie(
               "refreshToken",
@@ -69,19 +72,20 @@ export class TokenInterceptor implements HttpInterceptor {
               ""
             );
             this.refreshTokenSubject.next(token.accessToken);
-            this.userService
-              .auth(token.accessToken, gtoken)
-              .subscribe();
-            this.isRefreshing = false;
+            // this.userService
+            //   .auth(token.accessToken, gtoken)
+            //   .subscribe();
             return next.handle(this.addTokenHeader(request, token.accessToken));
           }),
           catchError((err) => {
+            console.log("CATCH ERROR");
             this.isRefreshing = false;
             return throwError(() => err);
           })
         );
       }
     }
+
 
     return this.refreshTokenSubject.pipe(
       filter((token) => token !== null),
@@ -91,10 +95,24 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private addTokenHeader(request: HttpRequest<any>, token: string) {
-    return request.clone({
-      setHeaders: {
-        ...(token ? { Authorization: `${token}` } : {}),
-      },
-    });
+    console.log("API: " + request.url + " \n" + token);
+    // console.log("currentAccessToken: " + this.currentAccessToken);
+
+    // if (this.currentAccessToken != '') {
+    //   console.log("call this.currentAccessToken != '': " + this.currentAccessToken);
+
+    //   return request.clone({
+    //     setHeaders: {
+    //       ...(token ? { Authorization: `${this.currentAccessToken}` } : {}),
+    //     },
+    //   });
+    // } else {
+
+      return request.clone({
+        setHeaders: {
+          ...(token ? { Authorization: `${token}` } : {}),
+        },
+      });
+    // }
   }
 }
