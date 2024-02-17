@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, BehaviorSubject, pipe } from "rxjs";
 
-import { JwtService } from "./jwt.service";
+import { AuthCookieService } from "./authcookie.service";
 import { map, distinctUntilChanged, tap, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
@@ -20,7 +20,7 @@ export class UserService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: AuthCookieService,
     private readonly router: Router,
     private readonly cookieService: CookieService
   ) {}
@@ -84,11 +84,11 @@ export class UserService {
   }
 
   setAuth(userId: string): void {
-    this.jwtService.saveToken(userId);
+    this.jwtService.saveUserIdCookie(userId);
   }
 
   purgeAuth(): void {
-    this.jwtService.destroyToken();
+    this.jwtService.destroyUserIdCookie();
     this.currentUserSubject.next(null);
   }
 

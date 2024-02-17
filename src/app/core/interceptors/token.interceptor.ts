@@ -15,16 +15,15 @@ import {
   take,
   throwError,
 } from "rxjs";
-import { JwtService } from "../services/jwt.service";
+import { AuthCookieService } from "../services/authcookie.service";
 import { UserService } from "../services/user.service";
 import { CookieService } from "../services/cookies.service";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private readonly jwtService: JwtService,
-    private readonly userService: UserService,
-    private readonly cookieService: CookieService
+    private readonly jwtService: AuthCookieService,
+    private readonly userService: UserService
   ) {}
 
   private isRefreshing: boolean = false;
@@ -49,13 +48,13 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    console.log("Refreshing: " + request.url)
+    console.log("Refreshing: " + request.url + " is: " + this.isRefreshing)
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
         this.userService.purgeAuth();
-        this.jwtService.destroyToken();
+        this.jwtService.destroyUserIdCookie();
         return this.userService.refreshToken().pipe(
           switchMap((token: any) => {
             this.isRefreshing = false;

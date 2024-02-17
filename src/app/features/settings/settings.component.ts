@@ -14,7 +14,6 @@ import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { SettingsForm } from "./SettingsForm";
 import { SideBarComponent } from "../side-bar/side-bar.component";
-import { JwtService } from "src/app/core/services/jwt.service";
 
 @Component({
     selector: "app-settings-page",
@@ -46,9 +45,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.userService.getCurrentUser().subscribe((data) => {
       this.settingsForm.patchValue(data);
     });
-    // this.settingsForm.patchValue(
-    //   this.userService.getCurrentUser() as Partial<User>
-    // );
   }
 
   ngOnDestroy(): void {

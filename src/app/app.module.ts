@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./features/header/header.component";
-import { JwtService } from "./core/services/jwt.service";
+import { AuthCookieService } from "./core/services/authcookie.service";
 import { UserService } from "./core/services/user.service";
 import { EMPTY, Observable } from "rxjs";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -20,7 +20,7 @@ import {
 } from "@angular/router";
 import { routes } from "./app-routing.module";
 import { User } from "./core/models/auth/user.model";
-export function initAuth(jwtService: JwtService, userService: UserService) {
+export function initAuth(jwtService: AuthCookieService, userService: UserService) {
   let userId = jwtService.getUserId();
 
   return ()  =>
@@ -47,7 +47,7 @@ export function initAuth(jwtService: JwtService, userService: UserService) {
     {
       provide: APP_INITIALIZER,
       useFactory: initAuth,
-      deps: [JwtService, UserService],
+      deps: [AuthCookieService, UserService],
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
