@@ -8,7 +8,6 @@ import { User } from "../models/auth/user.model";
 import { Router } from "@angular/router";
 import { CookieService } from "./cookies.service";
 import { RefreshTokenResponse } from "../models/auth/refreshtoken.model";
-import { Auth } from "../models/auth/auth.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -26,12 +25,12 @@ export class UserService {
     private readonly cookieService: CookieService
   ) {}
 
-  login(credentials: { email: string; password: string }): Observable<Auth> {
+  login(credentials: { email: string; password: string }): Observable<User> {
     return this.http
-      .post<Auth>("/users/login", { user: credentials })
+      .post<User>("/users/login", { user: credentials })
       .pipe(tap((user) => {
         this.currentUserSubject.next(user);
-        this.setAuth(user.accessToken, user.refreshToken)
+        this.setAuth(user.id)
       }));
   }
 
@@ -39,18 +38,17 @@ export class UserService {
     username: string;
     email: string;
     password: string;
-  }): Observable<Auth> {
+  }): Observable<User> {
     return this.http
-      .post<Auth>("/users", { user: credentials })
+      .post<User>("/users", { user: credentials })
       .pipe(tap((user) => {
         this.currentUserSubject.next(user);
-        this.setAuth(user.accessToken, user.refreshToken)
+        this.setAuth(user.id);
       }));
   }
 
   logout(): Observable<boolean> {
-    const token = this.jwtService.getRefreshToken();
-    return this.http.post<boolean>("/users/logout", token);
+    return this.http.post<boolean>("/users/logout", {});
   }
 
   getCurrentUser(): Observable<User> {
@@ -72,22 +70,21 @@ export class UserService {
     );
   }
 
-  auth(accessToken: string, refreshToken: string): Observable<User> {
+  auth(): Observable<User> {
     return this.http.get<User>("/users").pipe(
       tap({
         next: (user) => {
           this.currentUserSubject.next(user);
           // this.setAuth(accessToken, refreshToken);
         },
-        error: () => this.purgeAuth(),
+        // error: () => this.purgeAuth(),
       }),
       shareReplay(1)
     );
   }
 
-  setAuth(accessToken: string, refreshToken: string): void {
-    this.jwtService.saveToken(accessToken);
-    this.cookieService.setCookie("refreshToken", refreshToken, 1000, "");
+  setAuth(userId: string): void {
+    this.jwtService.saveToken(userId);
   }
 
   purgeAuth(): void {
@@ -95,13 +92,8 @@ export class UserService {
     this.currentUserSubject.next(null);
   }
 
-  refreshToken(
-    refreshToken: string
-  ): Observable<{ response: RefreshTokenResponse }> {
+  refreshToken(): Observable<boolean> {
     return this.http
-      .post<{ response: RefreshTokenResponse }>("/users/refreshToken", {
-        refreshToken,
-      })
-      .pipe(tap(({ response }) => {}));
+      .post<boolean>("/users/refreshToken", {});
   }
 }

@@ -5,23 +5,17 @@ import { CookieService } from "./cookies.service";
 export class JwtService {
   constructor(private readonly cookieService: CookieService) {}
 
-  getRefreshToken(): string {
-    return this.cookieService.getCookie("refreshToken");
+
+
+  getUserId(): string {
+    return this.cookieService.getCookie("userId");
   }
 
-  getToken(): string {
-    return this.cookieService.getCookie("jwtToken");
-    // return window.localStorage["jwtToken"];
-  }
-
-  saveToken(token: string): void {
-    this.cookieService.setCookie("jwtToken", token, 10000000000,"");
-    // window.localStorage["jwtToken"] = token;
+  saveToken(userId: string): void {
+    this.cookieService.setCookie("userId", userId, 10000000000,"");
   }
 
   destroyToken(): void {
-    // window.localStorage.removeItem("jwtToken");
-    this.cookieService.deleteCookie("refreshToken");
-    this.cookieService.deleteCookie("jwtToken");
+    this.cookieService.deleteCookie("userId");
   }
 }

@@ -21,12 +21,10 @@ import {
 import { routes } from "./app-routing.module";
 import { User } from "./core/models/auth/user.model";
 export function initAuth(jwtService: JwtService, userService: UserService) {
-  let accessToken = jwtService.getToken();
-  let refreshToken = jwtService.getRefreshToken();
-  userService.setAuth(accessToken, refreshToken);
+  let userId = jwtService.getUserId();
 
   return ()  =>
-    accessToken ? userService.auth(accessToken, refreshToken): EMPTY;
+  userId ? userService.auth() : EMPTY;
 }
 
 @NgModule({

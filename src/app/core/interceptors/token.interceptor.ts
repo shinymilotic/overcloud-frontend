@@ -36,8 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.jwtService.getToken();
-    const request = this.addTokenHeader(req, token);
+    const request = this.addTokenHeader(req);
 
     return next.handle(request).pipe(
       catchError((error: any) => {
@@ -50,54 +49,40 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-
+    console.log("Refreshing: " + request.url)
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      const gtoken = this.jwtService.getRefreshToken();
-
-      if (gtoken) {
-        // this.userService.purgeAuth();
+        this.userService.purgeAuth();
         this.jwtService.destroyToken();
-        return this.userService.refreshToken(gtoken).pipe(
+        return this.userService.refreshToken().pipe(
           switchMap((token: any) => {
             this.isRefreshing = false;
-            this.jwtService.saveToken(token.accessToken);
-            this.cookieService.setCookie(
-              "refreshToken",
-              gtoken,
-              1000,
-              ""
-            );
             this.refreshTokenSubject.next(token.accessToken);
-            // this.userService
-            //   .auth(token.accessToken, gtoken)
-            //   .subscribe();
-            return next.handle(this.addTokenHeader(request, token.accessToken));
+            return next.handle(this.addTokenHeader(request, false));
           }),
           catchError((err) => {
             this.isRefreshing = false;
             return throwError(() => err);
           })
         );
-      }
     }
 
 
-    return this.refreshTokenSubject.pipe(
-      filter((token) => token !== null),
-      take(1),
-      switchMap((token) => next.handle(this.addTokenHeader(request, token)))
-    );
+    return next.handle(this.addTokenHeader(request));
   }
 
-  private addTokenHeader(request: HttpRequest<any>, token: string) {
+  private addTokenHeader(request: HttpRequest<any>, isCredentials: boolean = true) {
+    
+    if (isCredentials) {
       return request.clone({
-        setHeaders: {
-          ...(token ? { Authorization: `${token}` } : {}),
-        },
+        withCredentials: true
       });
+    } else {
+      return request.clone();
+    }
+      
     // }
   }
 }

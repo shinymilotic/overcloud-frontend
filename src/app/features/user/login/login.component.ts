@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     this.isSubmitting = true;
-    // this.errors = { errors: {} };
 
     let observable = this.userService.login(
       this.authForm.value as { email: string; password: string }
