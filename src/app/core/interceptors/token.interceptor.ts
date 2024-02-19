@@ -65,8 +65,6 @@ export class TokenInterceptor implements HttpInterceptor {
               this.userService.setAuth(userId);
             }
             this.refreshTokenState = RefreshTokenState.REFRESHED;
-            console.log("Refreshed  API!: " + request.url);
-
             return next.handle(this.addTokenHeader(request));
           }),
           catchError((err) => {
@@ -79,9 +77,6 @@ export class TokenInterceptor implements HttpInterceptor {
         );
     }
 
-    // while(this.isRefreshing) {
-    //   setTimeout(() => {console.log(this.isRefreshing)});
-    // }
     return this.refreshTokenSubject
                 .pipe(
                     filter(token => token != null)
