@@ -16,19 +16,14 @@ import {
   take,
   throwError,
 } from "rxjs";
-import { AuthCookieService } from "../services/authcookie.service";
 import { UserService } from "../services/user.service";
-import { CookieService } from "../services/cookies.service";
-import { RefreshTokenState } from "../models/auth/refreshtokenstate";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {
   constructor(
-    private readonly jwtService: AuthCookieService,
     private readonly userService: UserService
   ) {}
 
-  private refreshTokenState: number = RefreshTokenState.REFRESHED;
   private isRefreshing: boolean = false;
   private refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
@@ -49,12 +44,10 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (this.refreshTokenState != RefreshTokenState.REFRESHING) {
-      this.refreshTokenState = RefreshTokenState.EXPIRED;
-    }
 
-    if (this.refreshTokenState != RefreshTokenState.REFRESHING) {
-      this.refreshTokenState = RefreshTokenState.REFRESHING;
+
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
       console.log("Refreshing Token API: " + request.url);
       this.refreshTokenSubject.next(null);
 
@@ -64,24 +57,21 @@ export class TokenInterceptor implements HttpInterceptor {
               this.refreshTokenSubject.next(userId);
               this.userService.setAuth(userId);
             }
-            this.refreshTokenState = RefreshTokenState.REFRESHED;
             return next.handle(this.addTokenHeader(request));
           }),
           catchError((err) => {
-            this.refreshTokenState = RefreshTokenState.EXPIRED;
             return throwError(() => err);
           }),
           finalize(() => {
-            this.refreshTokenState = RefreshTokenState.REFRESHED;
+            this.isRefreshing = false;
           })
         );
     }
 
     return this.refreshTokenSubject
-                .pipe(
-                    filter(token => token != null)
-                    , take(1)
-                    , switchMap(token => {
+                .pipe(filter(token => token != null)
+                    ,take(1)
+                    ,switchMap(token => {
                         return next.handle(this.addTokenHeader(request));
                     })
                 );
