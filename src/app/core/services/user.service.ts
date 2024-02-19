@@ -92,8 +92,9 @@ export class UserService {
     this.currentUserSubject.next(null);
   }
 
-  refreshToken(): Observable<boolean> {
+  refreshToken(): Observable<string> {
     return this.http
-      .post<boolean>("/users/refreshToken", {});
+      .post<{userId: string}>("/users/refreshToken", {}).pipe(map((data) => data.userId));
+      ;
   }
 }

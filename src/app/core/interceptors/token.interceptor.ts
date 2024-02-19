@@ -11,6 +11,7 @@ import {
   Observable,
   catchError,
   filter,
+  finalize,
   switchMap,
   take,
   throwError,
@@ -18,6 +19,7 @@ import {
 import { AuthCookieService } from "../services/authcookie.service";
 import { UserService } from "../services/user.service";
 import { CookieService } from "../services/cookies.service";
+import { RefreshTokenState } from "../models/auth/refreshtokenstate";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {
@@ -26,10 +28,9 @@ export class TokenInterceptor implements HttpInterceptor {
     private readonly userService: UserService
   ) {}
 
+  private refreshTokenState: number = RefreshTokenState.REFRESHED;
   private isRefreshing: boolean = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
+  private refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   intercept(
     req: HttpRequest<any>,
@@ -48,40 +49,52 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    console.log("Refreshing: " + request.url + " is: " + this.isRefreshing)
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
+    if (this.refreshTokenState != RefreshTokenState.REFRESHING) {
+      this.refreshTokenState = RefreshTokenState.EXPIRED;
+    }
+
+    if (this.refreshTokenState != RefreshTokenState.REFRESHING) {
+      this.refreshTokenState = RefreshTokenState.REFRESHING;
+      console.log("Refreshing Token API: " + request.url);
       this.refreshTokenSubject.next(null);
 
-        this.userService.purgeAuth();
-        this.jwtService.destroyUserIdCookie();
         return this.userService.refreshToken().pipe(
-          switchMap((token: any) => {
-            this.isRefreshing = false;
-            this.refreshTokenSubject.next(token.accessToken);
-            return next.handle(this.addTokenHeader(request, false));
+          switchMap((userId: string) => {
+            if (userId != "") {
+              this.refreshTokenSubject.next(userId);
+              this.userService.setAuth(userId);
+            }
+            this.refreshTokenState = RefreshTokenState.REFRESHED;
+            console.log("Refreshed  API!: " + request.url);
+
+            return next.handle(this.addTokenHeader(request));
           }),
           catchError((err) => {
-            this.isRefreshing = false;
+            this.refreshTokenState = RefreshTokenState.EXPIRED;
             return throwError(() => err);
+          }),
+          finalize(() => {
+            this.refreshTokenState = RefreshTokenState.REFRESHED;
           })
         );
     }
 
-
-    return next.handle(this.addTokenHeader(request));
+    // while(this.isRefreshing) {
+    //   setTimeout(() => {console.log(this.isRefreshing)});
+    // }
+    return this.refreshTokenSubject
+                .pipe(
+                    filter(token => token != null)
+                    , take(1)
+                    , switchMap(token => {
+                        return next.handle(this.addTokenHeader(request));
+                    })
+                );
   }
 
-  private addTokenHeader(request: HttpRequest<any>, isCredentials: boolean = true) {
-    
-    if (isCredentials) {
+  private addTokenHeader(request: HttpRequest<any>) {
       return request.clone({
         withCredentials: true
       });
-    } else {
-      return request.clone();
-    }
-      
-    // }
   }
 }
