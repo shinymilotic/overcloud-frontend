@@ -15,16 +15,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "16.1.5",
+    "@angular/animations": "17.2.1",
     "@angular/cdk": "^16.1.5",
-    "@angular/common": "16.1.5",
-    "@angular/compiler": "16.1.5",
-    "@angular/core": "16.1.5",
-    "@angular/forms": "16.1.5",
-    "@angular/platform-browser": "16.1.5",
-    "@angular/platform-browser-dynamic": "16.1.5",
-    "@angular/router": "16.1.5",
-    "@angular/service-worker": "16.1.5",
+    "@angular/common": "17.2.1",
+    "@angular/compiler": "17.2.1",
+    "@angular/core": "17.2.1",
+    "@angular/forms": "17.2.1",
+    "@angular/platform-browser": "17.2.1",
+    "@angular/platform-browser-dynamic": "17.2.1",
+    "@angular/router": "17.2.1",
+    "@angular/service-worker": "17.2.1",
     "@babel/plugin-syntax-jsx": "^7.22.5",
     "@editorjs/editorjs": "^2.27.2",
     "@editorjs/embed": "^2.5.3",
@@ -54,12 +54,12 @@
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
     "y-websocket": "^1.5.0",
-    "zone.js": "~0.13.1"
+    "zone.js": "~0.14.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.1.4",
-    "@angular/cli": "^16.1.4",
-    "@angular/compiler-cli": "16.1.5",
+    "@angular-devkit/build-angular": "^17.2.0",
+    "@angular/cli": "^17.2.0",
+    "@angular/compiler-cli": "17.2.1",
     "@babel/preset-react": "^7.22.5",
     "@editorjs/checklist": "^1.5.0",
     "@editorjs/link": "^2.5.0",
@@ -84,7 +84,7 @@
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.5",
-    "typescript": "~5.1.6"
+    "typescript": "~5.3.3"
   },
   "lint-staged": {
     "*.{ts,html,css,json,md}": "prettier --write"

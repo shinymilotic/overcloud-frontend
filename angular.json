@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "overcloud:build:production"
+              "buildTarget": "overcloud:build:production"
             },
             "development": {
-              "browserTarget": "overcloud:build:development"
+              "buildTarget": "overcloud:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "overcloud:build"
+            "buildTarget": "overcloud:build"
           }
         },
         "test": {
