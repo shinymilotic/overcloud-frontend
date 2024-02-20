@@ -126,6 +126,13 @@ export const routes: Routes = [
     ]
   },
   {
+    path: "confirmEmail/:token",
+    loadComponent: () =>
+      import("./features/user/confirm-email/confirm-email.component").then(
+        (m) => m.ConfirmEmailComponent
+      ),
+  },
+  {
     // path: ":username",
     matcher: (url) => {
       const username: string = url[0].path;
