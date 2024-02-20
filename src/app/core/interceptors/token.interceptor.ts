@@ -69,9 +69,9 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     return this.refreshTokenSubject
-                .pipe(filter(token => token != null)
+                .pipe(filter((token: string | null) => token != null)
                     ,take(1)
-                    ,switchMap(token => {
+                    ,switchMap((token: string | null) => {
                         return next.handle(this.addTokenHeader(request));
                     })
                 );

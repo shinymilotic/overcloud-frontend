@@ -28,5 +28,4 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "useDefineForClassFields": false
 }
