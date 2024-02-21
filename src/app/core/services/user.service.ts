@@ -100,7 +100,7 @@ export class UserService {
 
   confirmEmail(token: string) : Observable<boolean> {
     return this.http
-      .post<boolean>(`/confirmEmail`, {token});
+      .post<boolean>(`/confirmEmail`, {"confirmToken" : token});
     ;
   }
 }
