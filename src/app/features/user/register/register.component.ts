@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   errors!: Errors[];
   isSubmitting = false;
   authForm: FormGroup<RegisterFrom>;
+  isRegisterSuccess: boolean = false;
   destroy$ = new Subject<void>();
 
   constructor(
@@ -79,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     );
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
-      next: () => void this.router.navigate(["/"]),
+      next: () => this.isRegisterSuccess = true,
       error: ({ errors }) => {
         this.errors = errors;
         this.isSubmitting = false;

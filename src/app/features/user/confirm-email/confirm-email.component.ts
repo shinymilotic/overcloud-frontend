@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { NgIf } from "@angular/common";
 import { ListErrorsComponent } from "../../../shared/list-errors.component";
 import { SideBarComponent } from "../../side-bar/side-bar.component";
+import { UserService } from "src/app/core/services/user.service";
+import { Errors } from "src/app/core/models/errors.model";
 @Component({
     selector: "app-confirm-email",
     templateUrl: "./confirm-email.component.html",
@@ -12,11 +14,29 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
     imports: [RouterLink, NgIf, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
 })
 export class ConfirmEmailComponent implements OnInit, OnDestroy {
+  private isConfirmed: boolean = false;
+  private errors!: Errors[];
 
-  constructor() {
+  constructor(private route: ActivatedRoute,
+    private readonly userService: UserService) {
   }
 
   ngOnInit(): void {
+    const token :string = this.route.snapshot.params["token"];
+    this.userService.confirmEmail(token).subscribe({
+      next: (isConfirm: boolean) => {
+        if (isConfirm) {
+          this.isConfirmed = true;
+        }
+      },
+      error: (errors) => {
+        this.errors = errors.errors;
+      }
+    });
+  }
+
+  getIsConfirmed() : boolean {
+    return this.isConfirmed;
   }
 
   ngOnDestroy() {

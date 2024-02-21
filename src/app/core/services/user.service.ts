@@ -42,8 +42,8 @@ export class UserService {
     return this.http
       .post<User>("/users", { user: credentials })
       .pipe(tap((user) => {
-        this.currentUserSubject.next(user);
-        this.setAuth(user.id);
+        // this.currentUserSubject.next(user);
+        // this.setAuth(user.id);
       }));
   }
 
@@ -96,5 +96,11 @@ export class UserService {
     return this.http
       .post<{userId: string}>("/users/refreshToken", {}).pipe(map((data) => data.userId));
       ;
+  }
+
+  confirmEmail(token: string) : Observable<boolean> {
+    return this.http
+      .post<boolean>(`/confirmEmail`, {token});
+    ;
   }
 }

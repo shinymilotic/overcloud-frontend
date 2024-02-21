@@ -1,1 +1,6 @@
-confirm email!
+<div *ngIf="!this.getIsConfirmed()">
+    Đang xác thực tài khoản
+</div>
+<div *ngIf="this.getIsConfirmed()">
+    Xác thực thành công!
+</div>
