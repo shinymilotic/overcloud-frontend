@@ -7,6 +7,7 @@
         <a [routerLink]="['/login']">Bạn đã có tài khoản?</a>
       </p>
       <app-list-errors [errors]="errors"></app-list-errors>
+      <div *ngIf="this.isRegisterSuccess">Đăng ký thành công, mời bạn kiểm tra hộp thư để xác nhận.</div>
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
         <fieldset [disabled]="isSubmitting">
           <fieldset class="form-group">
