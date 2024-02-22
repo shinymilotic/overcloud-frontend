@@ -53,6 +53,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
   errors!: Errors[];
   testForm: FormGroup = this.fb.group({
     title: this.fb.control(""),
+    description: this.fb.control(""),
     questions: this.fb.array([]),
   });
   destroy$ = new Subject<void>();
@@ -146,9 +147,11 @@ export class CreateTestComponent implements OnInit, OnDestroy {
   submitForm() {
     const questions: Question[] = this.testForm.value.questions as Question[];
     const title: string = this.testForm.value.title as string;
+    const description: string = this.testForm.value.description as string;
     // create post request
     const test: Test = {
       title: title,
+      description: description,
       questions: questions,
     };
     console.log(test);

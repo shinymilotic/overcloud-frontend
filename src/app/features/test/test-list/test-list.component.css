@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.test {
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+}

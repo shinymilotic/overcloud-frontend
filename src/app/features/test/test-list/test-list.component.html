@@ -4,12 +4,14 @@
   <app-side-bar class="col-sm-0 col-s-0"></app-side-bar>
 
   <div>
-    <div class="w3-teal p-2" *ngFor="let test of this.tests">
+    <div class="w3-teal p-2 test" *ngFor="let test of this.tests">
       <a
         [routerLink]="['/practice', test.slug]"
         class="font-bold"
         routerLinkActive="active"
-        >{{ test.title }}
+        >
+        <h1 class="font-bold mb-4 title">{{ test.title }}</h1>
+        <p class="mb-4">{{test.description}}</p>
       </a>
     </div>
   </div>
