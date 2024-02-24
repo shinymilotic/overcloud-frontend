@@ -56,12 +56,9 @@
           </div>
         </fieldset>
         <div class="inTag">
-          <div
-            class="cursor-pointer relative"
-            *ngFor="let tag of inTags"
-            id="{{ tag }}"
-          >
-            {{ tag }}
+          @for (tag of inTags; track $index) {
+          <div class="cursor-pointer relative"
+            id="{{ tag }}">{{ tag }}
             <span
               class="material-symbols-outlined cancel-tag"
               (click)="deleteTag(tag)"
@@ -69,6 +66,8 @@
               cancel
             </span>
           </div>
+        }
+          
         </div>
         <button
           id="submitBtn"
