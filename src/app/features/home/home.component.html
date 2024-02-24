@@ -6,13 +6,14 @@
         <br>
         <div class="tag-list">
           <a (click)="setListTo()" class="tag-default tag-pill"> Tất cả </a>
-          <a
-            *ngFor="let tag of tags"
+          @for (tag of tags; track $index) {
+            <a
             (click)="setListTo({ tag: tag })"
             class="tag-default tag-pill"
           >
             {{ tag }}
           </a>
+          }
         </div>
   
         <div [hidden]="tagsLoaded">Loading tags...</div>

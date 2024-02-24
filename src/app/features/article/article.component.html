@@ -49,12 +49,13 @@
           <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
           <div [outerHTML]="article.body"></div>
           <ul class="tag-list">
+            @for (tag of article.tagList; track $index) {
             <li
-              *ngFor="let tag of article.tagList"
               class="tag-default tag-pill tag-outline"
             >
               {{ tag }}
             </li>
+            }
           </ul>
         </div>
       </div>
@@ -114,12 +115,14 @@
             đăng.
           </div>
           <br>
-          <app-article-comment
-            *ngFor="let comment of comments; trackBy: trackById"
+          @for (comment of comments; track $index) {
+            <app-article-comment
             [comment]="comment"
             (delete)="deleteComment(comment)"
-          >
-          </app-article-comment>
+            >
+            </app-article-comment>
+          }
+          
       </div>
     </div>
   </div>
