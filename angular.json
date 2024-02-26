@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
-            "outputPath": "dist/overcloud",
+            "outputPath": "dist/overcloud/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -92,6 +92,60 @@
             "styles": ["src/styles.css", "src/lexical-editor.css"],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/overcloud/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "overcloud:build:development",
+              "serverTarget": "overcloud:server:development"
+            },
+            "production": {
+              "browserTarget": "overcloud:build:production",
+              "serverTarget": "overcloud:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "overcloud:build:production",
+              "serverTarget": "overcloud:server:production"
+            },
+            "development": {
+              "browserTarget": "overcloud:build:development",
+              "serverTarget": "overcloud:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
