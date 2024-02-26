@@ -103,4 +103,10 @@ export class UserService {
       .post<boolean>(`/confirmEmail`, {"confirmToken" : token});
     ;
   }
+
+  getFollowers(userId: string) : Observable<User[]> {
+    return this.http
+      .get<User[]>(`/followers/${userId}`, {}).pipe(map((data: any) => data.followers));
+    ;
+  }
 }

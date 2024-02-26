@@ -8,6 +8,7 @@ import {
 import { UserService } from "./core/services/user.service";
 import { map } from "rxjs/operators";
 import { ProfileComponent } from "./features/profile/show-profile/profile.component";
+import {QuicklinkStrategy, QuicklinkModule} from 'ngx-quicklink';
 
 export const routes: Routes = [
   {
@@ -202,13 +203,19 @@ export const routes: Routes = [
         "./features/profile/practice-result/practice-result.component"
       ).then((m) => m.PracticeResultComponent),
   },
-  
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
   imports: [
+    QuicklinkModule,
     RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
+      preloadingStrategy: QuicklinkStrategy,
+      // PreloadAllModules,
     }),
   ],
   exports: [RouterModule],

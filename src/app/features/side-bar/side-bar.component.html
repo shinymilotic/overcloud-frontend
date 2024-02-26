@@ -24,8 +24,14 @@
     >Chat</a>
     <br>
     <hr>
-    <div>Người theo dõi</div>
-    <!-- @for (customer of customers; track customer) {
-
-    } -->
+    @if (this.followers != null && this.followers != []) {
+      <div>Người theo dõi</div>
+      @for (follower of followers; track $index) {
+        <div class="article-meta mt-3">
+          <a [routerLink]="['/@'.concat(follower.username)]">
+            <img class="inline-block" [src]="follower.image" /> {{ follower.username }}
+          </a>
+        </div>
+      }
+    }
 </div>

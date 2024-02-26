@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, NgModule, isDevMode } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, provideClientHydration, withHttpTransferCacheOptions } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
@@ -57,6 +57,10 @@ export function initAuth(jwtService: AuthCookieService, userService: UserService
       withComponentInputBinding(),
       withRouterConfig({ paramsInheritanceStrategy: "always" })
     ),
+    provideClientHydration(),
+    provideClientHydration(withHttpTransferCacheOptions({
+      includePostRequests: true
+    }))
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
