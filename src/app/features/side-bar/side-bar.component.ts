@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { SidebarService } from "../../core/services/sidebar.service";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { UserService } from "src/app/core/services/user.service";
 import { EMPTY, map, switchMap } from "rxjs";
 import { User } from "src/app/core/models/auth/user.model";
@@ -26,6 +26,7 @@ export class SideBarComponent {
   public followers!: User[];
 
   constructor(
+    private readonly router: Router,
     private readonly userService: UserService,
     private readonly sidebarService: SidebarService
   ) {
@@ -51,5 +52,10 @@ export class SideBarComponent {
 
   toggleSidebar() {
     this.isOpen = !this.isOpen;
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+    this.router.navigate([uri]));
   }
 }

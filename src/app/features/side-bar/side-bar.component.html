@@ -28,7 +28,7 @@
       <div>Người theo dõi</div>
       @for (follower of followers; track $index) {
         <div class="article-meta mt-3">
-          <a [routerLink]="['/@'.concat(follower.username)]">
+          <a (click)="this.redirectTo('/@'.concat(follower.username))" [routerLink]="['/@'.concat(follower.username)]">
             <img class="inline-block" [src]="follower.image" /> {{ follower.username }}
           </a>
         </div>

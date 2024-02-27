@@ -62,4 +62,9 @@ export class HeaderComponent {
   refreshPage() {
     this.router.navigateByUrl("/");
   }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+    this.router.navigate([uri]));
+  }
 }

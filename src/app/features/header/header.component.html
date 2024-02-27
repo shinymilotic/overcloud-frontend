@@ -66,6 +66,7 @@
 
       <li class="nav-item" *ngIf="currentUser$ | async as currentUser">
         <a
+          (click)="this.redirectTo('/@'.concat(currentUser.username))"
           class="nav-link"
           [routerLink]="['/@'.concat(currentUser.username)]"
           routerLinkActive="active"
