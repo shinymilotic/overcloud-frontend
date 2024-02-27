@@ -14,7 +14,7 @@ import { PracticeService } from "src/app/core/services/practice.service";
 })
 export class UserPracticeComponent implements OnInit {
   practices: UserPractice[] = [];
-
+  practiceMap: Map<string, UserPractice[]> = new Map();
   constructor(
     private readonly practiceService: PracticeService,
     private readonly route: ActivatedRoute
@@ -23,8 +23,22 @@ export class UserPracticeComponent implements OnInit {
   ngOnInit() {
     const username = this.getUsername();
     this.practiceService.getPractices(username).subscribe((practices) => {
-      this.practices = practices;
+      practices.forEach(practice => {
+        const [day, month, year] = practice.date.split(/[- :]/);
+        const date = day + '/' + month + '/' + year;
+        if (this.practiceMap.has(date)) {
+          this.practiceMap.get(date)?.push(practice);
+        } else {
+          this.practiceMap.set(date, [practice]);
+        }
+      });
+      this.practices = practices; 
     });
+  }
+
+  getTime(dateStr: string) {
+    const date = dateStr.split(/[- :]/);
+    return date[3] + ":" + date[4];
   }
 
   getUsername(): string {
