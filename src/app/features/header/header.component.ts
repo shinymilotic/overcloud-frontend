@@ -60,7 +60,8 @@ export class HeaderComponent {
   }
 
   refreshPage() {
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl('/').then(() =>
+    window.location.reload());
   }
 
   redirectTo(uri: string) {

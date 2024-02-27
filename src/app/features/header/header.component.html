@@ -17,10 +17,12 @@
         />
       </svg>
     </button> -->
-    <a class="navbar-brand logo-small" routerLink="/" (click)="this.refreshPage()">
+    <a class="navbar-brand logo-small nav-link " 
+      (click)="this.refreshPage()" [routerLink]="['/']">
       O
     </a>
-    <a class="navbar-brand logo-large" routerLink="/" (click)="this.refreshPage()">
+    <a class="navbar-brand logo-large nav-link"
+      (click)="this.refreshPage()" [routerLink]="['/']" >
       Overcloud
     </a>
   </div>
