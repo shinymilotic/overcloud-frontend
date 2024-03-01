@@ -57,7 +57,6 @@ export function initAuth(jwtService: AuthCookieService, userService: UserService
       withComponentInputBinding(),
       withRouterConfig({ paramsInheritanceStrategy: "always" })
     ),
-    provideClientHydration(),
     provideClientHydration(withHttpTransferCacheOptions({
       includePostRequests: true
     }))
