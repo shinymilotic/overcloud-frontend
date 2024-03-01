@@ -63,7 +63,7 @@ export class TestComponent implements OnInit {
     private readonly testService: TestService,
     private readonly userService: UserService,
     private readonly router: Router,
-    public readonly fb: FormBuilder,
+    private readonly fb: FormBuilder,
     private readonly practiceService: PracticeService
   ) {}
 
