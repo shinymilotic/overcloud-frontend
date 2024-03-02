@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from "@angular/core";
 import { PracticeService } from "src/app/core/services/practice.service";
 import { SideBarComponent } from "../../side-bar/side-bar.component";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
-import { Question } from "src/app/core/models/test/question.model";
-import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
 import { PracticeResult } from "./PracticeResult";
+import { Question } from "./Question";
+import { ChoiceQuestion } from "./ChoiceQuestion";
 
 @Component({
     selector: "app-practice-result",
@@ -14,9 +14,13 @@ import { PracticeResult } from "./PracticeResult";
     imports: [SideBarComponent]
 })
 export class PracticeResultComponent implements OnInit {
+  
   @Input() username!: string;
   @Input() id!: string;
-  practiceResult!: PracticeResult;
+  practiceResult: PracticeResult = {
+    testTitle: '',
+    questions: []
+  };
 
   constructor(
     private readonly practiceService: PracticeService,
@@ -25,6 +29,11 @@ export class PracticeResultComponent implements OnInit {
   ngOnInit(): void {
     this.practiceService.getPractice(this.id).subscribe((data: PracticeResult) => {
       console.log(data);
+      this.practiceResult = data;
     });
+  }
+
+  asChoiceQuestion(question: Question) {
+    return question as ChoiceQuestion;
   }
 }
