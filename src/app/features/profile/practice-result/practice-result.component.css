@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fail {
+    color: red;
+}
+
+.success {
+    color: green;
+}

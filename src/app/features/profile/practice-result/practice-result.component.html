@@ -13,7 +13,7 @@
             <ol class="answers-list">
               @for (answer of asChoiceQuestion(question).answers; track $index) {
                 <li>        
-                    <div class="inline-block m-2">{{ answer.answer }}</div>
+                    <div [class]="this.paintColor(answer)" class="inline-block m-2">{{ answer.answer }}</div>
                 </li>
               }   
             </ol>

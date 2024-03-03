@@ -5,6 +5,8 @@ import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { PracticeResult } from "./PracticeResult";
 import { Question } from "./Question";
 import { ChoiceQuestion } from "./ChoiceQuestion";
+import { Answer } from "./Answer";
+import { ChoiceAnswer } from "./ChoiceAnswer";
 
 @Component({
     selector: "app-practice-result",
@@ -29,11 +31,24 @@ export class PracticeResultComponent implements OnInit {
   ngOnInit(): void {
     this.practiceService.getPractice(this.id).subscribe((data: PracticeResult) => {
       console.log(data);
+
       this.practiceResult = data;
     });
   }
 
   asChoiceQuestion(question: Question) {
     return question as ChoiceQuestion;
+  }
+
+  paintColor(answer: ChoiceAnswer): string {
+    if (answer.choice == true && answer.truth == true) {
+      return "success";
+    }
+    
+    if (answer.choice == true && answer.truth == false) {
+      return "fail";
+    }
+
+    return "";
   }
 }
