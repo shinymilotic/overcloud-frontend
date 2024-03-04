@@ -165,18 +165,12 @@ export class TestComponent implements OnInit {
       }
     });
 
-    this.practiceService
-      .createPractice(practice)
+    combineLatest([this.practiceService.createPractice(practice), this.userService.currentUser])
       .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          this.router.navigate(["/tests"]);
+      .subscribe(([data, currentUser]) => {
+          this.router.navigate([`@${currentUser?.username}/practices/${data.practiceId}`]);
         },
-        error: (errors) => {
-          this.errors = errors.errors;
-          this.isSubmitting = false;
-        },
-      });
+      );
   }
 
   deleteTest() {

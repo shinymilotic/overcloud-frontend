@@ -11,10 +11,9 @@ import { PracticeResult } from "src/app/features/profile/practice-result/Practic
 export class PracticeService {
   constructor(private readonly http: HttpClient) {}
 
-  createPractice(practice: Practice): Observable<string> {
+  createPractice(practice: Practice): Observable<{practiceId: string}> {
     return this.http
-      .post<string>(`/practice`, { practice: practice })
-      .pipe(map((data) => data));
+      .post<{practiceId: string}>(`/practice`, { practice: practice });
   }
 
   getPractices(username: string): Observable<UserPractice[]> {
