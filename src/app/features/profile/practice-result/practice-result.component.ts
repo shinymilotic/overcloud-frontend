@@ -4,9 +4,11 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { PracticeResult } from "./PracticeResult";
 import { Question } from "./Question";
-import { ChoiceQuestion } from "./ChoiceQuestion";
+import { ChoiceResult } from "./ChoiceQuestion";
 import { Answer } from "./Answer";
 import { ChoiceAnswer } from "./ChoiceAnswer";
+import { EssayAnswer } from "./EssayAnswer";
+import { EssayResult } from "./EssayQuestion";
 
 @Component({
     selector: "app-practice-result",
@@ -36,8 +38,12 @@ export class PracticeResultComponent implements OnInit {
     });
   }
 
-  asChoiceQuestion(question: Question) {
-    return question as ChoiceQuestion;
+  asChoiceQuestion(question: Question): ChoiceResult {
+    return question as ChoiceResult;
+  }
+
+  asEssayQuestion(question: Question): EssayResult {
+    return question as EssayResult;
   }
 
   paintColor(answer: ChoiceAnswer): string {

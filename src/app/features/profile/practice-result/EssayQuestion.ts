@@ -1,4 +1,5 @@
 import { Question } from "./Question";
 
-export interface EssayQuestion extends Question {
+export interface EssayResult extends Question {
+    answer: string;
 }

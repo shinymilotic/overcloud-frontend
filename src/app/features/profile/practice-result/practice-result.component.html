@@ -19,11 +19,11 @@
             </ol>
           }
           
-            @if (question.questionType == 2) {
-              <fieldset class="form-group">
-                <textarea type="text" class="border-none outline-none w-full"></textarea>
-              </fieldset>
-            }
+          @if (question.questionType == 2) {
+              <textarea type="text" [disabled]="true" class="border-none outline-none w-full">
+                {{asEssayQuestion(question).answer}}
+              </textarea>
+          }
           
           </li>
         }
