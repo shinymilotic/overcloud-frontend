@@ -134,6 +134,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: "chat",
+    loadComponent: () =>
+          import("./chat/chat.component").then(
+            (m) => m.ChatComponent
+          ),
+  },
+  {
     // path: ":username",
     matcher: (url) => {
       const username: string = url[0].path;
@@ -202,11 +209,6 @@ export const routes: Routes = [
       import(
         "./features/profile/practice-result/practice-result.component"
       ).then((m) => m.PracticeResultComponent),
-  },
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full'
   }
 ];
 
