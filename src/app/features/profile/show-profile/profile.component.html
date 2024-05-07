@@ -60,6 +60,16 @@
               Lịch sử thi
             </a>
           </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="['/@'.concat(profile.username), 'practices']"
+            >
+              Bài thi đã tạo
+            </a>
+          </li>
         </ul>
       </div>
       <br>
