@@ -1,41 +1,7 @@
 html * {
-  font-family: "charter", serif;
-  font-size: 16px;
+  font-family: "liberation-serif", serif;
   font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
 }
-@font-face {
-  font-family: charter;
-  font-style: normal;
-  font-weight: normal;
-  font-stretch: normal;
-  src: url('assets/fonts/charter/charter_regular.woff2') format('woff2');
-  }
-  
-  @font-face {
-  font-family: charter;
-  font-style: italic;
-  font-weight: normal;
-  font-stretch: normal;
-  src: url('assets/fonts/charter/charter_italic.woff2') format('woff2');
-  }
-  
-  @font-face {
-  font-family: charter;
-  font-style: normal;
-  font-weight: bold;
-  font-stretch: normal;
-  src: url('assets/fonts/charter/charter_bold.woff2') format('woff2');
-  }
-  
-  @font-face {
-  font-family: charter;
-  font-style: italic;
-  font-weight: bold;
-  font-stretch: normal;
-  src: url('assets/fonts/charter/charter_bold_italic.woff2') format('woff2');
-  }
 .im-fell-english-regular {
   font-family: "IM Fell English", serif;
   font-weight: 400;
@@ -48,7 +14,7 @@ html * {
   font-style: italic;
 }
 body {
-  background-color: #f1e9d7;
+  background-color: rgba(255, 255, 255, 1);
   margin: 0px;
 }
 
@@ -109,11 +75,11 @@ body {
 }
 
 .title:hover {
-  color: #8a5917;
+  color: #0084ff;
 }
 
 .author:hover {
-  color: #8a5917;
+  color: #0084ff;
 }
 
 app-root {

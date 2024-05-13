@@ -6,9 +6,8 @@ input {
   /* background: var(--yt-spec-base-background, #282828); */
 }
 
-div.flex {
+.search-bar{
   border-radius: 28px;
-  /* background: var(--yt-spec-base-background, #282828); */
   display: flex;
   padding: 4px;
   align-items: center;
@@ -16,4 +15,8 @@ div.flex {
   flex: 1 0 0;
   align-self: stretch;
   border: solid 1px;
+}
+
+.search-bar, .search-bar input {
+  background-color: #f1f1f1;
 }

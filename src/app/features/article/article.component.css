@@ -3,7 +3,7 @@
 
 .banner{
     color:#fff;
-    background:#333;
+    background:white;
     padding:2rem;
     margin-bottom:2rem
 }
@@ -121,7 +121,6 @@ a.btn.disabled,fieldset[disabled] a.btn{
 .btn .counter{
     font-size:.8rem!important
 }
-page
 .article-page .article-content p{
     font-family:'source serif pro',serif;
     font-size:1.2rem;
@@ -224,7 +223,7 @@ page
 }
 
 .title {
-    color: #f1e9d7;
+    color: black;
 }
 
 .comment-btn {
@@ -237,4 +236,9 @@ page
 
 .follow-favorites-panel {
     display: flex;
+}
+
+.page {
+    padding-left: 5rem;
+    padding-right: 5rem;
 }

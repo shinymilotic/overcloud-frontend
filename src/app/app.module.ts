@@ -32,7 +32,7 @@ export function initAuth(jwtService: AuthCookieService, userService: UserService
   imports: [
     BrowserModule,
     HeaderComponent,
-    SideBarComponent,
+    // SideBarComponent,
     AppRoutingModule,
     HttpClientModule,
     ServiceWorkerModule.register("ngsw-worker.js", {

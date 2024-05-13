@@ -19,7 +19,6 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 5px;
-  background-color: #392215;
   color: white;
   flex-wrap: wrap;
 }
@@ -44,7 +43,7 @@ nav ul li {
 }
 
 .nav-item:focus {
-  background-color: #8a5917 !important;
+  background-color: #f1f1f1 !important;
 }
 
 .navbar-brand {
@@ -152,4 +151,9 @@ app-search-bar {
   .logo-large {
     display: block;
   }
+}
+
+.logo-small, .logo-large {
+  color: black;
+  font-size: larger;
 }

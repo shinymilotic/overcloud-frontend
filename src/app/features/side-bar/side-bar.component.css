@@ -12,16 +12,16 @@
   width: 190px;
   transition-duration: 0.1s;
   color: white;
-  background-color: #8a5917;
+  background-color: #0084ff;
   margin-top: 5px;
 }
 
 
 .sidebar-items:hover {
-  background-color: #8a5917;
+  background-color: #0084ff;
 }
 
 .sidebar-items:focus {
-  background-color: #8a5917;
+  background-color: #0084ff;
   /* background: rgba(40, 40, 40, 0.3); */
 }
