@@ -30,20 +30,24 @@ nav ul {
 
 nav ul li {
   margin: 0 15px;
-  padding: 7px;
-  border-radius: 15px;
+  padding: 5px;
+  border-radius: 7px;
 }
 
 .logo {
   background-image: url(logo.svg), none;
 }
-
+.nav-item {
+  color: black;
+}
 .nav-item:hover {
-  background-color: #8a5917 !important;
+  background-color: #f2f2f2 !important;
+  color: #0079eb;
+  border-color: #0079eb;
 }
 
 .nav-item:focus {
-  background-color: #f1f1f1 !important;
+  background-color: #0079eb !important;
 }
 
 .navbar-brand {

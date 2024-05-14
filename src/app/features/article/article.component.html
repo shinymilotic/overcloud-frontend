@@ -110,9 +110,8 @@
           </div>
   
           <div *appShowAuthed="false">
-            <a [routerLink]="['/login']">Đăng nhập</a> hay
-            <a [routerLink]="['/register']">Đăng ký</a> để bình luận vào các bài
-            đăng.
+            <a [routerLink]="['/login']">Login</a> or 
+            <a [routerLink]="['/register']">Register</a> to comments on this post.
           </div>
           <br>
           @for (comment of comments; track $index) {

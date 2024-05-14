@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title = "Đăng nhập";
+    this.title = "Login";
   }
 
   ngOnDestroy() {
