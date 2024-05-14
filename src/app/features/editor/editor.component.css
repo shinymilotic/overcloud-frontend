@@ -15,21 +15,22 @@ fieldset.form-group {
 
 button,
 .overcloud-btn {
-  border-radius: 20px;
-  padding: 12px;
+  border-radius: 15px;
+  width: 120px;
+  padding: 5px;
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
 
 button:hover,
 overcloud-btn {
   color: white;
-  background-color: green !important;
+  background-color: #0084ff !important;
 }
 
 button:focus,
 overcloud-btn {
   color: white;
-  background-color: green !important;
+  background-color: #0084ff !important;
 }
 
 .inTag div {

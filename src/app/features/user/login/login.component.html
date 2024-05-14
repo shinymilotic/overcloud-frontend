@@ -1,10 +1,10 @@
-<div class="auth-page flex justify-between">
+<div class="auth-page flex justify-center">
     <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
-    <div class="flex flex-col justify-center login-panel">
+    <div class=" login-panel">
       <h1 class="text-xs-center">{{ title }}</h1>
       <p class="text-xs-center">
-        <a [routerLink]="['/register']">Bạn cần có tài khoản?</a>
+        <a [routerLink]="['/register']">Create account</a>
       </p>
       <app-list-errors [errors]="errors"></app-list-errors>
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
@@ -36,5 +36,4 @@
       </form>
     </div>
 
-    <div class="invisible col-sm-0 col-s-0"> Item invisibledsdasdsadsa</div>
 </div>

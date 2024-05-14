@@ -15,14 +15,17 @@ margin-bottom: 20px;
 }
 
 .btn-register {
-  background-color: green;
+  background-color: #0084ff;
   padding: 7px;
   color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 2px 0 green, inset 0 -3px 8px -3px green;
   border: none;
   cursor: pointer;
-  float: right;
+  border-radius: 15px;
+  width: 120px;
+}
+
+.btn-register:hover {
+  background-color: #071c2e;
 }
 
 .register-panel {

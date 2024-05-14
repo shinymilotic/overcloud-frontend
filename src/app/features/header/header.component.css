@@ -21,6 +21,7 @@ nav {
   padding: 5px;
   color: white;
   flex-wrap: wrap;
+  background-color: #071c2e;
 }
 
 nav ul {
@@ -38,7 +39,7 @@ nav ul li {
   background-image: url(logo.svg), none;
 }
 .nav-item {
-  color: black;
+  color: white;
 }
 .nav-item:hover {
   background-color: #f2f2f2 !important;
@@ -158,6 +159,6 @@ app-search-bar {
 }
 
 .logo-small, .logo-large {
-  color: black;
+  color: white;
   font-size: larger;
 }

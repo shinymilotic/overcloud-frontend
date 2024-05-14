@@ -18,5 +18,8 @@ input {
 }
 
 .search-bar, .search-bar input {
-  background-color: #f1f1f1;
+  background-color: white;
+}
+fa-icon {
+  color: black;
 }

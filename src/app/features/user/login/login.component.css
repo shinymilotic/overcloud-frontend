@@ -15,14 +15,17 @@ fieldset {
 }
 
 .btn-login {
-  background-color: green;
+  background-color: #0084ff;
   padding: 7px;
   color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 2px 0 green, inset 0 -3px 8px -3px green;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
-  float: right;
+  width: 120px;
+}
+
+.btn-login:hover {
+  background-color: #071c2e;
 }
 
 .login-panel {

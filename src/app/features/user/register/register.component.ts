@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.title = "Đăng kí";
+    this.title = "Register";
     this.authForm.addControl(
       "username",
       new FormControl("", {

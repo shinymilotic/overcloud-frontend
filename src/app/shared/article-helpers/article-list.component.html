@@ -2,16 +2,16 @@
 </app-article-preview>
 
 <div class="btn-moreArticle" *ngIf="this.isNoMore" (click)="this.moreArticle()">
-  Xem thêm
+  See more
 </div>
 
 <div class="article-preview" *ngIf="loading === LoadingState.LOADING">
-  Đang tải...
+  Loading...
 </div>
 
 <div
   class="article-preview"
   *ngIf="loading === LoadingState.LOADED && !results.length"
 >
-  Không có bài viết nào.
+  No posts.
 </div>
