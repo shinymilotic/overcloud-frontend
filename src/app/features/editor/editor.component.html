@@ -1,4 +1,4 @@
-<div class="editor-page flex justify-between">
+<div class="editor-page">
   <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
   <div class="p-4">
@@ -11,7 +11,7 @@
             class="form-control form-control-lg w-full outline-none"
             formControlName="title"
             type="text"
-            placeholder="Tiêu đề"
+            placeholder="Title"
           />
         </fieldset>
   
@@ -20,7 +20,7 @@
             class="form-control w-full outline-none"
             formControlName="description"
             type="text"
-            placeholder="Tóm tắt"
+            placeholder="Description"
           />
         </fieldset>
   
@@ -36,7 +36,7 @@
             #tagInputTextElement
             class="form-control w-full outline-none"
             type="text"
-            placeholder="Danh sách thẻ"
+            placeholder="Tags"
             [formControl]="tagField"
             (focus)="focusInputTag()"
             (blur)="loseFocusInputTag()"
@@ -81,5 +81,4 @@
     </form>
   </div>
   
-  <div class="invisible col-sm-0 col-s-0">Item Invisiabeeeeeeeeeeeeeee</div>
 </div>

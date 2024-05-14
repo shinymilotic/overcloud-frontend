@@ -29,7 +29,7 @@ export class LEditor {
   
   root!: Root;
   placeholder = () => {
-    return <div className="editor-placeholder">Nhập nội dung...</div>;
+    return <div className="editor-placeholder">Content...</div>;
   }
 
   editorConfig = () : InitialConfigType => {
