@@ -12,7 +12,7 @@
               class="btn btn-sm btn-outline-secondary"
               [routerLink]="['/editor', article.slug]"
             >
-              <i class="ion-edit"></i> Sửa
+              <i class="ion-edit"></i>Edit
             </a>
             <span>&nbsp;&nbsp;</span>
             <button
@@ -20,7 +20,7 @@
               [ngClass]="{ disabled: isDeleting }"
               (click)="deleteArticle()"
             >
-              <i class="ion-trash-a"></i> Xóa
+              <i class="ion-trash-a"></i> Delete
             </button>
           </span>
   
@@ -44,8 +44,7 @@
     </div>
   
     <div class="page">
-      <div class="row article-content">
-        <div class="col-md-12">
+      <div class="row article-content col-md-12">
           <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
           <div [outerHTML]="article.body"></div>
           <ul class="tag-list">
@@ -57,7 +56,6 @@
             </li>
             }
           </ul>
-        </div>
       </div>
   
       <hr />
@@ -91,7 +89,7 @@
                 <div class="card-block">
                   <textarea
                     class="form-control max-w-md w-11/12 outline-none"
-                    placeholder="Hãy bình luận..."
+                    placeholder="Write comment..."
                     rows="3"
                     [formControl]="commentControl"
                   ></textarea>
@@ -101,8 +99,8 @@
                     [src]="currentUser?.image === null ? '' : currentUser?.image"
                     class="comment-author-img"
                   />
-                  <button class="btn btn-sm btn-primary comment-btn" type="submit">
-                    Bình luận
+                  <button class="btn btn-sm comment-btn" type="submit">
+                    Comment
                   </button>
                 </div>
               </fieldset>

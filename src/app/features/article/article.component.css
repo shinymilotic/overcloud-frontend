@@ -55,36 +55,38 @@ a.btn.disabled,fieldset[disabled] a.btn{
     border-radius:.2rem
 }
 .btn-outline-secondary{
-    color:#ccc;
+    color:black;
     background-image:none;
     background-color:transparent;
-    border-color:#ccc
+    border-color:#ccc;
+    text-decoration: none;
 }
 .btn-outline-secondary:hover{
-    color:#fff;
-    background-color:#ccc;
-    border-color:#ccc
+    color:black;
+    background-color:#0084ff;
+    border-color:#ccc;
+    color: white;
 }
 .btn-outline-secondary:focus,.btn-outline-secondary.focus{
-    color:#fff;
+    color: white;
     background-color:#ccc;
     border-color:#ccc
 }
 .btn-outline-secondary:active,.btn-outline-secondary.active,.open>.btn-outline-secondary.dropdown-toggle{
-    color:#fff;
-    background-color:#ccc;
+    color:white;
+    background-color:#071c2e;
     border-color:#ccc
 }
 .btn-outline-secondary:active:hover,.btn-outline-secondary:active:focus,.btn-outline-secondary:active.focus,.btn-outline-secondary.active:hover,.btn-outline-secondary.active:focus,.btn-outline-secondary.active.focus,.open>.btn-outline-secondary.dropdown-toggle:hover,.open>.btn-outline-secondary.dropdown-toggle:focus,.open>.btn-outline-secondary.dropdown-toggle.focus{
-    color:#fff;
-    background-color:#a1a1a1;
+    color:white;
+    background-color:#071c2e;
     border-color:#8c8c8c
 }
 .btn-outline-secondary.disabled:focus,.btn-outline-secondary.disabled.focus,.btn-outline-secondary:disabled:focus,.btn-outline-secondary:disabled.focus{
-    border-color:#fff
+    border-color:white;
 }
 .btn-outline-secondary.disabled:hover,.btn-outline-secondary:disabled:hover{
-    border-color:#fff
+    border-color:white;
 }
 .btn-outline-danger{
     color:#b85c5c;
@@ -121,11 +123,16 @@ a.btn.disabled,fieldset[disabled] a.btn{
 .btn .counter{
     font-size:.8rem!important
 }
+.article-content {
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px;
+}
 .article-page .article-content p{
     font-family:'source serif pro',serif;
     font-size:1.2rem;
     line-height:1.8rem;
-    margin-bottom:2rem
+    margin-bottom:2rem;
 }
 .article-page .article-content h1,.article-page .article-content h2,.article-page .article-content h3,.article-page .article-content h4,.article-page .article-content h5,.article-page .article-content h6{
     font-weight:500!important;
@@ -224,13 +231,16 @@ a.btn.disabled,fieldset[disabled] a.btn{
 
 .title {
     color: black;
+    text-align: center;
+    margin: 5px;
+    font-size: 42px !important;
 }
 
 .comment-btn {
-    background-color: #8a5917;
+    background-color: #0084ff;
     color: white;
     border-radius: 5px;
-    box-shadow: 0 0 2px 0 #392407, inset 0 -3px 8px -3px #55360c;
+    box-shadow: 0 0 2px 0 #0084ff, inset 0 -3px 8px -3px #0084ff;
     font-weight: 100;
 }
 
