@@ -1,4 +1,4 @@
-<div class="profile-page flex justify-between" >
+<div class="profile-page flex justify-center" >
   <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
   <div  *ngIf="profile">
@@ -12,9 +12,9 @@
           <a
             [routerLink]="['/settings']"
             *ngIf="isUser"
-            class="setting-btn absolute bottom-0 w-40"
+            class="setting-btn absolute bottom-0"
           >
-            <i class="ion-gear-a"></i> Thay đổi cài đặt
+            <i class="ion-gear-a"></i> Settings
           </a>
         </div>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,7 +50,7 @@
               Favorited posts
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-2">
             <a
               class="nav-link"
               routerLinkActive="active"
@@ -77,5 +77,4 @@
     </div>
   </div>
   
-  <div class="invisible col-sm-0 col-s-0"> Item invisibleeeeeeeeee</div>
 </div>

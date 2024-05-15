@@ -25,13 +25,6 @@
         </fieldset>
   
         <fieldset class="form-group bg-white">
-          <lexical-editor
-            id="lexical-editor"
-            (changeValueEvent)="this.updateBodyChange($event)"
-          ></lexical-editor>
-        </fieldset>
-  
-        <fieldset class="form-group bg-white">
           <input
             #tagInputTextElement
             class="form-control w-full outline-none"
@@ -69,6 +62,13 @@
         }
           
         </div>
+
+        <fieldset class="form-group bg-white lexical-editor">
+          <lexical-editor
+            id="lexical-editor"
+            (changeValueEvent)="this.updateBodyChange($event)"
+          ></lexical-editor>
+        </fieldset>
         <button
           id="submitBtn"
           class="overcloud-btn"

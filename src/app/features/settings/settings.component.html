@@ -1,8 +1,8 @@
-<div class="settings-page flex justify-between">
+<div class="settings-page flex justify-center">
   <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
   <div class="flex flex-col justify-center settings-panel">
-    <h1 class="text-settings">Cài đặt</h1>
+    <h1 class="text-settings">Settings</h1>
 
     <app-list-errors [errors]="errors"></app-list-errors>
 
@@ -44,10 +44,10 @@
             formControlName="email"
         />
         </fieldset>
-        <button class="btn btn-outline-danger btn-logout" (click)="logout()">Đăng xuất</button>
+        <button class="btn btn-outline-danger btn-logout" (click)="logout()">Logout</button>
 
         <button class="btn btn-lg btn-primary float-right" type="submit">
-          Thay đổi
+          Update
         </button>
       </fieldset>
     </form>
@@ -56,6 +56,4 @@
     <hr />
   
   </div>
-  
-  <div class="invisible col-sm-0 col-s-0">Item Invisiabeeeeeeeeeeeee</div>
-</div>
+  </div>
