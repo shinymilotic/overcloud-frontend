@@ -1,4 +1,4 @@
-<div class="flex justify-between">
+<div class="flex justify-center">
   <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
   <div class="mt-3 w-1/2">
@@ -42,10 +42,10 @@
               ></textarea>
             </fieldset>
             <a
-              class="deleteQuestionBtn"
+              class="deleteQuestionBtn btn-outline-danger"
               (click)="deleteQuestion(qIndex)"
             >
-              X
+              Delete
             </a>
           </div>
   
@@ -77,20 +77,19 @@
                 </fieldset>
                   
                 <a
-                  class="deleteAnswerBtn"
+                  class="deleteAnswerBtn btn-outline-danger"
                   (click)="deleteAnswer(qIndex, aIndex)"
                 >
-                  X
+                  Delete
                 </a>
 
                 <br>
               </div>
-              <br>
               <a
                 class="addAnswerBtn"
                 (click)="addAnswer(qIndex)"
               >
-                +
+                Add answer
               </a>
             </div>
           </div>
@@ -119,6 +118,4 @@
       </button>
     </form>
   </div>
-  
-  <div class="invisible">Item Invisiabeeeeeeeeeeeee</div>
 </div>
