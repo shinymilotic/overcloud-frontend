@@ -14,12 +14,18 @@ input,
 textarea {
   border: none;
 }
+
 .addAnswerBtn {
-  padding: 3px;
+  padding: 8px;
   color: #0084ff;
   cursor: pointer;
   font-weight: bold;
   font-size: 20px;
+  border-radius: 5px;
+}
+.addAnswerBtn:hover {
+  color: white;
+  background-color: #0084ff;
 }
 
 .deleteAnswerBtn {

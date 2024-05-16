@@ -1,7 +1,22 @@
 .btn-follow {
-background-color: green;
-  color: white;
-  border-radius: 5px;
-  border: none;
+  border-radius: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
+  border: 0 solid transparent;
+  transition: .2s ease-in-out;
+  background-color: #0084ff;
+  color: white;
+  padding: 10px;
+  width: 100px;
+  outline-color: white;
+}
+
+
+.btn-follow:hover {
+  filter: brightness(120%);
 }

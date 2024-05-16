@@ -99,20 +99,20 @@ app-root {
 .overcloud-btn {
   outline: none;
   border: none;
-  border-radius: 20px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 8px;
   background-color: rgba(0, 0, 0, 0.05) !important;
   cursor: pointer;
 }
 
 .overcloud-btn:hover {
   color: white;
-  background-color: green !important;
+  background-color: #0084ff !important;
 }
 
 .overcloud-btn:focus {
   color: white;
-  background-color: green !important;
+  background-color: #0084ff !important;
 }
 
 .btn-outline-danger{
