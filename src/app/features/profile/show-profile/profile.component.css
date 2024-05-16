@@ -21,10 +21,12 @@
 
 .setting-btn:hover,
 .nav-item:hover {
+  color: white;
   background-color: #0084ff;
 }
 
 .setting-btn:focus,
 .nav-item:focus {
+  color: white;
   background-color: #0084ff;
 }

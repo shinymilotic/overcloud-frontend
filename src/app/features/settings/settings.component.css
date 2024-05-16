@@ -26,3 +26,14 @@ fieldset {
   text-align: center;
   border-radius: 7px;
 }
+
+.btn-update {
+  color: white;
+  background-color: #0084ff;
+  box-shadow: 0 0 0 100vmax inset rgb(0 0 0/var(--o,0%));
+  transition: .4s;
+}
+
+.btn-update:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0)
+}
