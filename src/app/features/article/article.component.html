@@ -67,7 +67,7 @@
               class="btn btn-sm btn-outline-secondary bg-black text-white"
               [routerLink]="['/editor', article.slug]"
             >
-              <i class="ion-edit"></i> Sửa
+              <i class="ion-edit"></i> Edit
             </a>
             <span>&nbsp;&nbsp;</span>
             <button
@@ -75,7 +75,7 @@
               [ngClass]="{ disabled: isDeleting }"
               (click)="deleteArticle()"
             >
-              <i class="ion-trash-a"></i> Xóa
+              <i class="ion-trash-a"></i> Delete
             </button>
           </span>
         </app-article-meta>

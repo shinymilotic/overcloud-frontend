@@ -138,6 +138,9 @@ a.btn.disabled,fieldset[disabled] a.btn{
     font-weight:500!important;
     margin:1.6rem 0 1rem
 }
+.article-content pre {
+    background-color: aliceblue;
+  }
 .article-page .article-actions{
     text-align:center;
     margin:1.5rem 0 3rem
