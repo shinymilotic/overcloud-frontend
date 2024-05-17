@@ -251,7 +251,17 @@ a.btn.disabled,fieldset[disabled] a.btn{
     display: flex;
 }
 
-.page {
-    padding-left: 5rem;
-    padding-right: 5rem;
-}
+
+
+
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px)   {
+    .page {
+        padding-left: 20rem;
+        padding-right: 20rem;
+    }
+  }
+  
+
+  

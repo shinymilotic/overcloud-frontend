@@ -68,12 +68,15 @@
                     (keydown)="addAnswer(qIndex, $event)"
                   />
                 </fieldset>
-                <fieldset class="form-group mr-3">
-                  <input
-                    class="form-control outline-none border-none"
-                    formControlName="truth"
-                    type="checkbox"
-                  />
+                <fieldset class="form-group mr-3 truth-fieldset">
+                  <label class="checkmark-fieldset">
+                    <input
+                      class="form-control outline-none border-none"
+                      formControlName="truth"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>  
                 </fieldset>
                   
                 <a
