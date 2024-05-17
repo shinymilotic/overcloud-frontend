@@ -24,11 +24,11 @@ body {
   padding: 15px;
 
   white-space: pre-wrap;
-  word-wrap: break-all;
+  word-wrap: break-word;
   /* overflow-x: auto; */
   text-align: justify;
   /* width: 80%; */
-  word-break: break-all;
+  word-break: break-word;
 
 }
 /* .app-editor-page {
