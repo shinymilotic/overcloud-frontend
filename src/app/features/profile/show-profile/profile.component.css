@@ -30,3 +30,8 @@
   color: white;
   background-color: #0084ff;
 }
+
+.bio {
+  word-wrap: break-word;
+  word-break: break-word;
+}

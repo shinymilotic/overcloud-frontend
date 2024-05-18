@@ -256,7 +256,7 @@ a.btn.disabled,fieldset[disabled] a.btn{
 
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px)   {
+  @media only screen and (min-width: 1200px)   {
     .page {
         padding-left: 20rem;
         padding-right: 20rem;

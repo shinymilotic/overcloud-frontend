@@ -1,18 +1,21 @@
-@for (practice of practiceMap; track $index) {
-  <div class="p-3">
-   At {{ practice[0] }}:
-  </div>
-  @for (item of practice[1]; track $index) {
+<div class="container">
+  @for (practice of practiceMap; track $index) {
     <div class="p-3">
-      &emsp;&emsp;
-      <span>{{this.getTime(item.date)}}</span>
-      <a
-        [routerLink]="['/@' + this.getUsername(), 'practices', item.id]"
-        class="no-underline font-black to-black
-        "
-        >&emsp;{{ item.testTitle }}
-      </a>
+     At {{ practice[0] }}:
     </div>
+    @for (item of practice[1]; track $index) {
+      <div class="p-3">
+        &emsp;&emsp;
+        <span>{{this.getTime(item.date)}}</span>
+        <a
+          [routerLink]="['/@' + this.getUsername(), 'practices', item.id]"
+          class="no-underline font-black to-black
+          "
+          >&emsp;{{ item.testTitle }}
+        </a>
+      </div>
+    }
   }
-}
+  
+</div>
 
