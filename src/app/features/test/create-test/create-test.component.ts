@@ -1,37 +1,36 @@
+import { CommonModule, NgForOf, NgIf } from "@angular/common";
 import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  Renderer2,
+    Component,
+    ElementRef,
+    OnDestroy,
+    OnInit,
+    Renderer2,
 } from "@angular/core";
-import { Errors } from "src/app/core/models/errors.model";
-import { ListErrorsComponent } from "src/app/shared/list-errors.component";
-import { CreateTestForm } from "./CreateTestForm";
-import { ChoiceAnswerForm } from "./form-model/ChoiceAnswerForm";
 import {
-  AbstractControl,
-  Form,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
+    AbstractControl,
+    Form,
+    FormArray,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
 } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
-import { ChoiceQuestionForm } from "./form-model/ChoiceQuestionForm";
-import { CommonModule } from "@angular/common";
-import { Question } from "src/app/core/models/test/question.model";
-import { TestService } from "src/app/core/services/test.service";
-import { Subject, takeUntil } from "rxjs";
 import { Router } from "@angular/router";
+import { Subject, takeUntil } from "rxjs";
+import { Errors } from "src/app/core/models/errors.model";
+import { Question } from "src/app/core/models/test/question.model";
 import { Test } from "src/app/core/models/test/test.model";
-import { QuestionForm } from "./form-model/QuestionForm";
-import { EssayQuestionForm } from "./form-model/EssayQuestionForm";
-import { QuestionType } from "./enum/QuestionType";
+import { TestService } from "src/app/core/services/test.service";
+import { ListErrorsComponent } from "src/app/shared/list-errors.component";
 import { SideBarComponent } from "../../side-bar/side-bar.component";
+import { CreateTestForm } from "./CreateTestForm";
+import { QuestionType } from "./enum/QuestionType";
+import { ChoiceAnswerForm } from "./form-model/ChoiceAnswerForm";
+import { ChoiceQuestionForm } from "./form-model/ChoiceQuestionForm";
+import { EssayQuestionForm } from "./form-model/EssayQuestionForm";
+import { QuestionForm } from "./form-model/QuestionForm";
 
 @Component({
     selector: "app-create-test",
@@ -61,9 +60,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly testService: TestService,
-    private readonly router: Router,
-    private readonly elementRef: ElementRef,
-    private readonly renderer: Renderer2
+    private readonly router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -134,7 +131,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
         question: this.fb.nonNullable.control("", Validators.required),
         questionType: this.fb.nonNullable.control(
           QuestionType.ESSAY,
-          Validators.required
+          Validators.required,
         ),
       })
     );

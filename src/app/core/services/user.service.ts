@@ -7,7 +7,6 @@ import { HttpClient } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
 import { Router } from "@angular/router";
 import { CookieService } from "./cookies.service";
-import { RefreshTokenResponse } from "../models/auth/refreshtoken.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -21,8 +20,6 @@ export class UserService {
   constructor(
     private readonly http: HttpClient,
     private readonly jwtService: AuthCookieService,
-    private readonly router: Router,
-    private readonly cookieService: CookieService
   ) {}
 
   login(credentials: { email: string; password: string }): Observable<User> {
