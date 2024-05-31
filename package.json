@@ -56,6 +56,8 @@
     "marked": "^4.2.12",
     "net": "^1.0.2",
     "ngx-quicklink": "^0.4.4",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "^7.4.0",
