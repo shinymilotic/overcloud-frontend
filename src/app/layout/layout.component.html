@@ -1,0 +1,12 @@
+<div class="layout-wrapper" [class]="containerClass">
+    <app-layout-header></app-layout-header>
+    <div class="layout-sidebar">
+        <app-side-bar></app-side-bar>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-main">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="layout-mask"></div>
+</div>
