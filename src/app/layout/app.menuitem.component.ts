@@ -10,14 +10,18 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModule } from 'primeng/sidebar';
 import { FormsModule } from '@angular/forms';
+import { NgFor, NgForOf } from '@angular/common';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[app-menuitem]',
     template: `
 		<ng-container>
-            <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">{{item.label}}</div>
-			<a *ngIf="(!item.routerLink || item.items) && item.visible !== false" [attr.href]="item.url" (click)="itemClick($event)"
+            @if (root && item.visible !== false) {
+                <div  class="layout-menuitem-root-text">{{item.label}}</div>
+            }
+            @if ((!item.routerLink || item.items) && item.visible !== false) {
+                <a  [attr.href]="item.url" (click)="itemClick($event)"
 			   [class]="item.class" [attr.target]="item.target" tabindex="0" pRipple>
 				<i [class]="item.icon" class="layout-menuitem-icon"></i>
 				<span class="layout-menuitem-text">{{item.label}}</span>
@@ -25,7 +29,9 @@ import { FormsModule } from '@angular/forms';
                     <i class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
 
                 }
-			</a>
+			    </a>
+            }
+			
             @if ((item.routerLink && !item.items) && item.visible !== false) {
                 <a 
 			   [routerLink]="item.routerLink" routerLinkActive="active-route" [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
@@ -71,6 +77,8 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
         // BrowserModule,
         FormsModule,
+        NgFor,
+        NgForOf
     ],
     standalone: true
 })

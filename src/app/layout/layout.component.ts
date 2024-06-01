@@ -10,6 +10,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SidebarModule } from 'primeng/sidebar';
 import { Subscription, filter } from 'rxjs';
 import { LayoutService } from './service/app.layout.service';
+import { AppMenuComponent } from "./app.menu.component";
 
 @Component({
     selector: 'app-layout',
@@ -17,16 +18,17 @@ import { LayoutService } from './service/app.layout.service';
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.css',
     imports: [
-      HeaderComponent, 
-      RouterModule,
-      SideBarComponent, 
-      SidebarModule,
-      RadioButtonModule,
-      InputSwitchModule,
-      RippleModule,
-      FormsModule,
-      // BrowserModule,
-      FormsModule,
+        HeaderComponent,
+        RouterModule,
+        SideBarComponent,
+        SidebarModule,
+        RadioButtonModule,
+        InputSwitchModule,
+        RippleModule,
+        FormsModule,
+        // BrowserModule,
+        FormsModule,
+        AppMenuComponent
     ]
 })
 export class LayoutComponent {
