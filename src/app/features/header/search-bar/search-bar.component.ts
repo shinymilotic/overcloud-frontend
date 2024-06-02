@@ -32,10 +32,8 @@ export class SearchBarComponent implements OnDestroy {
   faSearch = faSearch;
   
   constructor(
-    private fb: FormBuilder,
-    private searchService: SearchService,
+    private readonly fb: FormBuilder,
     private readonly router: Router,
-    private route: ActivatedRoute
   ) {}
 
   ngOnDestroy(): void {
@@ -48,6 +46,7 @@ export class SearchBarComponent implements OnDestroy {
     // this.router.navigate(["/search/articles"], {queryParams: {q: searchInput}}).then(() => {
     //   window.location.reload();
     // });;
+    
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/search/articles'], {queryParams: {q: searchInput}});
     }).catch((err) => {console.log(err)});
