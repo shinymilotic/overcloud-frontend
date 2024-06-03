@@ -7,7 +7,7 @@
         <i class="pi pi-bars"></i>
     </button>
 
-    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()" (click)="menu.toggle($event)">
         <i class="pi pi-ellipsis-v"></i>
     </button>
 
@@ -21,7 +21,7 @@
         <i class="pi pi-user"></i>
     </button>
 
-    <p-menu #menu [model]="items" styleClass="w-full md:w-15rem" [popup]="true" >
+    <p-menu #menu [model]="items" [popup]="true" >
 
         <ng-template pTemplate="submenuheader" let-item>
             <span class="text-primary font-bold">{{ item.label }}</span>
@@ -30,9 +30,6 @@
             <a pRipple class="flex align-items-center p-menuitem-link">
                 <span [class]="item.icon"></span>
                 <span class="ml-2">{{ item.label }}</span>
-                <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
-                    {{ item.shortcut }}
-                </span>
             </a>
         </ng-template>
     </p-menu>
