@@ -10,9 +10,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 } */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 nav {
   display: flex;

@@ -1,5 +1,4 @@
-@tailwind components;
-@tailwind utilities;
+
 
 .answers-list {
   list-style-type: upper-latin;

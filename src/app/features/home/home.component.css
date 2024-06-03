@@ -1,5 +1,4 @@
-@tailwind components;
-@tailwind utilities;
+
 
 div, h1, p {
   white-space:pre-wrap;
