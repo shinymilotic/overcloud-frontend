@@ -146,6 +146,13 @@ export const routes: Routes = [
               ),
       },
       {
+        path: "tags",
+        loadComponent: () =>
+              import("./features/tags/tags.component").then(
+                (m) => m.TagsComponent
+              ),
+      },
+      {
         // path: ":username",
         matcher: (url) => {
           const username: string = url[0].path;
