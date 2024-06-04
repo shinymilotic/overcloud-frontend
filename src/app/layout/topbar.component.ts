@@ -39,12 +39,10 @@ export class TopBarComponent implements OnInit {
             {
                 label: 'Settings',
                 icon: 'pi pi-cog',
-                shortcut: '⌘+O'
             },
             {
                 label: 'Logout',
                 icon: 'pi pi-sign-out',
-                shortcut: '⌘+Q'
             }  
         ]
     }

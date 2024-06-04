@@ -27,7 +27,6 @@ import { TopBarComponent } from "./topbar.component";
         InputSwitchModule,
         RippleModule,
         FormsModule,
-        // BrowserModule,
         FormsModule,
         AppMenuComponent,
         TopBarComponent

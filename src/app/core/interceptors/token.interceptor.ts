@@ -17,10 +17,14 @@ import {
   throwError,
 } from "rxjs";
 import { UserService } from "../services/user.service";
+import { AuthCookieUtils } from "../utils/authCookie.utils";
 
 @Injectable({ providedIn: "root" })
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authCookieUtils: AuthCookieUtils
+  ) {}
 
   private isRefreshing: boolean = false;
   private refreshTokenSubject: BehaviorSubject<string | null> =
@@ -52,7 +56,7 @@ export class TokenInterceptor implements HttpInterceptor {
         switchMap((userId: string) => {
           if (userId != "") {
             this.refreshTokenSubject.next(userId);
-            this.userService.setAuth(userId);
+            this.authCookieUtils.saveUserIdCookie(userId);
           }
           return next.handle(this.addTokenHeader(request));
         }),

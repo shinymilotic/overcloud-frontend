@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: "root" })
-export class CookieService {
+export class CookieUtils {
   constructor() {}
 
   public getCookie(name: string) {

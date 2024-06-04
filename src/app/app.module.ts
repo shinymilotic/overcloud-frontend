@@ -4,7 +4,6 @@ import { BrowserModule, provideClientHydration, withHttpTransferCacheOptions } f
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./features/header/header.component";
-import { AuthCookieService } from "./core/services/authcookie.service";
 import { UserService } from "./core/services/user.service";
 import { EMPTY, Observable } from "rxjs";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -19,9 +18,9 @@ import {
   withRouterConfig,
 } from "@angular/router";
 import { routes } from "./app-routing.module";
-import { User } from "./core/models/auth/user.model";
-export function initAuth(jwtService: AuthCookieService, userService: UserService) {
-  let userId = jwtService.getUserId();
+import { AuthCookieUtils } from "./core/utils/authCookie.utils";
+export function initAuth(authCookieUtils: AuthCookieUtils, userService: UserService) {
+  let userId = authCookieUtils.getUserId();
 
   return ()  =>
   userId ? userService.auth() : EMPTY;
@@ -47,7 +46,7 @@ export function initAuth(jwtService: AuthCookieService, userService: UserService
     {
       provide: APP_INITIALIZER,
       useFactory: initAuth,
-      deps: [AuthCookieService, UserService],
+      deps: [AuthCookieUtils, UserService],
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

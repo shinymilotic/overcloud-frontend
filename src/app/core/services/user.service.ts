@@ -1,12 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { Observable, BehaviorSubject, pipe } from "rxjs";
 
-import { AuthCookieService } from "./authcookie.service";
 import { map, distinctUntilChanged, tap, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
 import { Router } from "@angular/router";
-import { CookieService } from "./cookies.service";
+import { AuthCookieUtils } from "../utils/authCookie.utils";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -17,9 +16,11 @@ export class UserService {
 
   public isAuthenticated = this.currentUser.pipe(map((user) => !!user));
 
+  public userSignal = signal<User | null>(null);
+
   constructor(
     private readonly http: HttpClient,
-    private readonly jwtService: AuthCookieService,
+    private readonly authCookieUtils: AuthCookieUtils,
   ) {}
 
   login(credentials: { email: string; password: string }): Observable<User> {
@@ -27,7 +28,8 @@ export class UserService {
       .post<User>("/users/login", { user: credentials })
       .pipe(tap((user) => {
         this.currentUserSubject.next(user);
-        this.setAuth(user.id)
+        this.userSignal.set(user);
+        this.authCookieUtils.saveUserIdCookie(user.id);
       }));
   }
 
@@ -80,18 +82,15 @@ export class UserService {
     );
   }
 
-  setAuth(userId: string): void {
-    this.jwtService.saveUserIdCookie(userId);
-  }
-
   purgeAuth(): void {
-    this.jwtService.destroyUserIdCookie();
+    this.authCookieUtils.destroyUserIdCookie();
     this.currentUserSubject.next(null);
   }
 
   refreshToken(): Observable<string> {
     return this.http
-      .post<{userId: string}>("/users/refreshToken", {}).pipe(map((data) => data.userId));
+      .post<{userId: string}>("/users/refreshToken", {})
+      .pipe(map((data) => data.userId));
       ;
   }
 
@@ -103,7 +102,8 @@ export class UserService {
 
   getFollowers(userId: string) : Observable<User[]> {
     return this.http
-      .get<User[]>(`/followers/${userId}`, {}).pipe(map((data: any) => data.followers));
+      .get<User[]>(`/followers/${userId}`, {})
+      .pipe(map((data: any) => data.followers));
     ;
   }
 }
