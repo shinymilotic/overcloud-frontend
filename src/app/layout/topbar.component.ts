@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Signal, ViewChild, computed, signal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from "./service/app.layout.service";
 import { RouterLink } from '@angular/router';
@@ -7,6 +7,8 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MenuModule } from 'primeng/menu';
+import { UserService } from '../core/services/user.service';
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-topbar',
@@ -25,7 +27,38 @@ import { MenuModule } from 'primeng/menu';
 export class TopBarComponent implements OnInit {
 
     
-    items!: MenuItem[];
+    items: Signal<MenuItem[]> = computed(() => {
+        const user = this.userService.userSignal();
+        if (user != null) {
+            return [
+                {
+                    label: 'Settings',
+                    icon: 'pi pi-cog',
+                    routerLink: '/settings'
+                },
+                {
+                    label: 'Logout',
+                    icon: 'pi pi-sign-out',
+                    command: () => {
+                        this.logout();
+                    }
+                }
+            ]
+        } else {
+            return [
+                {
+                    label: 'Login',
+                    icon: 'pi pi-sign-in',
+                    routerLink: '/login'
+                },
+                {
+                    label: 'Register',
+                    icon: 'pi pi-user-plus',
+                    routerLink: '/register'
+                }
+            ]
+        }
+    });
 
     @ViewChild('menubutton') menuButton!: ElementRef;
 
@@ -33,17 +66,23 @@ export class TopBarComponent implements OnInit {
 
     @ViewChild('topbarmenu') menu!: ElementRef;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(
+        public readonly layoutService: LayoutService,
+        public readonly userService: UserService,
+        public readonly router: Router
+    ) { }
     ngOnInit(): void {
-        this.items = [
-            {
-                label: 'Settings',
-                icon: 'pi pi-cog',
-            },
-            {
-                label: 'Logout',
-                icon: 'pi pi-sign-out',
-            }  
-        ]
     }
+
+    logout(): void {
+        this.userService.logout()
+        .subscribe({
+          next: (isLogout) => {
+            if (isLogout) {
+              this.userService.purgeAuth();
+              void this.router.navigate(["/"]);
+            }
+          }
+        });
+      }
 }
