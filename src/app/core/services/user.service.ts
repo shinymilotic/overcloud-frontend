@@ -39,11 +39,7 @@ export class UserService {
     password: string;
   }): Observable<User> {
     return this.http
-      .post<User>("/users", { user: credentials })
-      .pipe(tap((user) => {
-        // this.currentUserSubject.next(user);
-        // this.setAuth(user.id);
-      }));
+      .post<User>("/users", { user: credentials });
   }
 
   logout(): Observable<boolean> {
@@ -52,19 +48,13 @@ export class UserService {
 
   getCurrentUser(): Observable<User> {
     return this.http.get<User>("/users");
-    // .pipe(
-    //   tap({
-    //     next: ({ user }) => {console.log("getCurrentUser")},
-    //     error: () => this.purgeAuth(),
-    //   }),
-    //   shareReplay(1)
-    // );
   }
 
   update(user: Partial<User>): Observable<User> {
     return this.http.put<User>("/users", user).pipe(
       tap((user) => {
         this.currentUserSubject.next(user);
+        this.userSignal.set(user);
       })
     );
   }
@@ -74,6 +64,7 @@ export class UserService {
       tap({
         next: (user) => {
           this.currentUserSubject.next(user);
+          this.userSignal.set(user);
           // this.setAuth(accessToken, refreshToken);
         },
         // error: () => this.purgeAuth(),
@@ -85,6 +76,7 @@ export class UserService {
   purgeAuth(): void {
     this.authCookieUtils.destroyUserIdCookie();
     this.currentUserSubject.next(null);
+    this.userSignal.set(null);
   }
 
   refreshToken(): Observable<string> {

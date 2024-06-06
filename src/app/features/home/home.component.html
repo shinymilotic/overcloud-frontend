@@ -1,7 +1,7 @@
 <div class="home-page flex justify-center">
   <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
-  <div class="container flex flex-col justify-center w-full">
+  <div class="container flex flex-col justify-center w-full items-center">
       <div class="m-auto" *rxLet="tags$; let tags">
         <br>
         <div class="tag-list">
@@ -23,7 +23,7 @@
         </div>
       </div>
      <br> 
-    <app-article-list class="m-auto" [limit]="10" [config]="listConfig"></app-article-list>
+    <app-article-list class="col-sm-12 col-md-10 col-lg-10 col-xl-8" [limit]="10" [config]="listConfig"></app-article-list>
   </div>
 
 </div>
