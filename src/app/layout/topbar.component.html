@@ -11,28 +11,10 @@
         <i class="pi pi-ellipsis-v"></i>
     </button>
 
-    <!-- <div #topbarmenu class="layout-topbar-menu" [class]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">    
-        <button class="p-link layout-topbar-button">
-            <i class="pi pi-user"></i>
-            <span>Profile</span>
-        </button>
-    </div> -->
     <button #topbarmenu class="p-link layout-topbar-button layout-topbar-menu" (click)="menu.toggle($event)">
         <i class="pi pi-user"></i>
     </button>
 
-    <p-menu #menu [model]="items" [popup]="true" >
-
-        <ng-template pTemplate="submenuheader" let-item>
-            <span class="text-primary font-bold">{{ item.label }}</span>
-        </ng-template>
-        <ng-template pTemplate="item" let-item>
-            <a pRipple class="flex align-items-center p-menuitem-link">
-                <span [class]="item.icon"></span>
-                <span class="ml-2">{{ item.label }}</span>
-            </a>
-        </ng-template>
-    </p-menu>
-    
+    <p-menu #menu [model]="this.items()" [popup]="true" />
 
 </div>
