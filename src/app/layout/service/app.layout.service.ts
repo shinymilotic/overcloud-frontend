@@ -90,12 +90,12 @@ export class LayoutService {
         }
     }
 
-    showProfileSidebar() {
-        this.state.profileSidebarVisible = !this.state.profileSidebarVisible;
-        if (this.state.profileSidebarVisible) {
-            this.overlayOpen.next(null);
-        }
-    }
+    // showProfileSidebar() {
+    //     this.state.profileSidebarVisible = !this.state.profileSidebarVisible;
+    //     if (this.state.profileSidebarVisible) {
+    //         this.overlayOpen.next(null);
+    //     }
+    // }
 
     showConfigSidebar() {
         this.state.configSidebarVisible = true;

@@ -7,21 +7,19 @@
         <i class="pi pi-bars"></i>
     </button>
 
-    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()" (click)="menu.toggle($event)">
-        <i class="pi pi-ellipsis-v"></i>
-    </button>
-
     <div class="layout-topbar-menu">
-        <button  class="p-link layout-topbar-button" (click)="menu.toggle($event)">
-            <i class="pi pi-user"></i>
-        </button>
+        @if (this.userService.userSignal()) {
+            <button class="p-link layout-topbar-button" (click)="createMenu.toggle($event)">
+                <i class="pi pi-pen-to-square"></i>
+            </button>
+        }
     
-        <button #topbarmenu class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+        <button class="p-link layout-topbar-button" (click)="userMenu.toggle($event)">
             <i class="pi pi-user"></i>
         </button>
     </div>
     
-
-    <p-menu #menu [model]="this.items()" [popup]="true" />
+    <p-menu #createMenu [model]="this.createMenuItems()" [popup]="true" />
+    <p-menu #userMenu [model]="this.userMenuItems()" [popup]="true" />
 
 </div>

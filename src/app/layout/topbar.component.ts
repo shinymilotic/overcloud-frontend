@@ -26,11 +26,35 @@ import { Router } from "@angular/router";
 })
 export class TopBarComponent implements OnInit {
 
-    
-    items: Signal<MenuItem[]> = computed(() => {
+    createMenuItems: Signal<MenuItem[]> = computed(() => {
         const user = this.userService.userSignal();
         if (user != null) {
             return [
+                {
+                    label: 'Write article',
+                    icon: 'pi pi-book',
+                    routerLink: '/editor'
+                },
+                {
+                    label: 'Write test',
+                    icon: 'pi pi-file',
+                    routerLink: '/createTest'
+                },
+            ]
+        }
+
+        return [];
+    });
+
+    userMenuItems: Signal<MenuItem[]> = computed(() => {
+        const user = this.userService.userSignal();
+        if (user != null) {
+            return [
+                {
+                    label: 'Profile',
+                    icon: 'pi pi-user',
+                    routerLink: `@${user.username}`
+                },
                 {
                     label: 'Settings',
                     icon: 'pi pi-cog',
@@ -60,11 +84,10 @@ export class TopBarComponent implements OnInit {
         }
     });
 
+    
+
     @ViewChild('menubutton') menuButton!: ElementRef;
 
-    @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
-
-    @ViewChild('topbarmenu') menu!: ElementRef;
 
     constructor(
         public readonly layoutService: LayoutService,
