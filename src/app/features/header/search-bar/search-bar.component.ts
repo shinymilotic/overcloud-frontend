@@ -4,8 +4,6 @@ import { SearchService } from "../../../core/services/search.service";
 import { SearchParam } from "../../../core/models/search.model";
 import { Subject, takeUntil } from "rxjs";
 import { Router } from "@angular/router";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ActivatedRoute } from "@angular/router";
 import { NgIf } from "@angular/common";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -14,7 +12,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
   selector: "app-search-bar",
   templateUrl: "./search-bar.component.html",
   styleUrls: ["./search-bar.component.css"],
-  imports: [FontAwesomeModule, FormsModule, NgIf, ReactiveFormsModule 
+  imports: [ FormsModule, NgIf, ReactiveFormsModule 
   ],
   standalone: true,
 })
@@ -29,7 +27,6 @@ export class SearchBarComponent implements OnDestroy {
   searchReturned = false;
   searchParam: SearchParam | any;
   destroy$ = new Subject<void>();
-  faSearch = faSearch;
   
   constructor(
     private readonly fb: FormBuilder,

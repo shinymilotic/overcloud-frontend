@@ -11,9 +11,16 @@
         <i class="pi pi-ellipsis-v"></i>
     </button>
 
-    <button #topbarmenu class="p-link layout-topbar-button layout-topbar-menu" (click)="menu.toggle($event)">
-        <i class="pi pi-user"></i>
-    </button>
+    <div class="layout-topbar-menu">
+        <button  class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+            <i class="pi pi-user"></i>
+        </button>
+    
+        <button #topbarmenu class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+            <i class="pi pi-user"></i>
+        </button>
+    </div>
+    
 
     <p-menu #menu [model]="this.items()" [popup]="true" />
 
