@@ -7,7 +7,6 @@
 
 fieldset.form-group {
   padding: 5px;
-  border: solid 1px;
   border-radius: 10px;
   margin-bottom: 5px;
 }
@@ -57,6 +56,8 @@ overcloud-btn {
   right: -10px;
 }
 
-.lexical-editor {
-  height: 69vh;
+.editor-page {
+  background-color: white!important;
+  min-height: 80vh;
 }
+
