@@ -25,9 +25,6 @@ import { UserService } from "../../core/services/user.service";
 import { Errors } from "../../core/models/errors.model";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { TagsService } from "src/app/core/services/tags.service";
-import { LexicalEditorBinding } from "src/app/lexical-editor.component";
-import { $getRoot, LexicalEditor } from "lexical";
-import { $generateHtmlFromNodes } from "@lexical/html";
 import { SideBarComponent } from "../side-bar/side-bar.component";
 
 interface ArticleForm {
@@ -50,7 +47,6 @@ interface ArticleForm {
         NgFor,
         AsyncPipe,
         FormsModule,
-        LexicalEditorBinding,
         SideBarComponent
     ]
 })
@@ -70,7 +66,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   tagInputTextElement!: ElementRef<HTMLInputElement>;
   announcer = inject(LiveAnnouncer);
   isUpdate: boolean = false;
-  editor!: LexicalEditor;
   isInputTag: boolean = true;
   selectedTagIndex: number;
   activeElement: Element | null = null;
@@ -159,13 +154,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   submitForm(): void {
     this.isSubmitting = true;
     let htmlString = "";
-    this.editor.update(() => {
-      const root = $getRoot();
-  
-      if(root?.getTextContent()) {
-        htmlString = $generateHtmlFromNodes(this.editor, null);
-      }
-    });
+    
     this.articleForm.controls.body.setValue(htmlString);
     if (this.isUpdate === true) {
       this.updateArticle();
@@ -174,9 +163,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateBodyChange(editor: LexicalEditor) {
-    this.editor = editor;
-  }
 
   updateArticle() {
     this.articleService
