@@ -10,7 +10,6 @@ import { ArticleMetaComponent } from "../../shared/article-helpers/article-meta.
 import { AsyncPipe, NgClass, NgForOf, NgIf } from "@angular/common";
 import { FollowButtonComponent } from "../../shared/buttons/follow-button.component";
 import { FavoriteButtonComponent } from "../../shared/buttons/favorite-button.component";
-import { MarkdownPipe } from "./markdown.pipe";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { ArticleCommentComponent } from "./article-comment.component";
 import { catchError, map, takeUntil } from "rxjs/operators";
@@ -33,7 +32,6 @@ import { SideBarComponent } from "../side-bar/side-bar.component";
         FollowButtonComponent,
         FavoriteButtonComponent,
         NgForOf,
-        MarkdownPipe,
         AsyncPipe,
         ListErrorsComponent,
         FormsModule,

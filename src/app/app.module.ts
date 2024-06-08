@@ -6,7 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./features/header/header.component";
 import { UserService } from "./core/services/user.service";
 import { EMPTY, Observable } from "rxjs";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
@@ -26,41 +26,32 @@ export function initAuth(authCookieUtils: AuthCookieUtils, userService: UserServ
   userId ? userService.auth() : EMPTY;
 }
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HeaderComponent,
-    // SideBarComponent,
-    AppRoutingModule,
-    HttpClientModule,
-    ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000",
-    }),
-    BrowserAnimationsModule,
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initAuth,
-      deps: [AuthCookieUtils, UserService],
-      multi: true,
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    provideRouter(
-      routes,
-      withComponentInputBinding(),
-      withRouterConfig({ paramsInheritanceStrategy: "always" })
-    ),
-    provideClientHydration(withHttpTransferCacheOptions({
-      includePostRequests: true
-    }))
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        HeaderComponent,
+        // SideBarComponent,
+        AppRoutingModule,
+        ServiceWorkerModule.register("ngsw-worker.js", {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: "registerWhenStable:30000",
+        }),
+        BrowserAnimationsModule], providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initAuth,
+            deps: [AuthCookieUtils, UserService],
+            multi: true,
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        provideRouter(routes, withComponentInputBinding(), withRouterConfig({ paramsInheritanceStrategy: "always" })),
+        provideClientHydration(withHttpTransferCacheOptions({
+            includePostRequests: true
+        }))
+        // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        ,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
