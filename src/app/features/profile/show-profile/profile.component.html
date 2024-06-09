@@ -1,80 +1,78 @@
 <div class="profile-page flex justify-center" >
-  <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
 
-  <div  *ngIf="profile">
-    <div class="user-info" >
-      <div class="flex flex-row p-4 user-info">
-        <img [src]="profile.image" class="user-img"  width="160" height="160"/>
-        <div class="user-info flex flex-col ml-5 relative">
-          <h1 class="font-bold mb-4">{{ profile.username }}</h1>
-          <div class="bio">{{ profile.bio }}</div>
-  
-          <a
-            [routerLink]="['/settings']"
-            *ngIf="isUser"
-            class="setting-btn absolute bottom-0"
+  @if (profile) {
+      <div class="user-info" >
+        <div class="flex flex-row p-4 user-info">
+          <img [src]="profile.image" class="user-img"  width="160" height="160"/>
+          <div class="user-info flex flex-col ml-5 relative">
+            <h1 class="font-bold mb-4">{{ profile.username }}</h1>
+            <div class="bio">{{ profile.bio }}</div>
+    
+            <a
+              [routerLink]="['/settings']"
+              *ngIf="isUser"
+              class="setting-btn absolute bottom-0"
+            >
+              <i class="ion-gear-a"></i> Settings
+            </a>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <app-follow-button
+            *ngIf="!isUser"
+            [profile]="profile"
+            (toggle)="onToggleFollowing($event)"
           >
-            <i class="ion-gear-a"></i> Settings
-          </a>
+          </app-follow-button>
         </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <app-follow-button
-          *ngIf="!isUser"
-          [profile]="profile"
-          (toggle)="onToggleFollowing($event)"
-        >
-        </app-follow-button>
       </div>
-    </div>
-  
-    <div class="container">
-      <div class="articles-toggle">
-        <ul class="nav nav-pills outline-active flex">
-          <li class="nav-item mr-2">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/@'.concat(profile.username)]"
-            >
-              Created posts
-            </a>
-          </li>
-          <li class="nav-item mr-2">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/@'.concat(profile.username), 'favorites']"
-            >
-              Favorited posts
-            </a>
-          </li>
-          <li class="nav-item mr-2">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/@'.concat(profile.username), 'practices']"
-            >
-              Practice history
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/@'.concat(profile.username), 'practices']"
-            >
-              Created tests
-            </a>
-          </li>
-        </ul>
+    
+      <div class="container">
+        <div class="articles-toggle">
+          <ul class="nav nav-pills outline-active flex">
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username)]"
+              >
+                Created posts
+              </a>
+            </li>
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username), 'favorites']"
+              >
+                Favorited posts
+              </a>
+            </li>
+            <li class="nav-item mr-2">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username), 'practices']"
+              >
+                Practice history
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="['/@'.concat(profile.username), 'practices']"
+              >
+                Created tests
+              </a>
+            </li>
+          </ul>
+        </div>
+        <br>
+        <router-outlet></router-outlet>
       </div>
-      <br>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-  
+  }
 </div>
