@@ -14,7 +14,6 @@ import { Profile } from "../../../core/models/auth/profile.model";
 import { ProfileService } from "../../../core/services/profile.service";
 import { FollowButtonComponent } from "../../../shared/buttons/follow-button.component";
 import { AsyncPipe } from "@angular/common";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
     selector: "app-profile-page",
@@ -27,7 +26,6 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
         AsyncPipe,
         RouterLinkActive,
         RouterOutlet,
-        SideBarComponent
     ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {

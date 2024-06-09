@@ -24,8 +24,6 @@ import { Question } from "src/app/core/models/test/question.model";
 import { Test } from "src/app/core/models/test/test.model";
 import { TestService } from "src/app/core/services/test.service";
 import { ListErrorsComponent } from "src/app/shared/list-errors.component";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
-import { CreateTestForm } from "./CreateTestForm";
 import { QuestionType } from "./enum/QuestionType";
 import { ChoiceAnswerForm } from "./form-model/ChoiceAnswerForm";
 import { ChoiceQuestionForm } from "./form-model/ChoiceQuestionForm";
@@ -43,7 +41,6 @@ import { QuestionForm } from "./form-model/QuestionForm";
         ReactiveFormsModule,
         NgForOf,
         CommonModule,
-        SideBarComponent
     ]
 })
 export class CreateTestComponent implements OnInit, OnDestroy {

@@ -4,7 +4,6 @@ import { Observable, BehaviorSubject, pipe } from "rxjs";
 import { map, distinctUntilChanged, tap, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
-import { Router } from "@angular/router";
 import { AuthCookieUtils } from "../utils/authCookie.utils";
 
 @Injectable({ providedIn: "root" })

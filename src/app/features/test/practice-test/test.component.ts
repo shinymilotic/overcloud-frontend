@@ -31,7 +31,6 @@ import { Practice } from "src/app/core/models/test/practice.model";
 import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
 import { QuestionType } from "../create-test/enum/QuestionType";
 import { Question } from "src/app/core/models/test/question.model";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
     selector: "app-test",
@@ -44,7 +43,6 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
         NgForOf,
         CommonModule,
         ReactiveFormsModule,
-        SideBarComponent
     ]
 })
 export class TestComponent implements OnInit {

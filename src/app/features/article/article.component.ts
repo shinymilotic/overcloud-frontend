@@ -7,7 +7,7 @@ import { ArticlesService } from "../../core/services/articles.service";
 import { CommentsService } from "../../core/services/comments.service";
 import { UserService } from "../../core/services/user.service";
 import { ArticleMetaComponent } from "../../shared/article-helpers/article-meta.component";
-import { AsyncPipe, NgClass, NgForOf, NgIf } from "@angular/common";
+import { AsyncPipe, NgClass, NgForOf } from "@angular/common";
 import { FollowButtonComponent } from "../../shared/buttons/follow-button.component";
 import { FavoriteButtonComponent } from "../../shared/buttons/favorite-button.component";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
@@ -18,7 +18,6 @@ import { Comment } from "../../core/models/blog/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
 import { Errors } from "../../core/models/errors.model";
 import { Profile } from "../../core/models/auth/profile.model";
-import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
     selector: "app-article-page",
@@ -38,7 +37,6 @@ import { SideBarComponent } from "../side-bar/side-bar.component";
         ArticleCommentComponent,
         ReactiveFormsModule,
         ShowAuthedDirective,
-        SideBarComponent
     ]
 })
 export class ArticleComponent implements OnInit, OnDestroy {

@@ -5,14 +5,13 @@ import { Subject, takeUntil } from "rxjs";
 import { Errors } from "src/app/core/models/errors.model";
 import { TestListResponse } from "src/app/core/models/test/test-list-response.model";
 import { TestService } from "src/app/core/services/test.service";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
     selector: "app-test-list",
     templateUrl: "./test-list.component.html",
     styleUrls: ["./test-list.component.css"],
     standalone: true,
-    imports: [RouterLinkActive, RouterLink, NgForOf, CommonModule, SideBarComponent]
+    imports: [RouterLinkActive, RouterLink, NgForOf, CommonModule]
 })
 export class TestListComponent implements OnDestroy {
   errors!: Errors[];

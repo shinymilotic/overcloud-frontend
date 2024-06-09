@@ -11,7 +11,6 @@ import { Errors } from "../../../core/models/errors.model";
 import { UserService } from "../../../core/services/user.service";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 interface RegisterFrom {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -22,7 +21,7 @@ interface RegisterFrom {
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.css"],
     standalone: true,
-    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
+    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   title = "";

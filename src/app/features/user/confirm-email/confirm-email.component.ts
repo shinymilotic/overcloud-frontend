@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { ListErrorsComponent } from "../../../shared/list-errors.component";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 import { UserService } from "src/app/core/services/user.service";
 import { Errors } from "src/app/core/models/errors.model";
 @Component({
@@ -10,7 +9,7 @@ import { Errors } from "src/app/core/models/errors.model";
     templateUrl: "./confirm-email.component.html",
     styleUrls: ["./confirm-email.component.css"],
     standalone: true,
-    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
+    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule]
 })
 export class ConfirmEmailComponent implements OnInit, OnDestroy {
   private isConfirmed: boolean = false;

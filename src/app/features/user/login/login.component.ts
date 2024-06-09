@@ -12,13 +12,12 @@ import { UserService } from "../../../core/services/user.service";
 import { catchError, takeUntil } from "rxjs/operators";
 import { Subject, throwError } from "rxjs";
 import { LoginForm } from "./LoginForm";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 @Component({
     selector: "app-login",
     templateUrl: "./login.component.html",
     styleUrls: ["./login.component.css"],
     standalone: true,
-    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
+    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   title = "";
