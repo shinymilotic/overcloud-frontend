@@ -1,5 +1,5 @@
 import { NgForOf, CommonModule, NgIf } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Signal } from "@angular/core";
 import {
   FormArray,
   FormBuilder,
@@ -51,7 +51,7 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
 export class TestComponent implements OnInit {
   errors!: Errors[];
   isSubmitting = false;
-  currentUser!: User | null;
+  currentUser: Signal<User | null> = this.userService.userSignal;
   title: string = "";
   slug: string = "";
   questions: Question[] = [];
@@ -97,18 +97,17 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
     const slug = this.route.snapshot.params["slug"];
-    combineLatest([this.testService.getOne(slug), this.userService.currentUser])
+    this.testService.getOne(slug)
       .pipe(
         catchError((err) => {
           void this.router.navigate(["/"]);
           return throwError(() => err);
         })
       )
-      .subscribe(([test, currentUser]) => {
+      .subscribe((test) => {
         test.questions.forEach((question) => {
           this.slug = test.slug;
           this.title = test.title;
-          this.currentUser = currentUser;
           if (question.questionType == QuestionType.CHOICE) {
             const choiceQuestion = question as ChoiceQuestion;
             this.questions.push(choiceQuestion);
@@ -118,7 +117,6 @@ export class TestComponent implements OnInit {
         });
 
         this.questionForm = this.toFormGroup(this.questions);
-        console.log(this.questions);
       });
   }
 
@@ -165,10 +163,9 @@ export class TestComponent implements OnInit {
       }
     });
 
-    combineLatest([this.practiceService.createPractice(practice), this.userService.currentUser])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(([data, currentUser]) => {
-          this.router.navigate([`@${currentUser?.username}/practices/${data.practiceId}`]);
+    this.practiceService.createPractice(practice)
+      .subscribe(({practiceId}) => {
+          this.router.navigate([`@${this.currentUser()?.username}/practices/${practiceId}`]);
         },
       );
   }
