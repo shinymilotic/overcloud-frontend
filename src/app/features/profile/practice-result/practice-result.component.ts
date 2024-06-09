@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { PracticeService } from "src/app/core/services/practice.service";
-import { SideBarComponent } from "../../side-bar/side-bar.component";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { PracticeResult } from "./PracticeResult";
 import { Question } from "./Question";
@@ -15,7 +14,7 @@ import { EssayResult } from "./EssayQuestion";
     templateUrl: "./practice-result.component.html",
     styleUrls: ["./practice-result.component.css"],
     standalone: true,
-    imports: [SideBarComponent]
+    imports: []
 })
 export class PracticeResultComponent implements OnInit {
   

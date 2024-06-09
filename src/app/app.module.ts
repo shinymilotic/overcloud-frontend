@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration, withHttpTransferCacheOptions } f
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { HeaderComponent } from "./features/header/header.component";
 import { UserService } from "./core/services/user.service";
 import { EMPTY, Observable } from "rxjs";
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
@@ -11,7 +10,6 @@ import { TokenInterceptor } from "./core/interceptors/token.interceptor";
 import { ApiInterceptor } from "./core/interceptors/api.interceptor";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { SideBarComponent } from "./features/side-bar/side-bar.component";
 import {
   provideRouter,
   withComponentInputBinding,
@@ -28,8 +26,6 @@ export function initAuth(authCookieUtils: AuthCookieUtils, userService: UserServ
 
 @NgModule({ declarations: [AppComponent],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        HeaderComponent,
-        // SideBarComponent,
         AppRoutingModule,
         ServiceWorkerModule.register("ngsw-worker.js", {
             enabled: !isDevMode(),

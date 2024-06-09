@@ -25,7 +25,6 @@ import { UserService } from "../../core/services/user.service";
 import { Errors } from "../../core/models/errors.model";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { TagsService } from "src/app/core/services/tags.service";
-import { SideBarComponent } from "../side-bar/side-bar.component";
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import {Paragraph} from '@tiptap/extension-paragraph'
@@ -51,7 +50,6 @@ interface ArticleForm {
         NgFor,
         AsyncPipe,
         FormsModule,
-        SideBarComponent,
         
     ]
 })

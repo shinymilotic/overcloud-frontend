@@ -1,9 +1,6 @@
 import { Component, Renderer2, ViewChild } from '@angular/core';
-import { HeaderComponent } from "../features/header/header.component";
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { SideBarComponent } from "../features/side-bar/side-bar.component";
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
@@ -19,9 +16,7 @@ import { TopBarComponent } from "./topbar.component";
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.css',
     imports: [
-        HeaderComponent,
         RouterModule,
-        SideBarComponent,
         SidebarModule,
         RadioButtonModule,
         InputSwitchModule,

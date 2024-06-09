@@ -12,7 +12,6 @@ import { Errors } from "../../core/models/errors.model";
 import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { SettingsForm } from "./SettingsForm";
-import { SideBarComponent } from "../side-bar/side-bar.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputText} from 'primeng/inputtext';
 import { FloatLabelModule} from 'primeng/floatlabel';
@@ -23,7 +22,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     templateUrl: "./settings.component.html",
     styleUrls: ["./settings.component.css"],
     standalone: true,
-    imports: [ListErrorsComponent, ReactiveFormsModule, SideBarComponent, InputTextModule, FloatLabelModule]
+    imports: [ListErrorsComponent, ReactiveFormsModule, InputTextModule, FloatLabelModule]
 })
 export class SettingsComponent implements OnInit {
   user!: User;
