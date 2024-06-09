@@ -9,7 +9,7 @@ import { ArticlesService } from "../../core/services/articles.service";
 import { ArticleListConfig } from "../../core/models/blog/article-list-config.model";
 import { Article } from "../../core/models/blog/article.model";
 import { ArticlePreviewComponent } from "./article-preview.component";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgForOf } from "@angular/common";
 import { LoadingState } from "../../core/models/loading-state.model";
 import { Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -20,7 +20,7 @@ import { SearchParam } from "src/app/core/models/search.model";
   selector: "app-article-list",
   styleUrls: ["article-list.component.css"],
   templateUrl: "./article-list.component.html",
-  imports: [ArticlePreviewComponent, NgForOf, NgClass, NgIf],
+  imports: [ArticlePreviewComponent, NgForOf, NgClass],
   standalone: true,
 })
 export class ArticleListComponent implements OnDestroy, OnInit {

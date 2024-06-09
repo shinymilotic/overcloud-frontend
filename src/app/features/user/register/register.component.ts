@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { NgIf } from "@angular/common";
 import { ListErrorsComponent } from "../../../shared/list-errors.component";
 import { Errors } from "../../../core/models/errors.model";
 import { UserService } from "../../../core/services/user.service";
@@ -23,7 +22,7 @@ interface RegisterFrom {
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.css"],
     standalone: true,
-    imports: [RouterLink, NgIf, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
+    imports: [RouterLink, ListErrorsComponent, ReactiveFormsModule, SideBarComponent]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   title = "";

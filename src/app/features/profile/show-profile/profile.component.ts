@@ -13,7 +13,7 @@ import { UserService } from "../../../core/services/user.service";
 import { Profile } from "../../../core/models/auth/profile.model";
 import { ProfileService } from "../../../core/services/profile.service";
 import { FollowButtonComponent } from "../../../shared/buttons/follow-button.component";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { SideBarComponent } from "../../side-bar/side-bar.component";
 
 @Component({
@@ -23,7 +23,6 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
     standalone: true,
     imports: [
         FollowButtonComponent,
-        NgIf,
         RouterLink,
         AsyncPipe,
         RouterLinkActive,

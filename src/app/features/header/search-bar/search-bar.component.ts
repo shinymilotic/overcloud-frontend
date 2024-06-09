@@ -5,14 +5,13 @@ import { SearchParam } from "../../../core/models/search.model";
 import { Subject, takeUntil } from "rxjs";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
-import { NgIf } from "@angular/common";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-search-bar",
   templateUrl: "./search-bar.component.html",
   styleUrls: ["./search-bar.component.css"],
-  imports: [ FormsModule, NgIf, ReactiveFormsModule 
+  imports: [ FormsModule, ReactiveFormsModule 
   ],
   standalone: true,
 })

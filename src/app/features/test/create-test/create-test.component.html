@@ -49,7 +49,8 @@
             </a>
           </div>
   
-            <div *ngIf="this.isChoiceQuestion(qIndex)" formArrayName="answers">
+          @if (this.isChoiceQuestion(qIndex)) {
+            <div formArrayName="answers">
               <div
                 class="flex mb-2"
                 *ngFor="
@@ -95,6 +96,8 @@
                 Add answer
               </a>
             </div>
+          }
+            
           </div>
         </div>
   

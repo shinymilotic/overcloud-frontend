@@ -5,7 +5,7 @@ import { LoadingState } from 'src/app/core/models/loading-state.model';
 import { SearchParam } from 'src/app/core/models/search.model';
 import { SearchService } from 'src/app/core/services/search.service';
 import { SideBarComponent } from "../side-bar/side-bar.component";
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -15,7 +15,6 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@ang
     standalone: true,
     imports: [
       SideBarComponent,
-      NgIf,
       RouterLink,
       AsyncPipe,
       RouterLinkActive,

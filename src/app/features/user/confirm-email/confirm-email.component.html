@@ -4,18 +4,24 @@
 
     <div class="text-center">
         
-        <div *ngIf="!this.getIsConfirmed()">         
-            Đang xác thực tài khoản...
-        </div>
-        <div *ngIf="this.getIsConfirmed()">
-            <div class="image">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" _SVGFile__filename="oldscale/actions/button_accept.svg" version="1.0" viewBox="0 0 60 60">
-                    <path d="m4.6873 31.376c6.4437 5.864 10.608 11.142 17.501 23.374 14.984-37.823 35.502-47.534 32.9-49.208-5.264-3.5325-30.874 26.075-33.971 29.981-3.724-1.972-16.43-8.865-16.43-4.147z" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.125"/>
-                    <path d="m4.6873 31.376c6.4437 5.864 10.608 11.142 17.501 23.374 14.984-37.823 35.502-47.534 32.9-49.208-5.264-3.5325-30.874 26.075-33.971 29.981-3.724-1.972-16.43-8.865-16.43-4.147z" fill="#62b01e" fill-rule="evenodd" stroke="#62b01e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.125"/>
-                   </svg>   
+        @if (!this.getIsConfirmed()) {
+            <div >         
+                Đang xác thực tài khoản...
             </div>
-            Xác thực thành công!
-        </div>
+        }
+        
+        @if (this.getIsConfirmed()) {
+            <div>
+                <div class="image">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" _SVGFile__filename="oldscale/actions/button_accept.svg" version="1.0" viewBox="0 0 60 60">
+                        <path d="m4.6873 31.376c6.4437 5.864 10.608 11.142 17.501 23.374 14.984-37.823 35.502-47.534 32.9-49.208-5.264-3.5325-30.874 26.075-33.971 29.981-3.724-1.972-16.43-8.865-16.43-4.147z" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.125"/>
+                        <path d="m4.6873 31.376c6.4437 5.864 10.608 11.142 17.501 23.374 14.984-37.823 35.502-47.534 32.9-49.208-5.264-3.5325-30.874 26.075-33.971 29.981-3.724-1.972-16.43-8.865-16.43-4.147z" fill="#62b01e" fill-rule="evenodd" stroke="#62b01e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.125"/>
+                       </svg>   
+                </div>
+                Xác thực thành công!
+            </div>
+        }
+        
     </div>
     
     <div class="invisible col-sm-0 col-s-0"> Item invisibledsdasdsadsa</div>

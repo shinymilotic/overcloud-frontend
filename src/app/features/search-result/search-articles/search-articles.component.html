@@ -1,13 +1,14 @@
 <app-article-preview *ngFor="let article of results" [article]="article">
 </app-article-preview>
 
-<div class="article-preview" *ngIf="loading === LoadingState.LOADING">
-  Loading...
-</div>
+@if (loading === LoadingState.LOADING) {
+  <div class="article-preview">
+    Loading...
+  </div>
+}
 
-<div
-  class="article-preview"
-  *ngIf="loading === LoadingState.LOADED && !results.length"
->
+@if (loading === LoadingState.LOADED && !results.length) {
+  <div class="article-preview">
   No posts.
 </div>
+}

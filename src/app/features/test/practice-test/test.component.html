@@ -11,10 +11,11 @@
           class="list-decimal p-3"
         >
           <pre class="question m-2">{{ question.question }}</pre>
-          <ol class="answers-list" *ngIf="question.questionType == 1">
+          @if (question.questionType == 1) {
+          <ol class="answers-list">
             <li *ngFor="let answer of asChoiceQuestion(qIndex).answers; let aIndex = index">
-              
-              <input *ngIf="!asChoiceQuestion(qIndex).isMultipleAnswers"
+              @if (!asChoiceQuestion(qIndex).isMultipleAnswers) {
+                <input
                 class="cursor-pointer"
                 type="radio"
                 id="{{ answer.id }}"
@@ -22,26 +23,33 @@
                 formControlName="{{ question.id }}"
               />
 
-              <span formArrayName="{{question.id}}" *ngIf="asChoiceQuestion(qIndex).isMultipleAnswers">
-              <span formGroupName="{{aIndex}}">
-                <input 
-                class="cursor-pointer"
-                type="checkbox"
-                id="{{ answer.id }}"
-                formControlName="selected"
-              />
-                </span>
-                
-              </span>
+              }
+              
+              @if (asChoiceQuestion(qIndex).isMultipleAnswers) {
+                <span formArrayName="{{question.id}}">
+                  <span formGroupName="{{aIndex}}">
+                    <input 
+                    class="cursor-pointer"
+                    type="checkbox"
+                    id="{{ answer.id }}"
+                    formControlName="selected"
+                  />
+                    </span>
+                </span>  
+              }
               
               <label for="{{ answer.id }}" class="cursor-pointer">
                 <pre class="inline-block m-2">{{ answer.answer }}</pre></label
               >
             </li>
           </ol>
-          <fieldset *ngIf="question.questionType == 2" class="form-group">
+        }
+        @if (question.questionType == 2) {
+          <fieldset class="form-group">
             <textarea type="text" class="border-none outline-none w-full" formControlName="{{ question.id }}"></textarea>
           </fieldset>
+        }
+          
         </li>
       </ol>
     

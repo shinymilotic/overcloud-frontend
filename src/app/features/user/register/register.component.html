@@ -4,7 +4,9 @@
     <div class=" justify-center register-panel">
       <h1 class="text-xs-center">{{ title }}</h1>
       <app-list-errors [errors]="errors"></app-list-errors>
-      <div *ngIf="this.isRegisterSuccess">Register success, please check email.</div>
+      @if (this.isRegisterSuccess) {
+        <div>Register success, please check email.</div>
+      }
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
         <fieldset [disabled]="isSubmitting">
           <fieldset class="form-group">

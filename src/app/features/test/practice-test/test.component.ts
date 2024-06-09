@@ -1,4 +1,4 @@
-import { NgForOf, CommonModule, NgIf } from "@angular/common";
+import { NgForOf, CommonModule } from "@angular/common";
 import { Component, OnInit, Signal } from "@angular/core";
 import {
   FormArray,
@@ -43,7 +43,6 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
         RouterLink,
         NgForOf,
         CommonModule,
-        NgIf,
         ReactiveFormsModule,
         SideBarComponent
     ]

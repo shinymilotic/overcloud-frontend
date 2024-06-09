@@ -1,4 +1,4 @@
-import { NgForOf, CommonModule, NgIf } from "@angular/common";
+import { NgForOf, CommonModule } from "@angular/common";
 import { Component, OnDestroy } from "@angular/core";
 import { RouterLinkActive, RouterLink } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
@@ -12,7 +12,7 @@ import { SideBarComponent } from "../../side-bar/side-bar.component";
     templateUrl: "./test-list.component.html",
     styleUrls: ["./test-list.component.css"],
     standalone: true,
-    imports: [RouterLinkActive, RouterLink, NgForOf, CommonModule, NgIf, SideBarComponent]
+    imports: [RouterLinkActive, RouterLink, NgForOf, CommonModule, SideBarComponent]
 })
 export class TestListComponent implements OnDestroy {
   errors!: Errors[];

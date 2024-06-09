@@ -6,14 +6,14 @@ import { LoadingState } from 'src/app/core/models/loading-state.model';
 import { SearchParam } from 'src/app/core/models/search.model';
 import { SearchService } from 'src/app/core/services/search.service';
 import { ArticlePreviewComponent } from "../../../shared/article-helpers/article-preview.component";
-import { NgFor, NgForOf, NgIf } from '@angular/common';
+import { NgForOf } from '@angular/common';
 
 @Component({
     selector: 'app-search-articles',
     templateUrl: './search-articles.component.html',
     styleUrls: ['./search-articles.component.css'],
     standalone: true,
-    imports: [ArticlePreviewComponent, NgForOf, NgIf]
+    imports: [ArticlePreviewComponent, NgForOf]
 })
 export class SearchArticlesComponent {
   limit: number = 10;

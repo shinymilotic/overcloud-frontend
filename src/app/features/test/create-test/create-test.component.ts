@@ -1,4 +1,4 @@
-import { CommonModule, NgForOf, NgIf } from "@angular/common";
+import { CommonModule, NgForOf } from "@angular/common";
 import {
     Component,
     ElementRef,
@@ -43,7 +43,6 @@ import { QuestionForm } from "./form-model/QuestionForm";
         ReactiveFormsModule,
         NgForOf,
         CommonModule,
-        NgIf,
         SideBarComponent
     ]
 })
