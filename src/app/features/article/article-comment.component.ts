@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
+import { Component, EventEmitter, Input, Output, Signal, computed, inject } from "@angular/core";
 import { UserService } from "../../core/services/user.service";
 import { User } from "../../core/models/auth/user.model";
 import { RouterLink } from "@angular/router";
@@ -17,10 +17,13 @@ export class ArticleCommentComponent {
   @Input() comment!: Comment;
   @Output() delete = new EventEmitter<boolean>();
 
-  canModify$ = inject(UserService).currentUser.pipe(
-    map(
-      (userData: User | null) =>
-        userData?.username === this.comment.author.username
-    )
-  );
+  canModify: Signal<boolean> = computed(() => {
+    if (this.userService.userSignal()?.username === this.comment.author.username) {
+      return true;
+    }
+
+    return false;
+  });
+
+  constructor(private readonly userService: UserService) {}
 }

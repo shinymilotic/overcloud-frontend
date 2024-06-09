@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, Signal, computed } from "@angular/core";
 import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { User } from "../../core/models/auth/user.model";
@@ -38,15 +38,22 @@ import { SideBarComponent } from "../side-bar/side-bar.component";
         ArticleCommentComponent,
         ReactiveFormsModule,
         ShowAuthedDirective,
-        NgIf,
         SideBarComponent
     ]
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   article!: Article;
-  currentUser!: User | null;
+  currentUser: Signal<User | null> = this.userService.userSignal;
   comments: Comment[] = [];
-  canModify: boolean = false;
+
+  canModify: Signal<boolean> = computed(() => {
+    if (this.userService.userSignal()?.username === this.article.author.username) {
+      return true;
+    }
+
+    return false;
+  });  
+
   commentControl: FormControl<string>;
   commentFormErrors: Errors | null = null;
   bodyAsHtml!: string;
@@ -68,8 +75,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     const slug = this.route.snapshot.params["slug"];
     combineLatest([
       this.articleService.get(slug),
-      this.commentsService.getAll(slug),
-      this.userService.currentUser,
+      this.commentsService.getAll(slug)
     ])
       .pipe(
         catchError((err) => {
@@ -77,11 +83,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
           return throwError(() => err);
         })
       )
-      .subscribe(([article, comments, currentUser]) => {
+      .subscribe(([article, comments]) => {
         this.article = article;
         this.comments = comments;
-        this.currentUser = currentUser;
-        this.canModify = currentUser?.username === article.author.username;
       });
   }
 

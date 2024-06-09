@@ -1,32 +1,37 @@
-<div class="card" *ngIf="comment">
-  <div class="card-block">
-    <p class="card-text">
-      {{ comment.body }}
-    </p>
-  </div>
-  <div class="card-footer">
-    <a
-      class="comment-author"
-      [routerLink]="['/@'.concat(comment.author.username)]"
-    >
-      <img
-        [src]="comment.author.image"
-        alt="author image"
-        class="comment-author-img"
-      />
-    </a>
-    &nbsp;
-    <a
-      class="author"
-      [routerLink]="['/@'.concat(comment.author.username)]"
-    >
-      {{ comment.author.username }}
-    </a>
-    <span class="date-posted">
-      {{ comment.createdAt | date : "longDate" }}
-    </span>
-    <span class="mod-options" *ngIf="canModify$ | async">
-      <i class="ion-trash-a cursor-pointer" (click)="delete.emit(true)">X</i>
-    </span>
-  </div>
-</div>
+@if (comment) {
+  <div class="card" *ngIf="comment">
+    <div class="card-block">
+      <p class="card-text">
+        {{ comment.body }}
+      </p>
+    </div>
+    <div class="card-footer">
+      <a
+        class="comment-author"
+        [routerLink]="['/@'.concat(comment.author.username)]"
+      >
+        <img
+          [src]="comment.author.image"
+          alt="author image"
+          class="comment-author-img"
+        />
+      </a>
+      &nbsp;
+      <a
+        class="author"
+        [routerLink]="['/@'.concat(comment.author.username)]"
+      >
+        {{ comment.author.username }}
+      </a>
+      <span class="date-posted">
+        {{ comment.createdAt | date : "longDate" }}
+      </span>
+      @if (canModify()) {
+        <span class="mod-options" >
+          <i class="ion-trash-a cursor-pointer" (click)="delete.emit(true)">X</i>
+        </span>
+      }
+      
+    </div>
+  </div>  
+}

@@ -1,126 +1,135 @@
-<div class="article-page flex justify-between" *ngIf="article">
-  <!-- <app-side-bar class="col-sm-0 col-s-0"></app-side-bar> -->
-
-  <div class="article-container flex flex-col">
-    <div class="banner">
-      <div class="container">
-        <h1 class="title">{{ article.title }}</h1>
+@if (article) {
+  <div class="article-page flex justify-between">
   
-        <app-article-meta [article]="article">
-          <span *ngIf="canModify">
-            <a
-              class="btn btn-sm btn-outline-secondary"
-              [routerLink]="['/editor', article.slug]"
-            >
-              <i class="ion-edit"></i>Edit
-            </a>
-            <span>&nbsp;&nbsp;</span>
-            <button
-              class="btn btn-sm btn-outline-danger"
-              [ngClass]="{ disabled: isDeleting }"
-              (click)="deleteArticle()"
-            >
-              <i class="ion-trash-a"></i> Delete
-            </button>
-          </span>
-  
-          <div class="follow-favorites-panel" *ngIf="!canModify">
-            <app-follow-button
-              [profile]="article.author"
-              (toggle)="toggleFollowing($event)"
-            >
-            </app-follow-button>
-            &nbsp;&nbsp;
-            <app-favorite-button
-              [article]="article"
-              (toggle)="onToggleFavorite($event)"
-            > 
-              {{ article.favorited ? " " : " " }}
-              <span class="counter">({{ article.favoritesCount }})</span>
-            </app-favorite-button>
-          </div>
-        </app-article-meta>
-      </div>
-    </div>
-  
-    <div class="page">
-      <div class="row article-content col-md-12">
-          <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
-          <div [outerHTML]="article.body"></div>
-          <ul class="tag-list">
-            @for (tag of article.tagList; track $index) {
-            <li
-              class="tag-default tag-pill tag-outline"
-            >
-              {{ tag }}
-            </li>
+    <div class="article-container flex flex-col">
+      <div class="banner">
+        <div class="container">
+          <h1 class="title">{{ article.title }}</h1>
+    
+          <app-article-meta [article]="article">
+            @if (canModify()) {
+              <span>
+                <a
+                  class="btn btn-sm btn-outline-secondary"
+                  [routerLink]="['/editor', article.slug]"
+                >
+                  <i class="ion-edit"></i>Edit
+                </a>
+                <span>&nbsp;&nbsp;</span>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  [ngClass]="{ disabled: isDeleting }"
+                  (click)="deleteArticle()"
+                >
+                  <i class="ion-trash-a"></i> Delete
+                </button>
+              </span>
             }
-          </ul>
+    
+            @if (!canModify()) {
+              <div class="follow-favorites-panel">
+                <app-follow-button
+                  [profile]="article.author"
+                  (toggle)="toggleFollowing($event)"
+                >
+                </app-follow-button>
+                &nbsp;&nbsp;
+                <app-favorite-button
+                  [article]="article"
+                  (toggle)="onToggleFavorite($event)"
+                > 
+                  {{ article.favorited ? " " : " " }}
+                  <span class="counter">({{ article.favoritesCount }})</span>
+                </app-favorite-button>
+              </div>
+            }
+            
+          </app-article-meta>
+        </div>
       </div>
-  
-      <hr />
-  
-      <div class="article-actions">
-        <app-article-meta [article]="article">
-          <span *ngIf="canModify">
-            <a
-              class="btn btn-sm btn-outline-secondary bg-black text-white"
-              [routerLink]="['/editor', article.slug]"
-            >
-              <i class="ion-edit"></i> Edit
-            </a>
-            <span>&nbsp;&nbsp;</span>
-            <button
-              class="btn btn-sm btn-outline-danger"
-              [ngClass]="{ disabled: isDeleting }"
-              (click)="deleteArticle()"
-            >
-              <i class="ion-trash-a"></i> Delete
-            </button>
-          </span>
-        </app-article-meta>
-      </div>
-  
-      <div class="row max-w-lg m-auto">
-          <div *appShowAuthed="true">
-            <app-list-errors></app-list-errors>
-            <form class="card comment-form" (ngSubmit)="addComment()">
-              <fieldset [disabled]="isSubmitting" class="border-none">
-                <div class="card-block">
-                  <textarea
-                    class="form-control max-w-md w-11/12 outline-none"
-                    placeholder="Write comment..."
-                    rows="3"
-                    [formControl]="commentControl"
-                  ></textarea>
-                </div>
-                <div class="card-footer">
-                  <img
-                    [src]="currentUser?.image === null ? '' : currentUser?.image"
-                    class="comment-author-img"
-                  />
-                  <button class="btn btn-sm comment-btn" type="submit">
-                    Comment
-                  </button>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-  
-          <div *appShowAuthed="false">
-            <a [routerLink]="['/login']">Login</a> or 
-            <a [routerLink]="['/register']">Register</a> to comments on this post.
-          </div>
-          <br>
-          @for (comment of comments; track $index) {
-            <app-article-comment
-            [comment]="comment"
-            (delete)="deleteComment(comment)"
-            >
-            </app-article-comment>
-          }
-          
+    
+      <div class="page">
+        <div class="row article-content col-md-12">
+            <!-- <div [innerHTML]="article.body | markdown | async"></div> -->
+            <div [outerHTML]="article.body"></div>
+            <ul class="tag-list">
+              @for (tag of article.tagList; track $index) {
+              <li
+                class="tag-default tag-pill tag-outline"
+              >
+                {{ tag }}
+              </li>
+              }
+            </ul>
+        </div>
+    
+        <hr />
+    
+        <div class="article-actions">
+          <app-article-meta [article]="article">
+            @if (canModify()) {
+              <span>
+                <a
+                  class="btn btn-sm btn-outline-secondary bg-black text-white"
+                  [routerLink]="['/editor', article.slug]"
+                >
+                  <i class="ion-edit"></i> Edit
+                </a>
+                <span>&nbsp;&nbsp;</span>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  [ngClass]="{ disabled: isDeleting }"
+                  (click)="deleteArticle()"
+                >
+                  <i class="ion-trash-a"></i> Delete
+                </button>
+              </span>
+            }
+            
+          </app-article-meta>
+        </div>
+    
+        <div class="row max-w-lg m-auto">
+            <div *appShowAuthed="true">
+              <app-list-errors></app-list-errors>
+              <form class="card comment-form" (ngSubmit)="addComment()">
+                <fieldset [disabled]="isSubmitting" class="border-none">
+                  <div class="card-block">
+                    <textarea
+                      class="form-control max-w-md w-11/12 outline-none"
+                      placeholder="Write comment..."
+                      rows="3"
+                      [formControl]="commentControl"
+                    ></textarea>
+                  </div>
+                  <div class="card-footer">
+                    <img
+                      [src]="currentUser()?.image === null ? '' : currentUser()?.image"
+                      class="comment-author-img"
+                    />
+                    <button class="btn btn-sm comment-btn" type="submit">
+                      Comment
+                    </button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+    
+            <div *appShowAuthed="false">
+              <a [routerLink]="['/login']">Login</a> or 
+              <a [routerLink]="['/register']">Register</a> to comments on this post.
+            </div>
+            <br>
+            @for (comment of comments; track $index) {
+              <app-article-comment
+              [comment]="comment"
+              (delete)="deleteComment(comment)"
+              >
+              </app-article-comment>
+            }
+            
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>  
+}
