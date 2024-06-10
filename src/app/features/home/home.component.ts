@@ -34,7 +34,6 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   standalone: true,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
   listConfig: ArticleListConfig = {
     filters: {},
   };
@@ -56,18 +55,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userService.isAuthenticated
-      .pipe(
-        tap((isAuthenticated) => {
-          if (isAuthenticated) {
-            this.setListTo();
-          }
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(
-        (isAuthenticated: boolean) => (this.isAuthenticated = isAuthenticated)
-      );
+      if (this.userService.userSignal()) {
+        this.setListTo();
+      }
   }
 
   ngOnDestroy(): void {

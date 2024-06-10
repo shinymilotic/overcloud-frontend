@@ -8,12 +8,6 @@ import { AuthCookieUtils } from "../utils/authCookie.utils";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
-  public currentUser = this.currentUserSubject
-    .asObservable()
-    .pipe(distinctUntilChanged());
-
-  public isAuthenticated = this.currentUser.pipe(map((user) => !!user));
 
   public userSignal = signal<User | null>(null);
 
@@ -26,7 +20,6 @@ export class UserService {
     return this.http
       .post<User>("/users/login", { user: credentials })
       .pipe(tap((user) => {
-        this.currentUserSubject.next(user);
         this.userSignal.set(user);
         this.authCookieUtils.saveUserIdCookie(user.id);
       }));
@@ -52,7 +45,6 @@ export class UserService {
   update(user: Partial<User>): Observable<User> {
     return this.http.put<User>("/users", user).pipe(
       tap((user) => {
-        this.currentUserSubject.next(user);
         this.userSignal.set(user);
       })
     );
@@ -62,7 +54,6 @@ export class UserService {
     return this.http.get<User>("/users").pipe(
       tap({
         next: (user) => {
-          this.currentUserSubject.next(user);
           this.userSignal.set(user);
           // this.setAuth(accessToken, refreshToken);
         },
@@ -74,7 +65,6 @@ export class UserService {
 
   purgeAuth(): void {
     this.authCookieUtils.destroyUserIdCookie();
-    this.currentUserSubject.next(null);
     this.userSignal.set(null);
   }
 

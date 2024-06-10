@@ -48,14 +48,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
           void this.router.navigate(["/"]);
           return throwError(() => error);
         }),
-        switchMap((profile) => {
-          return combineLatest([of(profile), this.userService.currentUser]);
-        }),
-        takeUntil(this.destroy$)
       )
-      .subscribe(([profile, user]) => {
+      .subscribe((profile) => {
         this.profile = profile;
-        this.isUser = profile.username === user?.username;
+        this.isUser = profile.username === this.userService.userSignal()?.username;
       });
   }
 
