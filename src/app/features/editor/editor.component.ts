@@ -40,7 +40,7 @@ interface ArticleForm {
 @Component({
     selector: "app-editor-page",
     templateUrl: "./editor.component.html",
-    styleUrls: ["./editor.component.css"],
+    styleUrls: ["./editor.component.scss"],
     standalone: true,
     imports: [
         ListErrorsComponent,
@@ -109,31 +109,31 @@ export class EditorComponent implements OnInit, OnDestroy {
         StarterKit,
         
       ],
-      content: '',
+      content: '<div class="editor-content"></div>',
 
     });
 
     this.items = [
       {
-        icon: 'bold',
+        icon: 'format_bold',
         title: 'Bold',
         action: () => this.editor.chain().focus().toggleBold().run(),
         isActive: () => this.editor.isActive('bold'),
       },
       {
-        icon: 'italic',
+        icon: 'format_italic',
         title: 'Italic',
         action: () => this.editor.chain().focus().toggleItalic().run(),
         isActive: () => this.editor.isActive('italic'),
       },
       {
-        icon: 'strikethrough',
+        icon: 'format_strikethrough',
         title: 'Strike',
         action: () => this.editor.chain().focus().toggleStrike().run(),
         isActive: () => this.editor.isActive('strike'),
       },
       {
-        icon: 'code-view',
+        icon: 'code',
         title: 'Code',
         action: () => this.editor.chain().focus().toggleCode().run(),
         isActive: () => this.editor.isActive('code'),
@@ -144,35 +144,35 @@ export class EditorComponent implements OnInit, OnDestroy {
       //   action: () => this.editor.chain().focus().toggleHighlight().run(),
       //   isActive: () => this.editor.isActive('highlight'),
       // },
+      // {
+      //   type: 'divider',
+      // },
       {
-        type: 'divider',
-      },
-      {
-        icon: 'h-1',
+        icon: 'format_h1',
         title: 'Heading 1',
         action: () => this.editor.chain().focus().toggleHeading({ level: 1 }).run(),
         isActive: () => this.editor.isActive('heading', { level: 1 }),
       },
       {
-        icon: 'h-2',
+        icon: 'format_h2',
         title: 'Heading 2',
         action: () => this.editor.chain().focus().toggleHeading({ level: 2 }).run(),
         isActive: () => this.editor.isActive('heading', { level: 2 }),
       },
       {
-        icon: 'paragraph',
+        icon: 'format_paragraph',
         title: 'Paragraph',
         action: () => this.editor.chain().focus().setParagraph().run(),
         isActive: () => this.editor.isActive('paragraph'),
       },
       {
-        icon: 'list-unordered',
+        icon: 'format_list_bulleted',
         title: 'Bullet List',
         action: () => this.editor.chain().focus().toggleBulletList().run(),
         isActive: () => this.editor.isActive('bulletList'),
       },
       {
-        icon: 'list-ordered',
+        icon: 'format_list_numbered',
         title: 'Ordered List',
         action: () => this.editor.chain().focus().toggleOrderedList().run(),
         isActive: () => this.editor.isActive('orderedList'),
@@ -184,51 +184,50 @@ export class EditorComponent implements OnInit, OnDestroy {
       //   isActive: () => this.editor.isActive('taskList'),
       // },
       {
-        icon: 'code-box-line',
+        icon: 'code_blocks',
         title: 'Code Block',
         action: () => this.editor.chain().focus().toggleCodeBlock().run(),
         isActive: () => this.editor.isActive('codeBlock'),
       },
+      // {
+      //   type: 'divider',
+      // },
       {
-        type: 'divider',
-      },
-      {
-        icon: 'double-quotes-l',
+        icon: 'format_quote',
         title: 'Blockquote',
         action: () => this.editor.chain().focus().toggleBlockquote().run(),
         isActive: () => this.editor.isActive('blockquote'),
       },
       {
-        icon: 'separator',
+        icon: 'horizontal_rule',
         title: 'Horizontal Rule',
         action: () => this.editor.chain().focus().setHorizontalRule().run(),
       },
+      // {
+      //   type: 'divider',
+      // },
+      // {
+      //   icon: 'text-wrap',
+      //   title: 'Hard Break',
+      //   action: () => this.editor.chain().focus().setHardBreak().run(),
+      // },
+      // {
+      //   icon: 'format-clear',
+      //   title: 'Clear Format',
+      //   action: () => this.editor.chain().focus().clearNodes().unsetAllMarks()
+      //     .run(),
+      // },
       {
-        type: 'divider',
-      },
-      {
-        icon: 'text-wrap',
-        title: 'Hard Break',
-        action: () => this.editor.chain().focus().setHardBreak().run(),
-      },
-      {
-        icon: 'format-clear',
-        title: 'Clear Format',
-        action: () => this.editor.chain().focus().clearNodes().unsetAllMarks()
-          .run(),
-      },
-      {
-        type: 'divider',
-      },
-      {
-        icon: 'arrow-go-back-line',
+        icon: 'undo',
         title: 'Undo',
         action: () => this.editor.chain().focus().undo().run(),
+        isActive: () => this.editor.isActive('undo'),
       },
       {
-        icon: 'arrow-go-forward-line',
+        icon: 'redo',
         title: 'Redo',
         action: () => this.editor.chain().focus().redo().run(),
+        isActive: () => this.editor.isActive('redo'),
       },
     ];
 

@@ -65,15 +65,17 @@
 
         <fieldset class="form-group bg-white">
           <div class="tiptap-editor">
+            <div class="editor-header">
               @for (item of items; track $index) {
-                <a
-                (click)="item.action()"
+                <button class="menu-item" [class]="item.isActive && item.isActive()? 'is-active' : ''" (click)="item.action()"
               >
               <span class="material-symbols-outlined">
-                check_circle
-              </span>{{ item.title }}
-              </a>
+                {{item.icon}}
+              </span>
+              </button>
               }
+            </div>
+              
           </div>
         </fieldset>
         <button

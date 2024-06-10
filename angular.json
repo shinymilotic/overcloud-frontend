@@ -30,7 +30,6 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/lexical-editor.css",
               "src/responsive.scss"],
             "scripts": [],
             "aot": true,
@@ -92,7 +91,7 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.css", "src/lexical-editor.css"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
