@@ -85,22 +85,19 @@
   
   .tiptap-editor {
     background-color: #fff;
-    border: 3px solid #0d0d0d;
-    border-radius: 0.75rem;
+    // border: 3px solid #0d0d0d;
+    border: 1px solid #0d0d0d;
+    border-radius: 0.75rem;s s
     color: #0d0d0d;
     display: flex;
     flex-direction: column;
-    max-height: 26rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 
     .editor-header {
       align-items: center;
+      border: 3px solid #0d0d0d;
+      border-radius: 0.75rem;
     //   background: #0d0d0d;
       border-bottom: 3px solid #0d0d0d;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
       display: flex;
       flex: 0 0 auto;
       flex-wrap: wrap;
@@ -110,6 +107,9 @@
     .ProseMirror {
       flex: 1 1 auto;
       padding: 1.25rem 1rem;
+      overflow-x: hidden;
+      overflow-y: auto;  
+      overflow-wrap:anywhere;
       -webkit-overflow-scrolling: touch;
     }
   }
