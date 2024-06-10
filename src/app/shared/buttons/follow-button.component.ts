@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { switchMap, takeUntil } from "rxjs/operators";
-import { EMPTY, Subject } from "rxjs";
+import { EMPTY, Observable, Subject } from "rxjs";
 import { ProfileService } from "../../core/services/profile.service";
 import { UserService } from "../../core/services/user.service";
 import { Profile } from "../../core/models/auth/profile.model";
@@ -40,28 +40,25 @@ export class FollowButtonComponent implements OnDestroy {
   toggleFollowing(): void {
     this.isSubmitting = true;
 
-    this.userService.isAuthenticated
-      .pipe(
-        switchMap((isAuthenticated: boolean) => {
-          if (!isAuthenticated) {
-            void this.router.navigate(["/login"]);
-            return EMPTY;
-          }
+    if (!this.userService.userSignal()) {
+        this.router.navigate(["/login"]);
+    }
 
-          if (!this.profile.following) {
-            return this.profileService.follow(this.profile.username);
-          } else {
-            return this.profileService.unfollow(this.profile.username);
-          }
-        }),
-        takeUntil(this.destroy$)
-      )
+    this.toggleFollow(this.profile.following)
       .subscribe({
-        next: (profile) => {
+        next: (profile: Profile) => {
           this.isSubmitting = false;
           this.toggle.emit(profile);
         },
         error: () => (this.isSubmitting = false),
       });
+  }
+
+  public toggleFollow(following: boolean): Observable<Profile> {
+    if (!following) {
+      return this.profileService.follow(this.profile.username);
+    } else {
+      return this.profileService.unfollow(this.profile.username);
+    }
   }
 }

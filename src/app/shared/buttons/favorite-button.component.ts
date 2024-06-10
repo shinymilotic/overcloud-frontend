@@ -6,8 +6,8 @@ import {
   Output,
 } from "@angular/core";
 import { Router } from "@angular/router";
-import { EMPTY, Subject, switchMap } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { EMPTY, Observable, Subject, of, switchMap } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
 import { NgClass } from "@angular/common";
 import { ArticlesService } from "../../core/services/articles.service";
 import { UserService } from "../../core/services/user.service";
@@ -38,32 +38,29 @@ export class FavoriteButtonComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  toggleFavorite($event: Event): void {
+  toggleFavoriteBtn($event: Event): void {
     $event.stopPropagation();
     this.isSubmitting = true;
+    if (!this.userService.userSignal()) {
+        this.router.navigate(["/login"]);
+    }
 
-    this.userService.isAuthenticated
-      .pipe(
-        switchMap((authenticated) => {
-          if (!authenticated) {
-            void this.router.navigate(["/login"]);
-            return EMPTY;
-          }
+    this.toggleFavorite(this.article.favorited)
+    .subscribe({
+      next: () => {
+        this.isSubmitting = false;
+        this.toggle.emit(!this.article.favorited);
+      },
+      error: () => (this.isSubmitting = false),
+    });
+      
+  }
 
-          if (!this.article.favorited) {
-            return this.articleService.favorite(this.article.slug);
-          } else {
-            return this.articleService.unfavorite(this.article.slug);
-          }
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe({
-        next: () => {
-          this.isSubmitting = false;
-          this.toggle.emit(!this.article.favorited);
-        },
-        error: () => (this.isSubmitting = false),
-      });
+  public toggleFavorite(favorited: boolean): Observable<any> {
+    if (!favorited) {
+      return this.articleService.favorite(this.article.slug);
+    } else {
+      return this.articleService.unfavorite(this.article.slug);
+    }
   }
 }
