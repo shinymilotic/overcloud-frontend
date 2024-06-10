@@ -234,19 +234,16 @@ export class EditorComponent implements OnInit, OnDestroy {
 
     const slug = this.route.snapshot.params["slug"];
     if (slug != undefined) {
-      combineLatest([
-        this.articleService.get(slug),
-        this.userService.getCurrentUser(),
-      ])
+      
+      this.articleService.get(slug)
         .pipe(
           catchError((err) => {
             void this.router.navigate(["/editor"]);
             return throwError(() => err);
           }),
-          takeUntil(this.destroy$)
         )
-        .subscribe(([article, user]) => {
-          if (user.username === article.author.username) {
+        .subscribe((article) => {
+          if (this.userService.userSignal()?.username === article.author.username) {
             this.inTags = article.tagList;
             this.articleForm.patchValue(article);
             this.isUpdate = true;

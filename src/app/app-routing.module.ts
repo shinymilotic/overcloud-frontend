@@ -49,7 +49,7 @@ export const routes: Routes = [
             (m) => m.LoginComponent
           ),
         canActivate: [
-          () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+          () => !inject(UserService).userSignal(),
         ],
       },
       {
@@ -59,7 +59,7 @@ export const routes: Routes = [
             (m) => m.RegisterComponent
           ),
         canActivate: [
-          () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+          () => !inject(UserService).userSignal(),
         ],
       },
       {
@@ -68,7 +68,7 @@ export const routes: Routes = [
           import("./features/settings/settings.component").then(
             (m) => m.SettingsComponent
           ),
-        canActivate: [() => inject(UserService).isAuthenticated],
+        canActivate: [() => inject(UserService).userSignal()],
       },
       {
         path: "editor",
@@ -79,7 +79,7 @@ export const routes: Routes = [
               import("./features/editor/editor.component").then(
                 (m) => m.EditorComponent
               ),
-            canActivate: [() => inject(UserService).isAuthenticated],
+            canActivate: [() => inject(UserService).userSignal()],
           },
           {
             path: ":slug",
@@ -87,7 +87,7 @@ export const routes: Routes = [
               import("./features/editor/editor.component").then(
                 (m) => m.EditorComponent
               ),
-            canActivate: [() => inject(UserService).isAuthenticated],
+            canActivate: [() => inject(UserService).userSignal()],
           },
         ],
       },

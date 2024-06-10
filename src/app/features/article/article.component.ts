@@ -41,7 +41,6 @@ import { Profile } from "../../core/models/auth/profile.model";
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   article!: Article;
-  currentUser: Signal<User | null> = this.userService.userSignal;
   comments: Comment[] = [];
 
   canModify: Signal<boolean> = computed(() => {
@@ -64,7 +63,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private readonly articleService: ArticlesService,
     private readonly commentsService: CommentsService,
     private readonly router: Router,
-    private readonly userService: UserService
+    public readonly userService: UserService
   ) {
     this.commentControl = new FormControl<string>("", { nonNullable: true });
   }
