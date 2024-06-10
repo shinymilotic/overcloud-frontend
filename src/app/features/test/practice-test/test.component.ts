@@ -21,8 +21,6 @@ import {
   takeUntil,
   Subject,
 } from "rxjs";
-import { TestResponse } from "src/app/core/models/test/test-response.model";
-import { User } from "src/app/core/models/auth/user.model";
 import { TestService } from "src/app/core/services/test.service";
 import { UserService } from "src/app/core/services/user.service";
 import { Errors } from "src/app/core/models/errors.model";
@@ -48,7 +46,6 @@ import { Question } from "src/app/core/models/test/question.model";
 export class TestComponent implements OnInit {
   errors!: Errors[];
   isSubmitting = false;
-  currentUser: Signal<User | null> = this.userService.userSignal;
   title: string = "";
   slug: string = "";
   questions: Question[] = [];
@@ -162,7 +159,7 @@ export class TestComponent implements OnInit {
 
     this.practiceService.createPractice(practice)
       .subscribe(({practiceId}) => {
-          this.router.navigate([`@${this.currentUser()?.username}/practices/${practiceId}`]);
+          this.router.navigate([`@${this.userService.userSignal()?.username}/practices/${practiceId}`]);
         },
       );
   }
