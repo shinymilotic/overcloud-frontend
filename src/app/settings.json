@@ -1,0 +1,56 @@
+{
+    "remote.SSH.configFile": "C:\\Users\\blues\\.ssh\\config",
+    "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark",
+    "editor.fontSize": 16,
+    "git.autofetch": true,
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "redhat.telemetry.enabled": true,
+    "cmake.options.advanced": {
+        
+        "build": {
+            "statusBarVisibility": "visible"
+        },
+        "launch": {
+            "statusBarVisibility": "visible"
+        },
+        "debug": {
+            "statusBarVisibility": "visible"
+        }
+    },
+    "editor.fontWeight": "normal",
+    "debug.console.fontSize": 12,
+    "git.suggestSmartCommit": false,
+    "cmake.configureOnOpen": false,
+    "cmake.showOptionsMovedNotification": false,
+    "glassit.alpha": 255,
+    "workbench.colorTheme": "Ayu Mirage",
+    "java.maven.downloadSources": true,
+    "java.import.maven.disableTestClasspathFlag": true,
+    "java.import.maven.offline.enabled": true,
+    "java.maven.updateSnapshots": true,
+    // "terminal.integrated.profiles.linux": {
+    //     "bash": {
+    //         "path": "bash",
+    //         "env": {"JAVA_HOME": "/home/overcloud/.sdkman/candidates/java/21.0.2-graal"},
+    //         "args": ["--rcfile", "/xxx/rcdir/.bashrc"]
+    //     },
+    // },
+    "terminal.integrated.env.linux": {
+        "JAVA_HOME": "/home/overcloud/.sdkman/candidates/java/21.0.2-graal"},
+    "maven.executable.path": "/home/overcloud/Downloads/apache-maven-3.9.6/bin/mvn",
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "monospace",
+    "C_Cpp.files.exclude": {
+        "**/.vscode": true,
+        "**/.vs": true
+    },
+    "C_Cpp.default.cppStandard": "c++20",
+    "terminal.explorerKind": "external",
+    "terminal.integrated.shellIntegration.enabled": true,
+    "java.jdt.ls.java.home": "/home/overcloud/.sdkman/candidates/java/21.0.2-graal",
+}

@@ -2,11 +2,9 @@ import { inject, NgModule } from "@angular/core";
 import {
   Routes,
   RouterModule,
-  PreloadAllModules,
   UrlSegment,
 } from "@angular/router";
 import { UserService } from "./core/services/user.service";
-import { map } from "rxjs/operators";
 import { ProfileComponent } from "./features/profile/show-profile/profile.component";
 import {QuicklinkStrategy, QuicklinkModule} from 'ngx-quicklink';
 import { LayoutComponent } from "./layout/layout.component";
@@ -137,13 +135,6 @@ export const routes: Routes = [
           import("./features/user/confirm-email/confirm-email.component").then(
             (m) => m.ConfirmEmailComponent
           ),
-      },
-      {
-        path: "chat",
-        loadComponent: () =>
-              import("./chat/chat.component").then(
-                (m) => m.ChatComponent
-              ),
       },
       {
         path: "tags",

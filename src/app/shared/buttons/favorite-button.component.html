@@ -1,12 +1,14 @@
 <button
   class="btn-favorite"
-  [ngClass]="{
+  [class]="{
     disabled: isSubmitting,
-    'btn-outline-primary': !article.favorited,
-    'btn-primary': article.favorited
   }"
   (click)="toggleFavoriteBtn($event)"
 >
-  <i class="material-symbols-outlined"> favorite </i>
+  @if (article.favorited) {
+    <i class="pi pi-heart-fill" style="color:rgba(254, 44, 85, 1)" ></i>
+  } @else {
+    <i class="pi pi-heart"></i>
+  }
   <span><ng-content></ng-content></span>
 </button>

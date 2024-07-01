@@ -1,11 +1,13 @@
 
 
 .btn-favorite {
-  display: inline-flex;
   padding: 3px;
+  border: none;
+  background-color: white;
 }
 
 .btn-favorite:hover {
   border-radius: 10px;
   border: solid 1px;
+  cursor: pointer;
 }

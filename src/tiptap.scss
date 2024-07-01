@@ -86,8 +86,8 @@
   .tiptap-editor {
     background-color: #fff;
     // border: 3px solid #0d0d0d;
-    border: 1px solid #0d0d0d;
-    border-radius: 0.75rem;
+    // border: 1px solid #0d0d0d;
+    // border-radius: 0.75rem;
     color: #0d0d0d;
     display: flex;
     flex-direction: column;
@@ -104,6 +104,10 @@
       padding: 0.25rem;
     }
   
+   
+    .ProseMirror * {
+      font-size: unset;
+    }
     .ProseMirror {
       flex: 1 1 auto;
       padding: 1.25rem 1rem;
@@ -111,6 +115,6 @@
       overflow-y: auto;  
       overflow-wrap:anywhere;
       -webkit-overflow-scrolling: touch;
-    }
+    }    
   }
-  
+
