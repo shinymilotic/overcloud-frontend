@@ -44,7 +44,6 @@ export class ArticleListComponent implements OnDestroy, OnInit {
 
   constructor(
     private articlesService: ArticlesService,
-    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {

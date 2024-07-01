@@ -11,7 +11,7 @@ import { TagsService } from "../../core/services/tags.service";
 import { ArticleListConfig } from "../../core/models/blog/article-list-config.model";
 import { AsyncPipe, NgClass, NgForOf } from "@angular/common";
 import { ArticleListComponent } from "../../shared/article-helpers/article-list.component";
-import { takeUntil, tap } from "rxjs/operators";
+import { map, takeUntil, tap } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { UserService } from "../../core/services/user.service";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
@@ -39,12 +39,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
   tags$ = inject(TagsService)
     .getAll()
-    .pipe(tap(() => (this.tagsLoaded = true)));
+    .pipe(
+      tap(() => (this.tagsLoaded = true))
+    );
   tagsLoaded = false;
   destroy$ = new Subject<void>();
 
   constructor(
-    private readonly router: Router,
     private readonly userService: UserService
   ) {
     // this.router.events.subscribe((event) => {

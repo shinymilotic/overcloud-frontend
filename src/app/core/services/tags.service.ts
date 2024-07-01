@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { RestResponse } from "../models/restresponse.model";
 
 @Injectable({ providedIn: "root" })
 export class TagsService {
@@ -9,7 +10,7 @@ export class TagsService {
 
   getAll(): Observable<string[]> {
     return this.http
-      .get<{ tags: string[] }>("/tags")
-      .pipe(map((data) => data.tags));
+      .get<RestResponse<{ tags: string[] }>>("/tags")
+      .pipe(map((data) => data.data.tags));
   }
 }

@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ArticleListConfig } from "../models/blog/article-list-config.model";
 import { Article } from "../models/blog/article.model";
+import { RestResponse } from "../models/restresponse.model";
+import { ArticleList } from "../models/blog/article-list.model";
 
 @Injectable({ providedIn: "root" })
 export class ArticlesService {
@@ -11,8 +13,7 @@ export class ArticlesService {
 
   query(
     config: ArticleListConfig
-  ): Observable<{ articles: Article[]; articlesCount: number }> {
-    // Convert any filters over to Angular's URLSearchParams
+  ): Observable<ArticleList> {
     let params = new HttpParams();
 
     Object.keys(config.filters).forEach((key) => {
@@ -20,9 +21,11 @@ export class ArticlesService {
       params = params.set(key, config.filters[key]);
     });
 
-    return this.http.get<{ articles: Article[]; articlesCount: number }>(
+    return this.http.get<RestResponse<ArticleList>>(
       "/articles",
       { params }
+    ).pipe(
+      map(data => data.data)
     );
   }
 
