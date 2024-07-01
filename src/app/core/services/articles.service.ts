@@ -31,8 +31,8 @@ export class ArticlesService {
 
   get(slug: string): Observable<Article> {
     return this.http
-      .get<{ article: Article }>(`/articles/${slug}`)
-      .pipe(map((data) => data.article));
+      .get<RestResponse<Article>>(`/articles/${slug}`)
+      .pipe(map((data) => data.data));
   }
 
   delete(slug: string): Observable<void> {

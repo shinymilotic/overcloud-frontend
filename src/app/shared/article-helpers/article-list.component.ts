@@ -13,7 +13,6 @@ import { NgClass, NgForOf } from "@angular/common";
 import { LoadingState } from "../../core/models/loading-state.model";
 import { Subject, Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { SearchService } from "src/app/core/services/search.service";
 @Component({
   selector: "app-article-list",
   styleUrls: ["article-list.component.css"],

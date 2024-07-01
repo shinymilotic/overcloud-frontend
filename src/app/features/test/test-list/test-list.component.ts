@@ -2,9 +2,9 @@ import { NgForOf, CommonModule } from "@angular/common";
 import { Component, OnDestroy } from "@angular/core";
 import { RouterLinkActive, RouterLink } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
-import { Errors } from "src/app/core/models/errors.model";
-import { TestListResponse } from "src/app/core/models/test/test-list-response.model";
+import { ApiError } from "src/app/core/models/apierrors.model";
 import { TestService } from "src/app/core/services/test.service";
+import { TestListResponse } from "./test-list-response.model";
 
 @Component({
     selector: "app-test-list",
@@ -14,7 +14,7 @@ import { TestService } from "src/app/core/services/test.service";
     imports: [RouterLinkActive, RouterLink, NgForOf, CommonModule]
 })
 export class TestListComponent implements OnDestroy {
-  errors!: Errors[];
+  errors!: ApiError;
   tests: TestListResponse[] = [];
   destroy$ = new Subject<void>();
 

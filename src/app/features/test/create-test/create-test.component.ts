@@ -19,7 +19,6 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
-import { Errors } from "src/app/core/models/errors.model";
 import { Question } from "src/app/core/models/test/question.model";
 import { Test } from "src/app/core/models/test/test.model";
 import { TestService } from "src/app/core/services/test.service";
@@ -29,6 +28,7 @@ import { ChoiceAnswerForm } from "./form-model/ChoiceAnswerForm";
 import { ChoiceQuestionForm } from "./form-model/ChoiceQuestionForm";
 import { EssayQuestionForm } from "./form-model/EssayQuestionForm";
 import { QuestionForm } from "./form-model/QuestionForm";
+import { ApiError } from "src/app/core/models/apierrors.model";
 
 @Component({
     selector: "app-create-test",
@@ -45,7 +45,7 @@ import { QuestionForm } from "./form-model/QuestionForm";
 })
 export class CreateTestComponent implements OnInit, OnDestroy {
   isSubmitting = false;
-  errors!: Errors[];
+  errors!: ApiError;
   testForm: FormGroup = this.fb.group({
     title: this.fb.control(""),
     description: this.fb.control(""),

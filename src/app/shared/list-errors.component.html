@@ -1,6 +1,6 @@
 @if (errorList) {
   <ul class="error-messages">
-    <li *ngFor="let error of errorList">
+    <li *ngFor="let error of errorList.errors">
       {{ error.message }}
     </li>
   </ul>

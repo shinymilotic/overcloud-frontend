@@ -5,6 +5,7 @@ import { map, distinctUntilChanged, tap, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/auth/user.model";
 import { AuthCookieUtils } from "../utils/authCookie.utils";
+import { RestResponse } from "../models/restresponse.model";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
@@ -16,12 +17,12 @@ export class UserService {
     private readonly authCookieUtils: AuthCookieUtils,
   ) {}
 
-  login(credentials: { email: string; password: string }): Observable<User> {
+  login(credentials: { email: string; password: string }): Observable<RestResponse<User>> {
     return this.http
-      .post<User>("/users/login", { user: credentials })
+      .post<RestResponse<User>>("/users/login", { user: credentials })
       .pipe(tap((user) => {
-        this.userSignal.set(user);
-        this.authCookieUtils.saveUserIdCookie(user.id);
+        this.userSignal.set(user.data);
+        this.authCookieUtils.saveUserIdCookie(user.data.id);
       }));
   }
 
@@ -29,9 +30,9 @@ export class UserService {
     username: string;
     email: string;
     password: string;
-  }): Observable<User> {
+  }): Observable<RestResponse<void>> {
     return this.http
-      .post<User>("/users", { user: credentials });
+      .post<RestResponse<void>>("/users", { user: credentials });
   }
 
   logout(): Observable<boolean> {
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<User> {
-    return this.http.get<User>("/users");
+    return this.http.get<RestResponse<User>>("/users").pipe(map((data) => data.data));
   }
 
   update(user: Partial<User>): Observable<User> {

@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 import { User } from "../../core/models/auth/user.model";
 import { UserService } from "../../core/services/user.service";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
-import { Errors } from "../../core/models/errors.model";
+import { ApiValidationError } from "../../core/models/apivalidationerror.model";
 import { Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { SettingsForm } from "./SettingsForm";
@@ -16,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputText} from 'primeng/inputtext';
 import { FloatLabelModule} from 'primeng/floatlabel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ApiError } from "src/app/core/models/apierrors.model";
 
 @Component({
     selector: "app-settings-page",
@@ -27,7 +28,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 export class SettingsComponent implements OnInit {
   user!: User;
   settingsForm: FormGroup<SettingsForm>;
-  errors!: Errors[];
+  errors!: ApiError;
   isSubmitting = false;
 
   constructor(

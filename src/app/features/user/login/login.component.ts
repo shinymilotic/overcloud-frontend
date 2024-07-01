@@ -7,11 +7,12 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ListErrorsComponent } from "../../../shared/list-errors.component";
-import { Errors } from "../../../core/models/errors.model";
+import { ApiValidationError } from "../../../core/models/apivalidationerror.model";
 import { UserService } from "../../../core/services/user.service";
 import { catchError, takeUntil } from "rxjs/operators";
 import { Subject, throwError } from "rxjs";
 import { LoginForm } from "./LoginForm";
+import { ApiError } from "src/app/core/models/apierrors.model";
 @Component({
     selector: "app-login",
     templateUrl: "./login.component.html",
@@ -21,7 +22,7 @@ import { LoginForm } from "./LoginForm";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   title = "";
-  errors!: Errors[];
+  errors!: ApiError;
   isSubmitting = false;
   authForm: FormGroup<LoginForm>;
   destroy$ = new Subject<void>();
@@ -62,7 +63,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => void this.router.navigate(["/"]),
-      error: ({ errors }) => {
+      error: (errors: ApiError) => {
+        console.log(errors);
         this.errors = errors;
         this.isSubmitting = false;
       },

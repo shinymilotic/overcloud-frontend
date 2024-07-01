@@ -7,10 +7,10 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ListErrorsComponent } from "../../../shared/list-errors.component";
-import { Errors } from "../../../core/models/errors.model";
 import { UserService } from "../../../core/services/user.service";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
+import { ApiError } from "src/app/core/models/apierrors.model";
 interface RegisterFrom {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -25,15 +25,13 @@ interface RegisterFrom {
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   title = "";
-  errors!: Errors[];
+  errors!: ApiError;
   isSubmitting = false;
   authForm: FormGroup<RegisterFrom>;
   isRegisterSuccess: boolean = false;
   destroy$ = new Subject<void>();
 
   constructor(
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
     private readonly userService: UserService
   ) {
     // use FormBuilder to create a form group
@@ -79,8 +77,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => this.isRegisterSuccess = true,
-      error: ({ errors }) => {
-        this.errors = errors;
+      error: (error: ApiError) => {
+        console.log(error);
+        // if (error.data == null) {
+        //   this.errors = [{messageId: error.code, message: error.message}];
+        // } else {
+        //    = error.data.errors;
+        // }
+        this.errors = error;
         this.isSubmitting = false;
       },
     });

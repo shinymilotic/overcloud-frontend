@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { Errors } from "../core/models/errors.model";
+import { ApiValidationError } from "../core/models/apivalidationerror.model";
 import { NgForOf } from "@angular/common";
+import { ApiError } from "../core/models/apierrors.model";
 
 @Component({
   selector: "app-list-errors",
@@ -10,9 +11,9 @@ import { NgForOf } from "@angular/common";
   standalone: true,
 })
 export class ListErrorsComponent {
-  errorList: Errors[] = [];
+  errorList!: ApiError;
 
-  @Input() set errors(errorList: Errors[]) {
+  @Input() set errors(errorList: ApiError) {
     this.errorList = errorList;
   }
 }

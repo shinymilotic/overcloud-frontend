@@ -12,12 +12,12 @@ import { FollowButtonComponent } from "../../shared/buttons/follow-button.compon
 import { FavoriteButtonComponent } from "../../shared/buttons/favorite-button.component";
 import { ListErrorsComponent } from "../../shared/list-errors.component";
 import { ArticleCommentComponent } from "./article-comment.component";
-import { catchError, map, takeUntil } from "rxjs/operators";
+import { catchError, takeUntil } from "rxjs/operators";
 import { Subject, combineLatest, throwError } from "rxjs";
 import { Comment } from "../../core/models/blog/comment.model";
 import { ShowAuthedDirective } from "../../shared/show-authed.directive";
-import { Errors } from "../../core/models/errors.model";
 import { Profile } from "../../core/models/auth/profile.model";
+import { ApiError } from "src/app/core/models/apierrors.model";
 
 @Component({
     selector: "app-article-page",
@@ -52,7 +52,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   });  
 
   commentControl: FormControl<string>;
-  commentFormErrors: Errors | null = null;
+  commentFormErrors: ApiError | null = null;
   bodyAsHtml!: string;
   isSubmitting = false;
   isDeleting = false;

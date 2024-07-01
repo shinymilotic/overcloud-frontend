@@ -23,12 +23,12 @@ import {
 } from "rxjs";
 import { TestService } from "src/app/core/services/test.service";
 import { UserService } from "src/app/core/services/user.service";
-import { Errors } from "src/app/core/models/errors.model";
 import { PracticeService } from "src/app/core/services/practice.service";
 import { Practice } from "src/app/core/models/test/practice.model";
 import { ChoiceQuestion } from "src/app/core/models/test/choicequestion.model";
 import { QuestionType } from "../create-test/enum/QuestionType";
 import { Question } from "src/app/core/models/test/question.model";
+import { ApiError } from "src/app/core/models/apierrors.model";
 
 @Component({
     selector: "app-test",
@@ -44,7 +44,7 @@ import { Question } from "src/app/core/models/test/question.model";
     ]
 })
 export class TestComponent implements OnInit {
-  errors!: Errors[];
+  errors!: ApiError[];
   isSubmitting = false;
   title: string = "";
   slug: string = "";

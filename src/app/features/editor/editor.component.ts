@@ -22,13 +22,14 @@ import { ArticlesService } from "../../core/services/articles.service";
 import { combineLatest, Observable, Subject, throwError } from "rxjs";
 import { catchError, map, startWith, takeUntil, tap } from "rxjs/operators";
 import { UserService } from "../../core/services/user.service";
-import { Errors } from "../../core/models/errors.model";
+import { ApiValidationError } from "../../core/models/apivalidationerror.model";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { TagsService } from "src/app/core/services/tags.service";
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import {Paragraph} from '@tiptap/extension-paragraph'
 import {Heading} from '@tiptap/extension-heading'
+import { ApiError } from "src/app/core/models/apierrors.model";
 
 interface ArticleForm {
   title: FormControl<string>;
@@ -56,7 +57,7 @@ interface ArticleForm {
 export class EditorComponent implements OnInit, OnDestroy {
   articleForm: FormGroup<ArticleForm>;
   tagField: FormControl<string>;
-  errors!: Errors[];
+  errors!: ApiError;
   isSubmitting = false;
   destroy$ = new Subject<void>();
   filteredTags: Observable<string[]>;
