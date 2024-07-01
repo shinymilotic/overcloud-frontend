@@ -33,3 +33,7 @@
   word-wrap: break-word;
   word-break: break-word;
 }
+.user-info {
+  background-color: white;
+  border-radius: 13px;
+}
