@@ -52,14 +52,15 @@ export class UserService {
   }
 
   auth(): Observable<User> {
-    return this.http.get<User>("/users").pipe(
+    return this.http.get<RestResponse<User>>("/users").pipe(
       tap({
         next: (user) => {
-          this.userSignal.set(user);
+          this.userSignal.set(user.data);
           // this.setAuth(accessToken, refreshToken);
         },
-        // error: () => this.purgeAuth(),
+        error: () => this.purgeAuth(),
       }),
+      map((data) => data.data),
       shareReplay(1)
     );
   }

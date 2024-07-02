@@ -293,8 +293,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (article) => {
-          this.router.navigate(["/articles/", article.slug]);
+        next: ({data}) => {
+          this.router.navigate(["/articles/", data.slug]);
         },
         error: (err) => {
           this.errors = err;

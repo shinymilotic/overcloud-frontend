@@ -13,7 +13,7 @@ export class ArticlesService {
 
   query(
     config: ArticleListConfig
-  ): Observable<ArticleList> {
+  ): Observable<RestResponse<ArticleList>> {
     let params = new HttpParams();
 
     Object.keys(config.filters).forEach((key) => {
@@ -24,42 +24,34 @@ export class ArticlesService {
     return this.http.get<RestResponse<ArticleList>>(
       "/articles",
       { params }
-    ).pipe(
-      map(data => data.data)
     );
   }
 
-  get(slug: string): Observable<Article> {
+  get(slug: string): Observable<RestResponse<Article>> {
     return this.http
-      .get<RestResponse<Article>>(`/articles/${slug}`)
-      .pipe(map((data) => data.data));
-  }
+      .get<RestResponse<Article>>(`/articles/${slug}`);
+      }
 
   delete(slug: string): Observable<void> {
     return this.http.delete<void>(`/articles/${slug}`);
   }
 
-  create(article: Partial<Article>): Observable<Article> {
+  create(article: Partial<Article>): Observable<RestResponse<Article>> {
     return this.http
-      .post<{ article: Article }>("/articles", { article: article })
-      .pipe(map((data) => data.article));
+      .post<RestResponse<Article>>("/articles", article);
   }
 
-  update(article: Partial<Article>): Observable<Article> {
+  update(article: Partial<Article>): Observable<RestResponse<Article>> {
     return this.http
-      .put<{ article: Article }>(`/articles/${article.slug}`, {
-        article: article,
-      })
-      .pipe(map((data) => data.article));
+      .put<RestResponse<Article>>(`/articles/${article.slug}`, article);
   }
 
-  favorite(slug: string): Observable<Article> {
+  favorite(slug: string): Observable<RestResponse<Article>> {
     return this.http
-      .post<{ article: Article }>(`/articles/${slug}/favorite`, {})
-      .pipe(map((data) => data.article));
+      .post<RestResponse<Article>>(`/articles/${slug}/favorite`, {});
   }
 
-  unfavorite(slug: string): Observable<void> {
-    return this.http.delete<void>(`/articles/${slug}/favorite`);
+  unfavorite(slug: string): Observable<RestResponse<void>> {
+    return this.http.delete<RestResponse<void>>(`/articles/${slug}/favorite`);
   }
 }

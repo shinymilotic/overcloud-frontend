@@ -4,26 +4,25 @@ import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Comment } from "../models/blog/comment.model";
 import { RestResponse } from "../models/restresponse.model";
+import { CommentList } from "../models/blog/comment-list.model";
 
 @Injectable({ providedIn: "root" })
 export class CommentsService {
   constructor(private readonly http: HttpClient) {}
 
-  getAll(slug: string): Observable<Comment[]> {
+  getAll(slug: string): Observable<RestResponse<CommentList>> {
     return this.http
-      .get<RestResponse<{ comments: Comment[] }>>(`/articles/${slug}/comments`)
-      .pipe(map((data) => data.data.comments));
+      .get<RestResponse<CommentList>>(`/articles/${slug}/comments`);
   }
 
-  add(slug: string, payload: string): Observable<Comment> {
+  add(slug: string, payload: string): Observable<RestResponse<Comment>> {
     return this.http
-      .post<{ comment: Comment }>(`/articles/${slug}/comments`, {
+      .post<RestResponse<Comment>>(`/articles/${slug}/comments`, {
         comment: { body: payload },
-      })
-      .pipe(map((data) => data.comment));
+      });
   }
 
-  delete(commentId: string, slug: string): Observable<void> {
-    return this.http.delete<void>(`/articles/${slug}/comments/${commentId}`);
+  delete(commentId: string, slug: string): Observable<RestResponse<void>> {
+    return this.http.delete<RestResponse<void>>(`/articles/${slug}/comments/${commentId}`);
   }
 }
